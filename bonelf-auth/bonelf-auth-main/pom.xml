@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bonelf-service-auth</artifactId>
+        <groupId>com.bonelf</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bonelf-auth-main</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-common-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-auth-feign-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-auth-provider-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-frame-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-frame-cloud</artifactId>
+            <!--FIXME 正式时需要mq注释-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.bonelf</groupId>
+                    <artifactId>bonelf-frame-mq</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--okhttp-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-user-feign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-support-feign</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

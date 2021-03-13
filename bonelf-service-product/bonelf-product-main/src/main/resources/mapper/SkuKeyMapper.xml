@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonelf.product.web.mapper.SkuKeyMapper">
+    <resultMap id="BaseResultMap" type="com.bonelf.product.web.domain.entity.SkuKey">
+        <!--@mbg.generated-->
+        <!--@Table bnf_sku_key-->
+        <id column="sku_key_id" jdbcType="BIGINT" property="skuKeyId"/>
+        <result column="spu_id" jdbcType="BIGINT" property="spuId"/>
+        <result column="sku_name" jdbcType="VARCHAR" property="skuName"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="specification" jdbcType="VARCHAR" property="specification"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <resultMap id="skuKeyMap" type="com.bonelf.product.web.domain.entity.SkuKey" extends="BaseResultMap">
+        <collection property="skuValue" column="sku_key_id" columnPrefix="sv_"
+                    resultMap="com.bonelf.product.web.mapper.SkuValueMapper.BaseResultMap"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        sku_key_id, spu_id, sku_name, sort, specification, create_time, update_time
+    </sql>
+    <select id="selectSkuList" resultMap="skuKeyMap">
+        SELECT sk.sku_name,sk.sku_key_id,
+        sv.sku_value_id sv_sku_value_id,sv.sku_key_id sv_sku_key_id,sv.sku_value_name sv_sku_value_name
+        FROM bnf_sku_key sk
+        LEFT JOIN bnf_sku_value sv ON sk.sku_key_id = sv.sku_key_id
+        WHERE sk.spu_id=#{spuId,jdbcType=BIGINT}
+        ORDER BY sk.sort,sv.sort
+    </select>
+</mapper>

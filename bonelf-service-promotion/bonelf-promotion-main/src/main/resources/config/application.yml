@@ -1,0 +1,8 @@
+server:
+  port: 8805
+
+spring:
+  profiles:
+    active: test
+    include:
+      - common

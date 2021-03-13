@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bonelf-service-demo</artifactId>
+        <groupId>com.bonelf</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bonelf-demo-main</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-common-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-demo-feign-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-demo-provider-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-frame-web</artifactId>
+        </dependency>
+        <!--测试，在公共模块里管理测试Jar是不合适的，因为引入时，指定的scope范围是test,在某一模块，引入依赖包时，并不能成功引入测试依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-frame-cloud</artifactId>
+            <!--FIXME 正式时需要mq注释-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.bonelf</groupId>
+                    <artifactId>bonelf-frame-mq</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--框架 websocket 配置-->
+        <!--<dependency>-->
+        <!--    <groupId>com.bonelf</groupId>-->
+        <!--    <artifactId>bonelf-frame-websocket</artifactId>-->
+        <!--</dependency>-->
+        <!--norm/stomp websocket-->
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.boot</groupId>-->
+        <!--    <artifactId>spring-boot-starter-websocket</artifactId>-->
+        <!--</dependency>-->
+    </dependencies>
+
+</project>

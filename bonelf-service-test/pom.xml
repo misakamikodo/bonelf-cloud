@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bonelf</artifactId>
+        <groupId>com.bonelf</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bonelf-service-test</artifactId>
+    <packaging>pom</packaging>
+
+    <description>微服务 test</description>
+
+    <modules>
+        <module>bonelf-test-feign</module>
+        <module>bonelf-test-feign-domain</module>
+        <module>bonelf-test-provider</module>
+        <module>bonelf-test-provider-domain</module>
+        <module>bonelf-test-main</module>
+    </modules>
+
+    <properties>
+        <test.version>${project.version}</test.version>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-test-feign</artifactId>
+                <version>${test.version}</version>
+            </dependency>
+            <!--domain 理论上应该不需要这些，哪里配置不对-->
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-test-feign-domain</artifactId>
+                <version>${test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-test-provider</artifactId>
+                <version>${test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-test-provider-domain</artifactId>
+                <version>${test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-test-main</artifactId>
+                <version>${test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-test-app</artifactId>
+                <version>${test.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bonelf</artifactId>
+        <groupId>com.bonelf</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bonelf-service-pay</artifactId>
+    <packaging>pom</packaging>
+
+    <description>微服务 pay</description>
+
+    <modules>
+        <module>bonelf-pay-feign</module>
+        <module>bonelf-pay-feign-domain</module>
+        <module>bonelf-pay-provider</module>
+        <module>bonelf-pay-provider-domain</module>
+        <module>bonelf-pay-main</module>
+        <module>bonelf-pay-app</module>
+    </modules>
+
+    <properties>
+        <pay.version>${project.version}</pay.version>
+        <best-pay-sdk.version>1.3.3</best-pay-sdk.version>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-pay-feign</artifactId>
+                <version>${pay.version}</version>
+            </dependency>
+            <!--domain 理论上应该不需要这些，哪里配置不对-->
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-pay-feign-domain</artifactId>
+                <version>${pay.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-pay-provider</artifactId>
+                <version>${pay.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-pay-provider-domain</artifactId>
+                <version>${pay.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-pay-main</artifactId>
+                <version>${pay.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-pay-app</artifactId>
+                <version>${pay.version}</version>
+            </dependency>
+            <!--BestPay-->
+            <dependency>
+                <groupId>cn.springboot</groupId>
+                <artifactId>best-pay-sdk</artifactId>
+                <version>${best-pay-sdk.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

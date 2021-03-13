@@ -1,0 +1,13 @@
+server:
+  port: 8804
+spring:
+  profiles:
+    active: test
+    include:
+      - common
+
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true

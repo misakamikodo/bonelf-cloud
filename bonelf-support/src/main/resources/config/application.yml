@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: test
+    include:
+      - common
+
+bonelf:
+  # websocket配置
+  websocket:
+    # WebsocketProperties
+    # 在不使用Mq、stomp主动获取的情况（见 link? ）下，由support主动将消息通过 feign或者redis发布订阅 发给服务 需要配置cmdMap 来处理指令消息和处理的服务对应关系，各服务需提供接收消息接口（frame-websocket已实现）。
+    # 使用 Mq 通过订阅websocketTopic主题下的tag(@StreamListener)来实现主动接收，
+    # 使用 stomp 则通过 @MessageMapping 来实现主动接收，推荐使用stomp结合Mq的方式
+    channels: ${bonelf.cloud.services:}
+    cmd-id-topic-map:
+      1:
+        - demo
+        - test
+        - support
+      2:
+        exclude:
+          - demo
+      3:
+        include:
+          - demo

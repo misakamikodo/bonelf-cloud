@@ -1,0 +1,4 @@
+spring:
+  # 放这里的原因见common的logback-spring.xml
+  application:
+    name: gateway

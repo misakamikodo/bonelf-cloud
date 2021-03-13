@@ -1,0 +1,8 @@
+server:
+  port: 8807
+
+spring:
+  profiles:
+    active: test
+    include:
+      - common

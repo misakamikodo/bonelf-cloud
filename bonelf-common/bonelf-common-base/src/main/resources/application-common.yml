@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    include:
+      - bonelf
+
+bonelf:
+  mode: cloud
+  # 微服务配置
+  cloud:
+    # 定义项目的所有服务 要想复用 需使用,分割 使用[xx,xx];- xx  - xx 的形式不行
+    services: demo,test,support

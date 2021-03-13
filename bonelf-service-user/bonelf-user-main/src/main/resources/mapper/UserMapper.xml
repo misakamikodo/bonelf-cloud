@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonelf.userservice.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.bonelf.userservice.domain.entity.User">
+    <!--@mbg.generated-->
+    <!--@Table bnf_user-->
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="user_password" jdbcType="VARCHAR" property="password" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="user_language" jdbcType="VARCHAR" property="language" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    user_id, phone, user_password, nickname, avatar, gender, country, province, city, user_language,
+    update_time, create_time
+  </sql>
+    <select id="selectOneByPhone" resultMap="BaseResultMap">
+        SELECT user_id, phone, open_id, user_password, nickname, avatar, gender, country, province,
+      city, user_language, union_id, last_login_time, update_time, create_time
+        FROM bnf_user
+        WHERE phone=#{value}
+    </select>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bonelf</artifactId>
+        <groupId>com.bonelf</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bonelf-service-order</artifactId>
+    <packaging>pom</packaging>
+
+    <description>微服务 order</description>
+
+    <modules>
+        <module>bonelf-order-feign</module>
+        <module>bonelf-order-feign-domain</module>
+        <module>bonelf-order-provider</module>
+        <module>bonelf-order-provider-domain</module>
+        <module>bonelf-order-main</module>
+        <module>bonelf-order-app</module>
+    </modules>
+
+    <properties>
+        <order.version>${project.version}</order.version>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-order-feign</artifactId>
+                <version>${order.version}</version>
+            </dependency>
+            <!--domain 理论上应该不需要这些，哪里配置不对-->
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-order-feign-domain</artifactId>
+                <version>${order.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-order-provider</artifactId>
+                <version>${order.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-order-provider-domain</artifactId>
+                <version>${order.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-order-main</artifactId>
+                <version>${order.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-order-app</artifactId>
+                <version>${order.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

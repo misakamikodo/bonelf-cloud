@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bonelf</artifactId>
+        <groupId>com.bonelf</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bonelf-service-auth</artifactId>
+    <packaging>pom</packaging>
+
+    <description>微服务 auth</description>
+
+    <modules>
+        <module>bonelf-auth-feign</module>
+        <module>bonelf-auth-feign-domain</module>
+        <module>bonelf-auth-provider</module>
+        <module>bonelf-auth-provider-domain</module>
+        <module>bonelf-auth-main</module>
+    </modules>
+
+    <properties>
+        <auth.version>${project.version}</auth.version>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-auth-feign</artifactId>
+                <version>${auth.version}</version>
+            </dependency>
+            <!--domain 理论上应该不需要这些，哪里配置不对-->
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-auth-feign-domain</artifactId>
+                <version>${auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-auth-provider</artifactId>
+                <version>${auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-auth-provider-domain</artifactId>
+                <version>${auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-auth-main</artifactId>
+                <version>${auth.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

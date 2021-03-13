@@ -1,0 +1,10 @@
+server:
+  port: 8801
+  servlet:
+    context-path:
+
+spring:
+  profiles:
+    active: dev
+    include:
+      - common

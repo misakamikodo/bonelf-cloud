@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonelf.product.web.mapper.SkuMapper">
+    <resultMap id="BaseResultMap" type="com.bonelf.product.web.domain.entity.Sku">
+        <!--@mbg.generated-->
+        <!--@Table bnf_sku-->
+        <id column="sku_id" jdbcType="INTEGER" property="skuId"/>
+        <result column="spu_id" jdbcType="BIGINT" property="spuId"/>
+        <result column="sku_value_ids" jdbcType="VARCHAR" property="skuValueIds"/>
+        <result column="specs" jdbcType="VARCHAR" property="specs"/>
+        <result column="sku_image" jdbcType="VARCHAR" property="skuImage"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="origin_price" jdbcType="DECIMAL" property="originPrice"/>
+        <result column="sell_price" jdbcType="DECIMAL" property="sellPrice"/>
+        <result column="is_default" jdbcType="TINYINT" property="isDefault"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="deleted"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        sku_id, sku_value_ids, specs, sku_image, stock, origin_price, sell_price, is_default, is_deleted,
+        create_time, update_time
+    </sql>
+</mapper>

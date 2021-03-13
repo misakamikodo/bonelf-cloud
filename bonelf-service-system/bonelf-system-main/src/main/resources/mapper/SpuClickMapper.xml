@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonelf.system.web.mapper.SpuClickMapper">
+
+    <select id="selectQueryChart" resultType="com.bonelf.system.web.domain.vo.ChartVO">
+        SELECT sum(click_count) col, click_date `row`
+        FROM bnf_spu_click
+        WHERE click_date >= #{startDate,jdbcType=DATE}
+          AND click_date &lt; #{endDate,jdbcType=DATE}
+        GROUP BY DAY(click_date)
+        ORDER BY click_date
+    </select>
+</mapper>

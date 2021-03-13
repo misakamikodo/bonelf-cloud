@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>bonelf</artifactId>
+        <groupId>com.bonelf</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bonelf-service-product</artifactId>
+    <packaging>pom</packaging>
+
+    <description>微服务 product</description>
+
+    <modules>
+        <module>bonelf-product-feign</module>
+        <module>bonelf-product-feign-domain</module>
+        <module>bonelf-product-provider</module>
+        <module>bonelf-product-provider-domain</module>
+        <module>bonelf-product-main</module>
+        <module>bonelf-product-app</module>
+    </modules>
+
+    <properties>
+        <product.version>${project.version}</product.version>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-product-feign</artifactId>
+                <version>${product.version}</version>
+            </dependency>
+            <!--domain 理论上应该不需要这些，哪里配置不对-->
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-product-feign-domain</artifactId>
+                <version>${product.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-product-provider</artifactId>
+                <version>${product.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-product-provider-domain</artifactId>
+                <version>${product.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-product-main</artifactId>
+                <version>${product.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.bonelf</groupId>
+                <artifactId>bonelf-product-app</artifactId>
+                <version>${product.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

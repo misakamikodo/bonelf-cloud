@@ -1,0 +1,70 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /bonelf
+
+bonelf:
+  no-auth-url:
+    - /oauth/token,/open,/v2/api-docs
+    - /user/loginByAccount
+    - /test/testConverter
+
+spring:
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowCredentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        # 下面的Path我在项目里默认都是使用的spring.application.name的驼峰形式，横杠形式做服务名称来做配置 比如swagger路径加服务名的配置，所有新的服务请都加个驼峰形式的前缀路径
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=${server.servlet.context-path:}/auth/**
+
+        - id: support
+          uri: lb://support
+          predicates:
+            - Path=${server.servlet.context-path:}/support/**
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=${server.servlet.context-path:}/user/**
+
+        - id: test-service
+          # 目标服务地址（uri：地址，请求转发后的地址） lb代表从注册中心获取服务
+          uri: lb://test-service
+          predicates:
+            - Path=${server.servlet.context-path:}/test/**
+          # StripPrefix=2:当通过网关向/testService/bar/foo发出请求时，对nameservice的请求将类似于http://test-service/foo。
+          # StripPrefix=1然后项目server.servlet.context-path设置为/ 和 不设置StripPrefix或StripPrefix=0 然后项目server.servlet.context-path=/testService效果一样
+          # 我在GlobalAccessTokenFilter中配置了StripPrefix skip 1，所以不用配置这个
+#          filters:
+#            - StripPrefix=1
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=${server.servlet.context-path:}/order/**
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=${server.servlet.context-path:}/product/**
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

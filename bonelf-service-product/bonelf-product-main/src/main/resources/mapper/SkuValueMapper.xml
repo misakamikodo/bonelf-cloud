@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonelf.product.web.mapper.SkuValueMapper">
+  <resultMap id="BaseResultMap" type="com.bonelf.product.web.domain.entity.SkuValue">
+    <!--@mbg.generated-->
+    <!--@Table bnf_sku_value-->
+    <id column="sku_value_id" jdbcType="BIGINT" property="skuValueId" />
+    <result column="sku_key_id" jdbcType="BIGINT" property="skuKeyId" />
+    <result column="sku_value_name" jdbcType="VARCHAR" property="skuValueName" />
+    <result column="sku_image" jdbcType="VARCHAR" property="skuImage" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="specification" jdbcType="VARCHAR" property="specification" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sku_value_id, sku_key_id,spu_id, sku_value_name, sku_image, sort, specification, is_deleted,
+    create_time, update_time
+  </sql>
+  <select id="selectSpecsBySkuValueIds" resultType="java.lang.String">
+    SELECT GROUP_CONCAT(tsk.sku_name,':',tsv.sku_value_name SEPARATOR ';')
+    FROM bnf_sku_value tsv
+    LEFT JOIN bnf_sku_key tsk ON tsv.sku_key_id = tsk.sku_key_id
+    WHERE tsv.sku_value_id IN
+    <foreach collection="array" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    ORDER BY tsv.update_time DESC
+  </select>
+  <select id="selectSkuValueDiffFromSkuKey" resultMap="BaseResultMap">
+    SELECT tsv.*
+    FROM bnf_sku_value tsv
+    LEFT JOIN bnf_sku_key tsk ON tsv.sku_key_id = tsk.sku_key_id
+    WHERE tsk.sku_key_id NOT IN (
+    SELECT tsk1.sku_key_id
+    FROM bnf_sku_value tsv1
+    LEFT JOIN bnf_sku_key tsk1 ON tsv1.sku_key_id = tsk1.sku_key_id
+    WHERE tsv1.sku_value_id IN
+    <foreach collection="array" item="item" separator="," open="(" close=")">
+      #{item,jdbcType=BIGINT}
+    </foreach>
+    GROUP BY tsk1.sku_key_id )
+  </select>
+</mapper>

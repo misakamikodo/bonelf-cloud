@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonelf.product.web.mapper.SpuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bonelf.product.web.domain.entity.Spu">
+        <id column="spu_id" property="spuId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="spu_no" property="spuNo"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="title" property="title"/>
+        <result column="subtitle" property="subtitle"/>
+        <result column="main_pic" property="mainPic"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="origin_price" jdbcType="DECIMAL" property="originPrice"/>
+        <result column="sell_price" jdbcType="DECIMAL" property="sellPrice"/>
+        <result column="sale" property="sale"/>
+        <result column="keywords" property="keywords"/>
+        <result column="brand" property="brand"/>
+        <result column="is_fine" property="fine"/>
+        <result column="content" property="content"/>
+        <result column="status" property="status"/>
+        <result column="add_time" property="addTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="updateSpuBySku" resultType="java.lang.Integer">
+        UPDATE bnf_spu s
+        SET s.stock = (SELECT SUM(sk.stock) FROM bnf_sku sk WHERE sk.spu_id = s.spu_id),
+            s.market_price = (SELECT MIN(sk.sell_price) FROM bnf_sku sk WHERE sk.spu_id = s.spu_id),
+            s.origin_price = (SELECT sk.origin_price FROM bnf_sku sk WHERE sk.spu_id = s.spu_id HAVING MIN(sk.sell_price))
+        WHERE s.spu_id = #{spuId,jdbcType=BIGINT}
+    </select>
+    <select id="updateSpuStockBySkuId" resultType="int">
+        UPDATE bnf_spu s
+            SET s.stock = (SELECT SUM(sk.stock) FROM bnf_sku sk WHERE sk.spu_id = s.spu_id)
+        WHERE s.spu_id = (SELECT sk2.sku_id FROM bnf_sku sk2 WHERE sk2.sku_id=#{skuId})
+    </select>
+</mapper>
