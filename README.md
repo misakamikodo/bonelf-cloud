@@ -42,7 +42,7 @@ Bonelf
 | `bonelf-common` | 公用模块 |  | |
 | `bonelf-gateway` | 网关 | HTTP 9999 | |
 | `bonelf-support-app` | Netty Websocket服务、定时器等 | HTTP 8800 & WS 8802 | |
-| `bonelf-service-auth` | 鉴权服务 | HTTP - | [接口文档]() |
+| `bonelf-auth` | 鉴权服务 | HTTP - | [接口文档]() |
 | `bonelf-service-order` | 订单服务 | HTTP 8801 | [接口文档]() |
 | `bonelf-service-pay` | 支付服务 | HTTP 8806 | [接口文档]() |
 | `bonelf-service-product` | 商品服务 | HTTP 8803 | [接口文档]() |

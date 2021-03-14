@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bonelf-service-auth</artifactId>
+    <artifactId>bonelf-auth</artifactId>
     <packaging>pom</packaging>
 
     <description>微服务 auth</description>
