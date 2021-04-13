@@ -40,7 +40,7 @@ public class SupportApplication {
 				"Application is running! Access URLs:\n\t" +
 				"Local: \t\thttp://127.0.0.1:" + port + path + "\n\t" +
 				"External: \thttp://" + ip + ":" + port + path + "\n\t" +
-				"Websocket: \tws://" + ip + ":" + port + "\n" +
+				"Websocket: \tws://" + ip + ":" + 8802 + "\n" +
 				"----------------------------------------------------------");
 	}
 }

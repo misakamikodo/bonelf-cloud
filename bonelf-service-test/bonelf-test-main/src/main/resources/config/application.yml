@@ -3,6 +3,6 @@ server:
 
 spring:
   profiles:
-    active: test
+    active: dev
     include:
       - common

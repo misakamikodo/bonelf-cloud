@@ -7,6 +7,7 @@ import com.bonelf.user.feign.domain.response.Role;
 import com.bonelf.user.feign.domain.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,10 +19,11 @@ import java.util.Set;
  * @author bonelf
  * @since 2020/11/17 15:37
  */
+@Component
 public class UserFeignClientFallback implements UserFeignClient {
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	// @Autowired
+	// private PasswordEncoder passwordEncoder;
 
 	@Override
 	public Result<UserResponse> getUserByUniqueId(String uniqueId) {

@@ -1,8 +1,8 @@
 server:
-  port: 8804
+  port: 8809
 spring:
   profiles:
-    active: test
+    active: dev
     include:
       - common
 

@@ -1,15 +1,19 @@
 spring:
-  datasource:
-    dynamic:
-      primary: master
-      datasource:
-        master:
-          url: jdbc:mysql://127.0.0.1:3306/bonelf-gateway?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
-          username: bonelf
-          password: 123456
-          driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.bonelf.com:80
+#  datasource:
+#    dynamic:
+#      primary: master
+#      datasource:
+#        master:
+#          url: jdbc:mysql://api.bonelf.com:3306/bonelf-gateway?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+#          username: bonelf
+#          password: 567215
+#          driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     database: 0
-    host: 127.0.0.1
+    host: api.bonelf.com
     port: 6379
-    password: ''
+    password: '567215'

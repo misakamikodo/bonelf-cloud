@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/role")
 @Slf4j
 @Api(tags = "角色接口")
-public class RoleController extends BaseApiController {
+public class RoleController {
 
 	@GetMapping(value = "/v1")
 	public Result<JSONArray> getUser(@RequestParam Long userId) {

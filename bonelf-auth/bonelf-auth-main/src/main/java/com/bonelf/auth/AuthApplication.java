@@ -24,7 +24,7 @@ import java.net.UnknownHostException;
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {
-		"com.bonelf.auth"
+		"com.bonelf.auth", "com.bonelf.**.feign"
 },
 		exclude = {DruidDataSourceAutoConfigure.class})
 public class AuthApplication {

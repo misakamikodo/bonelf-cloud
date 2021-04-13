@@ -20,7 +20,6 @@
         <module>bonelf-search-provider</module>
         <module>bonelf-search-provider-domain</module>
         <module>bonelf-search-main</module>
-        <module>bonelf-search-app</module>
     </modules>
 
     <properties>

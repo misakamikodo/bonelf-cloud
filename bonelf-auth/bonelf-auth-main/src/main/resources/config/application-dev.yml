@@ -8,3 +8,18 @@ spring:
           username: bonelf
           password: 567215
           driver-class-name: com.mysql.cj.jdbc.Driver
+
+  redis:
+    database: 0
+    host: api.bonelf.com
+    port: 6379
+    password: 567215
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos.bonelf.com:80
+    stream:
+      rocketmq:
+        binder:
+          namesrv-addr: api.bonelf.com:9876

@@ -20,7 +20,6 @@
         <module>bonelf-user-provider</module>
         <module>bonelf-user-provider-domain</module>
         <module>bonelf-user-main</module>
-        <module>bonelf-user-app</module>
     </modules>
 
     <properties>

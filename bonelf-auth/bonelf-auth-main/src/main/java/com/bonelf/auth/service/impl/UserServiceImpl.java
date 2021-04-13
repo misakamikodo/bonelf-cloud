@@ -11,6 +11,7 @@ import com.bonelf.user.feign.UserFeignClient;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.stereotype.Service;

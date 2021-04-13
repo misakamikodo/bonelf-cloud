@@ -20,7 +20,6 @@
         <module>bonelf-promotion-provider</module>
         <module>bonelf-promotion-provider-domain</module>
         <module>bonelf-promotion-main</module>
-        <module>bonelf-promotion-app</module>
     </modules>
 
     <properties>

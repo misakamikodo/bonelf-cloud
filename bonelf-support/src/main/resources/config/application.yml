@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8800
 
 spring:
   profiles:
-    active: test
+    active: dev
     include:
       - common
 

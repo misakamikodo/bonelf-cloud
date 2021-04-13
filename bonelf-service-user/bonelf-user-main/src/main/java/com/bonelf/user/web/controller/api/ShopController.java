@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.*;
  * @author bonelf
  * @since 2020/10/30 9:29
  */
-@RestController
+@RestController("BonelfShopController")
 @RequestMapping("/shop")
 @Slf4j
 @Api(tags = "商店接口")
-public class ShopController extends BaseApiController {
+public class ShopController {
 	@Autowired
 	private RedisUtil redisUtil;
 
