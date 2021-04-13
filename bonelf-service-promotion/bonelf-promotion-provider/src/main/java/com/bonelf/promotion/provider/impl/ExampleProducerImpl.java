@@ -8,7 +8,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 
-@Service
+// @Service
 public class ExampleProducerImpl implements ExampleProducer {
 	@Autowired
 	private MqProducerService mqProducerService;
