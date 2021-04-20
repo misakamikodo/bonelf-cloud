@@ -34,7 +34,7 @@ public class ProductMqConsumer {
 	/**
 	 * 缓存点击量入库
 	 */
-	// @StreamListener(value = Sink.INPUT, condition = "headers['TAGS']=='SpuStatisticSumTag'")
+	// @StreamListener(value = Sink.INPUT, condition = "headers['rocketmq_TAGS']=='SpuStatisticSumTag'")
 	public void spuStatisticSumTag(String message) {
 		spuService.sumStatistic();
 	}
@@ -42,7 +42,7 @@ public class ProductMqConsumer {
 	/**
 	 * 商品售出
 	 */
-	// @StreamListener(value = Sink.INPUT, condition = "headers['TAGS']=='ProductPaidTag'")
+	// @StreamListener(value = Sink.INPUT, condition = "headers['rocketmq_TAGS']=='ProductPaidTag'")
 	public void productPaidTag(String message) {
 		// FIXME: 2020/12/1 数量
 		spuService.spuSoldOut(Long.parseLong(message));
@@ -51,14 +51,14 @@ public class ProductMqConsumer {
 	/**
 	 * 库存变化
 	 */
-	// @StreamListener(value = Sink.INPUT, condition = "headers['TAGS']=='StockSkuTag'")
+	// @StreamListener(value = Sink.INPUT, condition = "headers['rocketmq_TAGS']=='StockSkuTag'")
 	public void stockSkuTag(String message) {
 		skuService.update(Wrappers.<Sku>lambdaUpdate().set(Sku::getStock, (Integer)redisUtil.hget(CacheConstant.SKU_STOCK_HASH, message)).eq(Sku::getSkuId, Long.parseLong(message)));
 		// 更新 Spu 表总库存 XXX 这里耗时可能有点大
 		spuService.updateStockBySkuId(Long.parseLong(message));
 	}
 
-	// @StreamListener(value = Sink.INPUT, condition = "headers['TAGS']=='StockSpuTag'")
+	// @StreamListener(value = Sink.INPUT, condition = "headers['rocketmq_TAGS']=='StockSpuTag'")
 	public void stockSpuTag(String message) {
 		spuService.update(Wrappers.<Spu>lambdaUpdate().set(Spu::getStock, (Integer)redisUtil.hget(CacheConstant.SKU_STOCK_HASH, message)).eq(Spu::getSpuId, Long.parseLong(message)));
 	}

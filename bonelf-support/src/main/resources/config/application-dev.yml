@@ -21,26 +21,15 @@ spring:
     stream:
       rocketmq:
         binder:
-          namesrv-addr: api.bonelf.com:9876
+          name-server: api.bonelf.com:9876
+          # RocketMQ 自定义 Binding 配置项，对应 RocketMQBindingProperties Map
           bindings:
-            input:
-              consumer:
-                enable: false
-                # 同步消费消息模式
-                orderly: true
-                tags: SocketTag||DictTag # tag 为 tag1/tag2/tag3/tag4
             output:
               producer:
-                enable: false
+                group: user
       bindings:
-        input:
-          destination: BNF_support
-          content-type: text/plain
-          group: ${spring.application.name}
-          consumer.maxAttempts: 1
-        output:
-          destination: BNF_${spring.application.name}
-          content-type: application/json
+        # provider
+        output: { destination: BNF_support, content-type: application/json }
 
 bonelf:
   rocketmq:

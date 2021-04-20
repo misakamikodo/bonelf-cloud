@@ -1,6 +1,8 @@
 package com.bonelf.promotion.config;
 
 // import org.springframework.cloud.stream.annotation.EnableBinding;
+import com.bonelf.promotion.messaging.ExampleSink;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -13,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 // @ConditionalOnProperty(prefix = BonelfConstant.PROJECT_NAME + ".rocketmq",
 // 		value = "enable", havingValue = "true")
-// @EnableBinding({ExampleSink.class})
+@EnableBinding({ExampleSink.class})
 // @EnableBinding({Processor.class})
 @Configuration
 public class RocketMqConfig {

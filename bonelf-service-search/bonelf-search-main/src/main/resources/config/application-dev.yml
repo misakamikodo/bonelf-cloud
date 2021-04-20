@@ -17,7 +17,7 @@ spring:
   elasticsearch:
     rest:
       # 配置节点地址数组 9042
-      uris: elasticsearch.bonelf.com
+      uris: elasticsearch.bonelf.com #api.bonelf.com:9200
   #      旧版本
   #  data:
   #    elasticsearch:
@@ -29,7 +29,7 @@ spring:
     stream:
       rocketmq:
         binder:
-          namesrv-addr: api.bonelf.com:9876
+          name-server: api.bonelf.com:9876
           bindings:
             input:
               consumer:

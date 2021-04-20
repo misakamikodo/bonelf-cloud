@@ -32,12 +32,12 @@
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud</artifactId>
             <!--FIXME 正式时需要mq注释-->
-            <exclusions>
-                <exclusion>
-                    <groupId>com.bonelf</groupId>
-                    <artifactId>bonelf-frame-mq</artifactId>
-                </exclusion>
-            </exclusions>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>com.bonelf</groupId>-->
+<!--                    <artifactId>bonelf-frame-mq</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
         <!--BestPay-->
         <dependency>

@@ -42,7 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	@Autowired
 	private WxMaService wxMaService;
 
-	@Value("${choujiang.base-url:http://127.0.0.1}")
+	@Value("${bonelf.base-url:http://127.0.0.1}")
 	private String baseUrl;
 
 	@Override

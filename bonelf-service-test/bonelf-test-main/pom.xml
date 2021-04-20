@@ -32,12 +32,12 @@
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud</artifactId>
             <!--FIXME 正式时需要mq注释-->
-            <exclusions>
-                <exclusion>
-                    <groupId>com.bonelf</groupId>
-                    <artifactId>bonelf-frame-mq</artifactId>
-                </exclusion>
-            </exclusions>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>com.bonelf</groupId>-->
+<!--                    <artifactId>bonelf-frame-mq</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
         <!--测试，在公共模块里管理测试Jar是不合适的，因为引入时，指定的scope范围是test,在某一模块，引入依赖包时，并不能成功引入测试依赖-->
         <dependency>

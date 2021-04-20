@@ -25,7 +25,7 @@ spring:
     stream:
       rocketmq:
         binder:
-          namesrv-addr: 127.0.0.1:9876
+          name-server: api.bonelf.com:9876
           bindings:
             input:
               consumer:
