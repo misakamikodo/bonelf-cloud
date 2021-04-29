@@ -6,12 +6,10 @@ import com.bonelf.auth.service.UserService;
 import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
-import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
 import com.bonelf.user.feign.UserFeignClient;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.stereotype.Service;
@@ -33,7 +31,8 @@ public class UserServiceImpl implements UserService {
 	public User getByUniqueId(String uniqueId) {
 		Result<UserResponse> user = userFeignClient.getUserByUniqueId(uniqueId);
 		if (!user.getSuccess()) {
-			throw new BonelfException(CommonBizExceptionEnum.BUSY);
+			// throw new BonelfException(CommonBizExceptionEnum.BUSY);
+			throw BonelfException.builder().code("500").msg(user.getMessage()).build();
 		}
 		User userResult = getUserFromUserResp(user);
 		return userResult;

@@ -40,7 +40,7 @@ class CustomOauthException extends OAuth2Exception {
 		super(b.getMessage(), b);
 		if (b.getCause() != null && b.getCause() instanceof BonelfException) {
 			BonelfException bonelfException = (BonelfException)b.getCause();
-			this.result = Result.error(bonelfException.getCode(), b.getMessage());
+			this.result = Result.error(bonelfException.getCode(), bonelfException.getErrorMessage());
 		} else {
 			this.result = Result.error(BizConstants.CODE_500, b.getMessage());
 		}

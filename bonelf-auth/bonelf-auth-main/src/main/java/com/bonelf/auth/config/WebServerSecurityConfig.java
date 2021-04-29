@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -55,10 +54,12 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(WebSecurity web) {
+		// TODO 修复认证失败 格式问题
 		web.ignoring()
 				.antMatchers(HttpMethod.OPTIONS, "/**")
 				.antMatchers("/swagger-ui/index.html")
 				.antMatchers("/oauth/token_key")
+				.antMatchers("/login/**")
 				.antMatchers("/v2/api-docs");
 	}
 

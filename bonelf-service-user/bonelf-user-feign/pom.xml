@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-user-feign-domain</artifactId>
-            <!--<version>1.0.0</version>-->
+            <!--<version>${bonelf.version}</version>-->
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>

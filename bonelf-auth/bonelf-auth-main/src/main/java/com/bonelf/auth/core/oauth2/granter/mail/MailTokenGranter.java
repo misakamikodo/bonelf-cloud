@@ -54,7 +54,7 @@ public class MailTokenGranter extends BaseApiTokenGranter {
 
 	@Override
 	protected String getPasswordParam(Map<String, String> parameters) {
-		return parameters.get("verifyCode");
+		return parameters.get("verify_code");
 	}
 
 	@Override

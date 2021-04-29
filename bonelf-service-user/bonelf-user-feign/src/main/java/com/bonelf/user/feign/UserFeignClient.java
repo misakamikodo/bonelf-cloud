@@ -6,7 +6,7 @@ import com.bonelf.frame.core.domain.Result;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.Role;
 import com.bonelf.user.feign.domain.response.UserResponse;
-import com.bonelf.user.feign.fallback.UserFeignClientFallback;
+import com.bonelf.user.feign.factory.UserFeignFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +22,10 @@ import java.util.Set;
  * @author bonelf
  * @since 2020/11/17 15:37
  */
-@FeignClient(name = ServiceNameConstant.USER_SERVICE, configuration = FeignConfig.class, fallback = UserFeignClientFallback.class)
+@FeignClient(contextId = "userFeignClient",
+        value = ServiceNameConstant.USER_SERVICE,
+        configuration = FeignConfig.class,
+        fallbackFactory = UserFeignFallbackFactory.class)
 public interface UserFeignClient {
 
     /**

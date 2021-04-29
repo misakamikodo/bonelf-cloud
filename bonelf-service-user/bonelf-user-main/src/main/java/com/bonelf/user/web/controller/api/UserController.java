@@ -2,10 +2,9 @@ package com.bonelf.user.web.controller.api;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.bonelf.frame.base.aop.annotation.MustFeignRequest;
 import com.bonelf.frame.base.property.BonelfProperties;
 import com.bonelf.frame.base.util.redis.RedisUtil;
+import com.bonelf.frame.cloud.aop.annotation.MustFeignRequest;
 import com.bonelf.frame.core.constant.BonelfConstant;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;

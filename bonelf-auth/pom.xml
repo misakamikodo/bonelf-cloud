@@ -24,6 +24,10 @@
 
     <properties>
         <auth.version>${project.version}</auth.version>
+        <!--最新RELEASE 或 1.1.1.RELEASE 已过时-->
+        <oauth-jwt.version>1.0.10.RELEASE</oauth-jwt.version>
+        <!--最新2.5.0.RELEASE 已过时-->
+        <oauth.version>2.3.6.RELEASE</oauth.version>
     </properties>
 
     <dependencies>
@@ -57,6 +61,18 @@
                 <artifactId>bonelf-auth-main</artifactId>
                 <version>${auth.version}</version>
             </dependency>
+            <!-- security start-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${oauth-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${oauth.version}</version>
+            </dependency>
+            <!--  security end-->
         </dependencies>
     </dependencyManagement>
 

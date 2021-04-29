@@ -5,9 +5,7 @@ import com.bonelf.user.feign.UserFeignClient;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.Role;
 import com.bonelf.user.feign.domain.response.UserResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,8 +17,11 @@ import java.util.Set;
  * @author bonelf
  * @since 2020/11/17 15:37
  */
-@Component
+// @Component
 public class UserFeignClientFallback implements UserFeignClient {
+
+	@Setter
+	private Throwable cause;
 
 	// @Autowired
 	// private PasswordEncoder passwordEncoder;

@@ -45,6 +45,7 @@
         <java.version>1.8</java.version>
         <project.encoding>UTF-8</project.encoding>
 
+        <bonelf.version>${project.version}</bonelf.version>
         <frame.version>1.0.0</frame.version>
     </properties>
 
@@ -62,104 +63,104 @@
             <!--<dependency>-->
             <!--    <groupId>com.bonelf</groupId>-->
             <!--    <artifactId>bonelf-common</artifactId>-->
-            <!--    <version>${project.version}</version>-->
+            <!--    <version>${bonelf.version}</version>-->
             <!--    <type>pom</type>-->
             <!--    <scope>import</scope>-->
             <!--</dependency>-->
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-common-core</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-common-base</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-order-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-order-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-pay-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-pay-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-product-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-product-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-promotion-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-promotion-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-search-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-search-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-system-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-system-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-user-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-user-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-support-main</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-support-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-support-provider</artifactId>
-                <version>${project.version}</version>
+                <version>${bonelf.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

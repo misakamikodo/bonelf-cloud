@@ -57,11 +57,6 @@
                 <artifactId>bonelf-search-main</artifactId>
                 <version>${search.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-search-app</artifactId>
-                <version>${search.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

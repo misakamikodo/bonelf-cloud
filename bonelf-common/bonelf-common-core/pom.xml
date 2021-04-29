@@ -18,15 +18,21 @@
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-core</artifactId>
         </dependency>
-        <!-- provider domain start -->
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-user-provider</artifactId>
-        </dependency>
-        <!-- provider domain end -->
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-mq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
         </dependency>
     </dependencies>
 

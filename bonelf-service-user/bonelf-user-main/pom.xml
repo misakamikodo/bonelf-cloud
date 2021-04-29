@@ -26,11 +26,7 @@
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-frame-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-frame-cloud</artifactId>
+            <artifactId>bonelf-frame-cloud-web</artifactId>
             <!--FIXME 正式时需要注释mq-->
 <!--            <exclusions>-->
 <!--                <exclusion>-->

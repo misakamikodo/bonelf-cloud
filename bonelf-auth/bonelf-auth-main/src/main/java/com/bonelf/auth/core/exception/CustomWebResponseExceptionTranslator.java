@@ -26,7 +26,7 @@ public class CustomWebResponseExceptionTranslator implements WebResponseExceptio
 			return ResponseEntity.ok().body(new CustomOauthException(exception));
 		} else {
 			return ResponseEntity.status(500)
-					.body(new CustomOauthException(new OAuth2Exception("system_error")));
+					.body(new CustomOauthException(new OAuth2Exception("system error")));
 		}
 	}
 }

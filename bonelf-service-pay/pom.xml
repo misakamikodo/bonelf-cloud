@@ -58,11 +58,6 @@
                 <artifactId>bonelf-pay-main</artifactId>
                 <version>${pay.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-pay-app</artifactId>
-                <version>${pay.version}</version>
-            </dependency>
             <!--BestPay-->
             <dependency>
                 <groupId>cn.springboot</groupId>

@@ -27,6 +27,7 @@ public class TestConverterDTO {
 	private BigDecimal var3;
 	private String var4;
 	private LocalDate var5;
+	// @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private LocalDateTime var6;
 	private LocalTime var7;
 	private Date var8;

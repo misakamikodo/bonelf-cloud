@@ -26,11 +26,7 @@
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-frame-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-frame-cloud</artifactId>
+            <artifactId>bonelf-frame-cloud-web</artifactId>
             <!--FIXME 正式时需要mq注释-->
 <!--            <exclusions>-->
 <!--                <exclusion>-->
@@ -52,6 +48,24 @@
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-support-feign</artifactId>
         </dependency>
+        <!-- spring security start-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+        </dependency>
+        <!-- spring security end-->
     </dependencies>
 
 </project>

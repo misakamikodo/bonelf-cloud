@@ -4,7 +4,7 @@ server:
     context-path: /bonelf
 
 bonelf:
-  no-auth-url:
+  no-auth-path:
     - /oauth/token,/open,/v2/api-docs
     - /user/loginByAccount
     - /test/testConverter
@@ -36,29 +36,29 @@ spring:
           predicates:
             - Path=${server.servlet.context-path:}/support/**
 
-        - id: user-service
-          uri: lb://user-service
+        - id: user
+          uri: lb://user
           predicates:
             - Path=${server.servlet.context-path:}/user/**
 
-        - id: test-service
+        - id: test
           # 目标服务地址（uri：地址，请求转发后的地址） lb代表从注册中心获取服务
-          uri: lb://test-service
+          uri: lb://test
           predicates:
             - Path=${server.servlet.context-path:}/test/**
-          # StripPrefix=2:当通过网关向/testService/bar/foo发出请求时，对nameservice的请求将类似于http://test-service/foo。
-          # StripPrefix=1然后项目server.servlet.context-path设置为/ 和 不设置StripPrefix或StripPrefix=0 然后项目server.servlet.context-path=/testService效果一样
+          # StripPrefix=2:当通过网关向/test/bar/foo发出请求时，对nameservice的请求将类似于http://test/foo。
+          # StripPrefix=1然后项目server.servlet.context-path设置为/ 和 不设置StripPrefix或StripPrefix=0 然后项目server.servlet.context-path=/test效果一样
           # 我在GlobalAccessTokenFilter中配置了StripPrefix skip 1，所以不用配置这个
 #          filters:
 #            - StripPrefix=1
 
-        - id: order-service
-          uri: lb://order-service
+        - id: order
+          uri: lb://order
           predicates:
             - Path=${server.servlet.context-path:}/order/**
 
-        - id: product-service
-          uri: lb://product-service
+        - id: product
+          uri: lb://product
           predicates:
             - Path=${server.servlet.context-path:}/product/**
 
