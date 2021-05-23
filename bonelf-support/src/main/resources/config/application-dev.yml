@@ -24,10 +24,17 @@ spring:
           name-server: api.bonelf.com:9876
           # RocketMQ 自定义 Binding 配置项，对应 RocketMQBindingProperties Map
           bindings:
+            input:
+              consumer:
+                # 同步消费消息模式
+                orderly: true
+                tags: TestTag # tag 为 tag1/tag2/tag3/tag4
             output:
               producer:
-                group: user
+                group: support
       bindings:
+        # consumer
+        input: { destination: BNF_support, group: support, content-type: text/plain, consumer.maxAttempts: 1 }
         # provider
         output: { destination: BNF_support, content-type: application/json }
 

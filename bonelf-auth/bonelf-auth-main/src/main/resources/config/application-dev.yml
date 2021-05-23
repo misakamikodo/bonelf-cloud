@@ -32,7 +32,7 @@ spring:
                 tags: SocketTag||DictTag # tag 为 tag1/tag2/tag3/tag4
             output:
               producer:
-                group: user
+                group: auth
       bindings:
         # consumer
         input: { destination: BNF_support, group: support, content-type: text/plain, consumer.maxAttempts: 1 }

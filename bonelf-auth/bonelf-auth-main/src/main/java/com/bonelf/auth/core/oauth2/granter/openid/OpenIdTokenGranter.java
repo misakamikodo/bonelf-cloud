@@ -9,19 +9,19 @@
 package com.bonelf.auth.core.oauth2.granter.openid;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
-import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
+import com.bonelf.auth.constant.GrantTypeEnum;
+import com.bonelf.auth.core.oauth2.granter.base.BaseApiAuthenticationToken;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
+import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
 import com.bonelf.auth.domain.User;
 import com.bonelf.auth.service.UserService;
 import com.bonelf.frame.core.exception.BonelfException;
-import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
@@ -29,7 +29,8 @@ import org.springframework.security.oauth2.provider.token.AuthorizationServerTok
 import java.util.Map;
 
 /**
- * @author joe_chen
+ * ThreadLocal
+ * @author bonelf
  * 短信验证码登录与用户名密码登录相似,密码为动态
  * 故继承ResourceOwnerPasswordTokenGranter
  */
@@ -37,9 +38,10 @@ import java.util.Map;
 public class OpenIdTokenGranter extends BaseApiTokenGranter {
 	private final WxMaService wxMaService;
 	private final UserService userService;
-	protected static final String GRANT_TYPE = "openid";
-	private String phone = null;
-	private WxMaUserInfo wxMaUserInfo = null;
+	protected static final String GRANT_TYPE = GrantTypeEnum.openid.getCode();
+	public static final String PASSWORD = "pass";
+	// private String phone = null;
+	private final ThreadLocal<WxMaUserInfo> wxMaUserInfo = new ThreadLocal<>();
 
 	public OpenIdTokenGranter(AuthenticationManager authenticationManager,
 							  AuthorizationServerTokenServices tokenServices,
@@ -53,56 +55,67 @@ public class OpenIdTokenGranter extends BaseApiTokenGranter {
 	}
 
 	@Override
-	protected String getUsernameParam(Map<String, String> parameters) {
+	protected AuthUser getAuthUserFromParam(Map<String, String> parameters) {
 		String code = parameters.get("code");
 		String encryptedData = parameters.get("encryptedData");
 		String iv = parameters.get("iv");
-		// 获取微信用户session
-		WxMaJscode2SessionResult session;
-		try {
-			session = wxMaService.getUserService().getSessionInfo(code);
-		} catch (WxErrorException e) {
-			log.error("session获取失败", e);
-			throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "session获取失败");
-		}
-		if (null == session) {
-			throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "session获取失败");
-		}
-		WxMaUserInfo wxUserInfo = wxMaService.getUserService().getUserInfo(session.getSessionKey(), encryptedData, iv);
-		if (null == wxUserInfo) {
-			throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "无法找到用户信息");
-		}
-		this.wxMaUserInfo = wxUserInfo;
-
-        WxMaPhoneNumberInfo wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(session.getSessionKey(),
-                encryptedData, iv);
-        if (null == wxMaPhoneNumberInfo) {
-            throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "无法找到用户信息");
-        }
-		this.phone = wxMaPhoneNumberInfo.getPhoneNumber();
-		return phone;
+		// // 获取微信用户session
+		// WxMaJscode2SessionResult session;
+		// try {
+		// 	session = wxMaService.getUserService().getSessionInfo(code);
+		// } catch (WxErrorException e) {
+		// 	log.error("session获取失败", e);
+		// 	throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "session获取失败");
+		// }
+		// if (null == session) {
+		// 	throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "session获取失败");
+		// }
+		// WxMaUserInfo wxUserInfo = wxMaService.getUserService().getUserInfo(session.getSessionKey(), encryptedData, iv);
+		// if (null == wxUserInfo) {
+		// 	throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "无法找到用户信息");
+		// }
+		// this.wxMaUserInfo.set(wxUserInfo);;
+		// return wxUserInfo.getOpenId();
+		AuthUser principal = new AuthUser(
+				// wxUserInfo.getOpenId(),
+				"oSxri4irwmzqj4VnxfwOtiMjZxaw",
+				UniqueIdType.openId,
+				PASSWORD);
+		// principal.setUsername(wxUserInfo.getOpenId());
+		principal.setIdType(UniqueIdType.openId);
+		return principal;
 	}
 
 	@Override
-	protected String getPasswordParam(Map<String, String> parameters) {
-		return wxMaUserInfo.getOpenId();
+	protected BaseApiAuthenticationToken getToken(Authentication userAuth) {
+		OpenIdAuthenticationToken token = new OpenIdAuthenticationToken(userAuth);
+		return token;
 	}
 
 	@Override
-	protected void handleBadCredentialsException(String phone, String openId, BadCredentialsException exp) {
-		// 用户不存在注册 保证openId和phone一定会同时匹配，否则出现注册openId、phone之一重复（造假数据同时修改phone和openId才能关闭一个微信用户）
-		RegisterUserRequest registerUser = RegisterUserRequest.builder()
-				.avatar(wxMaUserInfo.getAvatarUrl())
-				.city(wxMaUserInfo.getCity())
-				.country(wxMaUserInfo.getCountry())
-				.gender(Integer.parseInt(wxMaUserInfo.getGender()))
-				.language(wxMaUserInfo.getLanguage())
-				.phone(phone)
-				.openId(openId)
-				.nickname(wxMaUserInfo.getNickName())
-				.province(wxMaUserInfo.getProvince())
-				.unionId(wxMaUserInfo.getUnionId())
+	protected void handleUserNameNotFoundException(AuthUser principal,
+												   String psw,
+												   BonelfException exp) {
+		RegisterUserRequest.RegisterUserRequestBuilder build = RegisterUserRequest.builder();
+		WxMaUserInfo wmui = wxMaUserInfo.get();
+		if (wmui != null) {
+			build.avatar(wmui.getAvatarUrl())
+					.city(wmui.getCity())
+					.country(wmui.getCountry())
+					.gender(Integer.parseInt(wmui.getGender()))
+					.language(wmui.getLanguage())
+					.nickname(wmui.getNickName())
+					.province(wmui.getProvince())
+					.unionId(wmui.getUnionId());
+		}
+		RegisterUserRequest registerUser = build
+				.openId(principal.getUsername())
 				.build();
 		User userResult = userService.registerByOpenId(registerUser);
+	}
+
+	@Override
+	protected void authExpFinalyDo() {
+		wxMaUserInfo.remove();
 	}
 }

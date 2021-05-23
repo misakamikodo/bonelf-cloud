@@ -6,6 +6,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.HexUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bonelf.cicada.util.CipherCryptUtil;
@@ -17,6 +18,7 @@ import com.bonelf.frame.core.constant.CommonCacheConstant;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
 import com.bonelf.user.constant.CacheConstant;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import com.bonelf.user.web.domain.dto.AccountLoginDTO;
 import com.bonelf.user.web.domain.dto.WechatLoginDTO;
 import com.bonelf.user.web.domain.entity.User;
@@ -110,6 +112,75 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 				.expiresIn(AuthConstant.EXPIRATION_SECOND)
 				.user(user)
 				.build();
+	}
+
+	/**
+	 * 根据类型获取用户
+	 * @param uniqueId
+	 * @param idTypes
+	 * @return
+	 */
+	@Override
+	public User getUserByType(String uniqueId, UniqueIdType[] idTypes) {
+		if(idTypes == null || idTypes.length == 0){
+			return this.getOne(Wrappers.<User>lambdaQuery()
+					.eq(User::getUserId, uniqueId).or()
+					.eq(User::getUsername, uniqueId).or()
+					.eq(User::getPhone, uniqueId).or()
+					.eq(User::getMail, uniqueId).or()
+					.eq(User::getOpenId, uniqueId).orderByDesc(User::getUpdateTime).last("limit 1"));
+		} else {
+			LambdaQueryWrapper<User> lqw = Wrappers.<User>lambdaQuery()
+					.orderByDesc(User::getUpdateTime).last("limit 1");
+			for (int i = 0; i < idTypes.length - 1; i++) {
+				UniqueIdType idType = idTypes[i];
+				switch (idType){
+					case id:
+						lqw = lqw.eq(User::getUserId, uniqueId).or();
+						break;
+					case username:
+						lqw = lqw.eq(User::getUsername, uniqueId).or();
+						break;
+					case mail:
+						lqw = lqw.eq(User::getMail, uniqueId).or();
+						break;
+					case phone:
+						lqw = lqw.eq(User::getPhone, uniqueId).or();
+						break;
+					case openId:
+						lqw = lqw.eq(User::getOpenId, uniqueId).or();
+						break;
+					case unionId:
+						lqw = lqw.eq(User::getUnionId, uniqueId).or();
+						break;
+					default:
+						throw new BonelfException(String.format("unknown type %s of username", idType.toString()));
+				}
+			}
+			switch (idTypes[idTypes.length - 1]){
+				case id:
+					lqw.eq(User::getUserId, uniqueId);
+					break;
+				case username:
+					lqw.eq(User::getUsername, uniqueId);
+					break;
+				case mail:
+					lqw.eq(User::getMail, uniqueId);
+					break;
+				case phone:
+					lqw.eq(User::getPhone, uniqueId);
+					break;
+				case openId:
+					lqw.eq(User::getOpenId, uniqueId);
+					break;
+				case unionId:
+					lqw.eq(User::getUnionId, uniqueId);
+					break;
+				default:
+					throw new BonelfException(String.format("unknown type %s of username", uniqueId.toString()));
+			}
+			return this.getOne(lqw);
+		}
 	}
 
 	@Transactional(rollbackFor = Exception.class)

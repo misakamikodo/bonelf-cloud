@@ -12,11 +12,12 @@ import com.bonelf.frame.web.controller.BaseApiController;
 import com.bonelf.support.feign.SupportFeignClient;
 import com.bonelf.user.constant.enums.UserStatusEnum;
 import com.bonelf.user.constant.exception.UserExceptionEnum;
+import com.bonelf.user.feign.constant.UniqueIdType;
+import com.bonelf.user.feign.domain.response.UserResponse;
 import com.bonelf.user.web.domain.dto.AccountLoginDTO;
 import com.bonelf.user.web.domain.dto.WechatLoginDTO;
 import com.bonelf.user.web.domain.dto.WechatRegisterUserDTO;
 import com.bonelf.user.web.domain.entity.User;
-import com.bonelf.user.web.domain.response.UserResponse;
 import com.bonelf.user.web.domain.vo.LoginVO;
 import com.bonelf.user.web.service.UserService;
 import io.swagger.annotations.Api;
@@ -70,11 +71,9 @@ public class UserController extends BaseApiController<UserService, User> {
 	/*===========================Feign FIXME 为Feign新建模块 ===========================*/
 
 	@GetMapping(value = "/v1/getUser")
-	public Result<UserResponse> getUser(@RequestParam("uniqueId") String uniqueId) {
-		User user = userService.getOne(Wrappers.<User>lambdaQuery()
-				.eq(User::getUserId, uniqueId).or()
-				.eq(User::getPhone, uniqueId).or()
-				.eq(User::getOpenId, uniqueId).orderByDesc(User::getUpdateTime).last("limit 1"));
+	public Result<UserResponse> getUser(@RequestParam("uniqueId") String uniqueId,
+										@RequestParam(value = "idType", required = false) UniqueIdType[] idType) {
+		User user = userService.getUserByType(uniqueId, idType);
 		if (user == null) {
 			return Result.error(CommonBizExceptionEnum.DB_RESOURCE_NULL, "用户");
 		}

@@ -2,6 +2,7 @@ package com.bonelf.user.feign.fallback;
 
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.user.feign.UserFeignClient;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.Role;
 import com.bonelf.user.feign.domain.response.UserResponse;
@@ -27,7 +28,7 @@ public class UserFeignClientFallback implements UserFeignClient {
 	// private PasswordEncoder passwordEncoder;
 
 	@Override
-	public Result<UserResponse> getUserByUniqueId(String uniqueId) {
+	public Result<UserResponse> getUserByUniqueId(String uniqueId, UniqueIdType[] idType) {
 		// FIXME: 2020/11/19 超时报错返回error
 		//User user = new User();
 		//user.setEnabled(true);

@@ -54,7 +54,6 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(WebSecurity web) {
-		// TODO 修复认证失败 格式问题
 		web.ignoring()
 				.antMatchers(HttpMethod.OPTIONS, "/**")
 				.antMatchers("/swagger-ui/index.html")
@@ -67,6 +66,7 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		log.debug("HttpSecurity configure method");
 		http.csrf().disable();
+		// 这个可以继承重写 从而自定义返回 还有错误处理类.failureHandler(AuthenticationFailureHandler );
 		SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
 		successHandler.setTargetUrlParameter("redirectTo");
 		http.authorizeRequests()
@@ -92,15 +92,17 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		if (userDetailsService != null) {
+			// 设置密码登录的AuthenticationProvider
 			authenticationManagerBuilder
 					.userDetailsService(userDetailsService)
 					.passwordEncoder(passwordEncoder());
 		}
-		// 设置手机验证码登录的AuthenticationProvider
 		if (mobileUserDetailsService != null) {
+			// 设置手机验证码登录的AuthenticationProvider
 			authenticationManagerBuilder.authenticationProvider(mobileAuthenticationProvider());
 		}
 		if (mailUserDetailsService != null) {
+			// 设置邮箱验证码登录的AuthenticationProvider
 			authenticationManagerBuilder.authenticationProvider(mailAuthenticationProvider());
 		}
 		if (openidUserDetailsService != null) {
@@ -123,6 +125,25 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+
+	/**
+	 * 对原始字符不进行加密，比较时都会返回true
+	 */
+	// @Bean
+	// public PasswordEncoder passwordEncoder() {
+	// 	return new PasswordEncoder() {
+	// 		@Override
+	// 		public String encode(CharSequence charSequence) {
+	// 			return charSequence.toString();
+	// 		}
+	//
+	// 		@Override
+	// 		public boolean matches(CharSequence charSequence, String s) {
+	// 			return true;
+	// 		}
+	// 	};
+	// }
+
 	/**
 	 * 创建手机验证码登录的AuthenticationProvider
 	 * @return mobileAuthenticationProvider
@@ -143,6 +164,8 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public OpenIdAuthenticationProvider openIdAuthenticationProvider() {
-		return new OpenIdAuthenticationProvider(this.openidUserDetailsService);
+		OpenIdAuthenticationProvider openIdAuthenticationProvider = new OpenIdAuthenticationProvider(this.openidUserDetailsService);
+		openIdAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+		return openIdAuthenticationProvider;
 	}
 }

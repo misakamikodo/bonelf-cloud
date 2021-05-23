@@ -191,7 +191,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		//出现 Cannot convert access token to JSON （实际上为NPE，verifier为空）考虑设置
 		//converter.setVerifier(new RsaVerifier("---Begin--???---End---"));
 		//2:
-		if(!StringUtils.hasText(oauth2JwtProperties.getKeystore())){
+		if (!StringUtils.hasText(oauth2JwtProperties.getKeystore())) {
 			throw new RuntimeException("keystore is not set");
 		}
 		KeyPair keyPair = new KeyStoreKeyFactory(
@@ -209,25 +209,31 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public TokenGranter tokenGranter(final AuthorizationServerEndpointsConfigurer endpoints) {
 		List<TokenGranter> granters = Lists.newArrayList(endpoints.getTokenGranter());
 		//新增granter 新增登录方式
-		granters.add(new MobileTokenGranter(
+		MobileTokenGranter mobileTokenGranter = new MobileTokenGranter(
 				authenticationManager,
 				endpoints.getTokenServices(),
 				endpoints.getClientDetailsService(),
-				endpoints.getOAuth2RequestFactory()));
+				endpoints.getOAuth2RequestFactory(), userService);
+		mobileTokenGranter.setReAuthIfNotFound(true);
+		granters.add(mobileTokenGranter);
 
-		granters.add(new MailTokenGranter(
+		MailTokenGranter mailTokenGranter = new MailTokenGranter(
 				authenticationManager,
 				endpoints.getTokenServices(),
 				endpoints.getClientDetailsService(),
-				endpoints.getOAuth2RequestFactory()));
+				endpoints.getOAuth2RequestFactory(), userService);
+		mailTokenGranter.setReAuthIfNotFound(true);
+		granters.add(mailTokenGranter);
 
-		granters.add(new OpenIdTokenGranter(
+		OpenIdTokenGranter openIdTokenGranter = new OpenIdTokenGranter(
 				authenticationManager,
 				endpoints.getTokenServices(),
 				endpoints.getClientDetailsService(),
 				endpoints.getOAuth2RequestFactory(),
 				wxMaService,
-				userService));
+				userService);
+		openIdTokenGranter.setReAuthIfNotFound(true);
+		granters.add(openIdTokenGranter);
 		return new CompositeTokenGranter(granters);
 	}
 

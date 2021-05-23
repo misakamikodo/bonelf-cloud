@@ -23,7 +23,7 @@ public class MobileAuthenticationToken extends BaseApiAuthenticationToken {
      * 在下面添加自定义内容
      * @see com.bonelf.auth.core.oauth2.enhancer.CustomTokenEnhancer
      */
-    private String expPayload = "this is an example payload data";
+    private String payload = "this is an example payload data";
 
     public MobileAuthenticationToken(Authentication authenticationToken) {
         super(authenticationToken);

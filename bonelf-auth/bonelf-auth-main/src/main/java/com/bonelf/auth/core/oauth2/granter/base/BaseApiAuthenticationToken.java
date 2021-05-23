@@ -20,12 +20,14 @@ import org.springframework.security.core.Authentication;
 @Setter
 public abstract class BaseApiAuthenticationToken extends UsernamePasswordAuthenticationToken {
     /**
-     * 在下面添加自定义内容
+     * 在下面添加自定义内容 (认证通过后添加)
      * @see com.bonelf.auth.core.oauth2.enhancer.CustomTokenEnhancer
      */
-    private Object payload = "this is an example payload data";
+    private Object userId;
 
     public BaseApiAuthenticationToken(Authentication authenticationToken) {
         super(authenticationToken.getPrincipal(), authenticationToken.getCredentials());
     }
+
+
 }

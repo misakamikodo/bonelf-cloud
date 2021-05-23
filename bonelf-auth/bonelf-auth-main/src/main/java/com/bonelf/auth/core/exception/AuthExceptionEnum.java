@@ -9,13 +9,13 @@
 package com.bonelf.auth.core.exception;
 
 import com.bonelf.frame.core.exception.AbstractBaseExceptionEnum;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * <p>
  * 认证服务异常信息定义
  * </p>
+ * @see CustomOauthException
  * @author bonelf
  * @since 2020/10/12 10:48
  */
@@ -43,7 +43,7 @@ public enum AuthExceptionEnum implements AbstractBaseExceptionEnum {
 	 * 自定义部分
 	 */
 	EXAMPLE("-1", "-"),
-	;
+	LOGIN_REPLACE("40072", "您的账号已在其他设备登录");
 
 
 	AuthExceptionEnum(String code, String message, String devMessage) {

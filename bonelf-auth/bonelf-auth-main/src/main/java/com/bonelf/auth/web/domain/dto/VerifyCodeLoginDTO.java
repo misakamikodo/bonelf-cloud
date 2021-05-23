@@ -1,7 +1,9 @@
 package com.bonelf.auth.web.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * oauth2获取token传参
@@ -10,7 +12,10 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 @Data
 public class VerifyCodeLoginDTO {
+	@NotBlank(message = "请输入账号")
 	private String username;
+	@NotBlank(message = "请输入验证码")
 	@JsonProperty("verify_code")
 	private String verifyCode;
 }
+

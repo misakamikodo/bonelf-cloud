@@ -1,5 +1,6 @@
 package com.bonelf.auth.web.controller.api;
 
+import com.bonelf.auth.domain.User;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
@@ -24,6 +25,12 @@ public class ExampleController extends BaseController {
 	@RequestMapping("/test")
 	public Result<String> test(){
 		return Result.ok("ok");
+	}
+
+	@ApiOperation(value = "user")
+	@RequestMapping("/user")
+	public User user(){
+		return new User();
 	}
 
 	@ApiOperation(value = "integer")

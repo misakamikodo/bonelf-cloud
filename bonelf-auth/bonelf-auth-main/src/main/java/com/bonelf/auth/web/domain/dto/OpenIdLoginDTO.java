@@ -2,6 +2,8 @@ package com.bonelf.auth.web.domain.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * oauth2获取token传参
  * @author ccy
@@ -9,7 +11,10 @@ import lombok.Data;
  */
 @Data
 public class OpenIdLoginDTO {
+	@NotBlank
 	private String code;
+	@NotBlank
 	private String encryptedData;
+	@NotBlank
 	private String iv;
 }

@@ -7,6 +7,7 @@ import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.user.feign.UserFeignClient;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,27 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	//@Cacheable(value = "#id", condition = "#result.getSuccess()")
-	public User getByUniqueId(String uniqueId) {
-		Result<UserResponse> user = userFeignClient.getUserByUniqueId(uniqueId);
+	public User getByUniqueId(String uniqueId, UniqueIdType idType) {
+		return getByUniqueId(uniqueId, new UniqueIdType[]{idType});
+	}
+
+	/**
+	 * 根据用户唯一标识获取用户信息,没有的话则注册
+	 * @param uniqueId
+	 * @param idType
+	 * @param userMsg
+	 * @return
+	 */
+	@Override
+	public User getByUniqueIdOrElseRegister(String uniqueId, UniqueIdType idType, RegisterUserRequest userMsg) {
+		return getByUniqueId(uniqueId, new UniqueIdType[]{idType});
+	}
+
+	@Override
+	public User getByUniqueId(String uniqueId, UniqueIdType[] idTypes) {
+		Result<UserResponse> user = userFeignClient.getUserByUniqueId(uniqueId, idTypes);
 		if (!user.getSuccess()) {
-			// throw new BonelfException(CommonBizExceptionEnum.BUSY);
-			throw BonelfException.builder().code("500").msg(user.getMessage()).build();
+			throw BonelfException.builder(user.getMessage()).code(user.getCode()).msg(user.getMessage()).build();
 		}
 		User userResult = getUserFromUserResp(user);
 		return userResult;

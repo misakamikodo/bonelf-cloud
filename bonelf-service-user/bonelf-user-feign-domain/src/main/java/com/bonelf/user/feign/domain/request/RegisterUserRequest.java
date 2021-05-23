@@ -27,6 +27,7 @@ public class RegisterUserRequest implements Serializable {
      * 昵称
      */
     private String nickname;
+    private String mail;
 
     /**
      * 头像链接

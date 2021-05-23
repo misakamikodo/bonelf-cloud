@@ -8,8 +8,16 @@
 
 package com.bonelf.auth.core.oauth2.granter.mail;
 
+import com.bonelf.auth.constant.GrantTypeEnum;
+import com.bonelf.auth.core.oauth2.granter.base.BaseApiAuthenticationToken;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
+import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
+import com.bonelf.auth.domain.User;
+import com.bonelf.auth.service.UserService;
+import com.bonelf.frame.core.exception.BonelfException;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
@@ -36,25 +44,36 @@ import java.util.Map;
  * 注册见{@link com.bonelf.auth.core.oauth2.service.MailUserDetailsService}
  */
 public class MailTokenGranter extends BaseApiTokenGranter {
+	private final UserService userService;
 
-	protected static final String GRANT_TYPE = "mail";
+	protected static final String GRANT_TYPE = GrantTypeEnum.mail.getCode();
 
 
 	public MailTokenGranter(AuthenticationManager authenticationManager,
 							  AuthorizationServerTokenServices tokenServices,
 							  ClientDetailsService clientDetailsService,
-							  OAuth2RequestFactory requestFactory) {
+							  OAuth2RequestFactory requestFactory,
+							UserService userService) {
 		super(authenticationManager, tokenServices, clientDetailsService, requestFactory, GRANT_TYPE);
+		this.userService = userService;
 	}
 
 	@Override
-	protected String getUsernameParam(Map<String, String> parameters) {
-		return parameters.get("username");
+	protected AuthUser getAuthUserFromParam(Map<String, String> parameters) {
+		AuthUser principal = new AuthUser(parameters.get("username"), UniqueIdType.mail, parameters.get("verify_code"));
+		return principal;
 	}
 
 	@Override
-	protected String getPasswordParam(Map<String, String> parameters) {
-		return parameters.get("verify_code");
+	protected BaseApiAuthenticationToken getToken(Authentication userAuth) {
+		return new MailAuthenticationToken(userAuth);
+	}
+
+	@Override
+	protected void handleUserNameNotFoundException(AuthUser account,
+												   String psw,
+												   BonelfException exp) {
+		User userResult = userService.registerByMail(account.getUsername());
 	}
 
 	@Override

@@ -26,4 +26,5 @@ public class OpenIdAuthenticationProvider extends BaseApiAuthenticationProvider 
 	protected Class<? extends BaseApiAuthenticationToken> authenticationToken() {
 		return OpenIdAuthenticationToken.class;
 	}
+
 }

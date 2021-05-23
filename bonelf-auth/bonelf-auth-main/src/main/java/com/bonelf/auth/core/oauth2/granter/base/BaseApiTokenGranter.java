@@ -8,8 +8,9 @@
 
 package com.bonelf.auth.core.oauth2.granter.base;
 
-import com.bonelf.auth.core.oauth2.granter.mobile.MobileAuthenticationToken;
+import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
 import com.bonelf.auth.core.oauth2.service.MobileUserDetailsService;
+import com.bonelf.frame.core.exception.BonelfException;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
@@ -21,10 +22,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author joe_chen
  * 短信验证码登录与用户名密码登录相似,密码为动态
  * 故继承ResourceOwnerPasswordTokenGranter
- *
+ * <p>
  * POST：http://XXX:8001/bonelf/oauth/token
  * 以下参数对应数据库 和 GRANT_TYPE
  * grant_type:mobile
@@ -33,13 +33,23 @@ import java.util.Map;
  * client_id:test_client
  * client_secret:test_secret
  * 以下参数对应用户
- * username:13758233000
- * password:123456
+ * username:137582330XX
+ * password:980826
  * 验证{@link MobileUserDetailsService}
+ * @author bonelf
  */
 public abstract class BaseApiTokenGranter extends ResourceOwnerPasswordTokenGranter {
 
 	private AuthenticationManager authenticationManager;
+	private boolean reAuthIfNotFound = false;
+
+	public boolean isReAuthIfNotFound() {
+		return reAuthIfNotFound;
+	}
+
+	public void setReAuthIfNotFound(boolean reAuthIfNotFound) {
+		this.reAuthIfNotFound = reAuthIfNotFound;
+	}
 
 	public BaseApiTokenGranter(AuthenticationManager authenticationManager,
 							   AuthorizationServerTokenServices tokenServices,
@@ -50,15 +60,19 @@ public abstract class BaseApiTokenGranter extends ResourceOwnerPasswordTokenGran
 		this.authenticationManager = authenticationManager;
 	}
 
-	protected abstract String getUsernameParam(Map<String, String> parameters);
+	protected abstract AuthUser getAuthUserFromParam(Map<String, String> parameters);
 
-	protected abstract String getPasswordParam(Map<String, String> parameters);
+	protected abstract BaseApiAuthenticationToken getToken(Authentication userAuth);
 
 	protected void afterGet(Map<String, String> parameters) {
 
 	}
 
-	protected void handleBadCredentialsException(String username, String password, BadCredentialsException exp) {
+	protected void authExpFinalyDo() {
+
+	}
+
+	protected void handleUserNameNotFoundException(AuthUser username, String password, BonelfException exp) {
 		// If the username/password are wrong the spec says we should send 400/invalid grant, you can override and register hear
 		throw new InvalidGrantException(exp.getMessage());
 	}
@@ -66,28 +80,57 @@ public abstract class BaseApiTokenGranter extends ResourceOwnerPasswordTokenGran
 	@Override
 	protected final OAuth2Authentication getOAuth2Authentication(ClientDetails client, TokenRequest tokenRequest) {
 		Map<String, String> parameters = new LinkedHashMap<>(tokenRequest.getRequestParameters());
-		// 手机号还可以是邮箱等
-		String username = getUsernameParam(parameters);
+		// 手机号还可以是邮箱等 {id:,username:,type:}
+		AuthUser principal = getAuthUserFromParam(parameters);
 		// 验证码
-		String password = getPasswordParam(parameters);
+		String password = principal.getPassword();
 		afterGet(parameters);
 
-		Authentication userAuth = new UsernamePasswordAuthenticationToken(username, password);
-		MobileAuthenticationToken mobileAuthenticationToken = new MobileAuthenticationToken(userAuth);
-		((AbstractAuthenticationToken)userAuth).setDetails(parameters);
+		// principal可以替换为username字符串 效果一样，本意想在解token获得principal的内容，但是不行
+		AbstractAuthenticationToken usernamePasswordToken = new UsernamePasswordAuthenticationToken(
+				principal, password
+		);
+		// 只使用username作为principal setForcePrincipalAsString(true)
+		// AbstractAuthenticationToken usernamePasswordToken = new UsernamePasswordAuthenticationToken(principal.getUsername(), password);
+		BaseApiAuthenticationToken authenticationToken = getToken(usernamePasswordToken);
+		// 新建一个存放附带信息 如果需要这里放map 不然BaseApiAuthenticationProvider处理报错
+		// Map<String, String> details = new LinkedHashMap<>();
+		// authenticationToken.setDetails(details);
+		authenticationToken.setDetails(parameters);
+
+		Authentication userAuth;
 		try {
-			userAuth = this.authenticationManager.authenticate(mobileAuthenticationToken);
+			// 再auth中loadUserByUsername
+			userAuth = this.authenticationManager.authenticate(authenticationToken);
 		} catch (AccountStatusException ase) {
 			// covers expired, locked, disabled cases (mentioned in section 5.2, draft 31)
 			throw new InvalidGrantException(ase.getMessage());
-		} catch (BadCredentialsException e) {
-			handleBadCredentialsException(username, password, e);
+		} catch (InternalAuthenticationServiceException e) {
+			// 处理异常 注意 DaoAuthenticationProvider 对所有异常的捕获
+			if (e.getCause() instanceof BonelfException && "404".equals(((BonelfException)e.getCause()).getCode())) {
+				// 更推荐使用 UsernameNotFoundException
+				handleUserNameNotFoundException(principal, password, (BonelfException)e.getCause());
+				if (reAuthIfNotFound) {
+					try {
+						userAuth = this.authenticationManager.authenticate(authenticationToken);
+					} catch (AccountStatusException ase) {
+						throw new InvalidGrantException(ase.getMessage());
+					}
+				} else {
+					throw e;
+				}
+			} else {
+				throw e;
+			}
+		} finally {
+			authExpFinalyDo();
 		}
+
 		if (userAuth == null || !userAuth.isAuthenticated()) {
-			throw new InvalidGrantException("Could not authenticate user: " + username);
+			throw new InvalidGrantException("Could not authenticate user: " + principal);
 		}
 
 		OAuth2Request storedOAuth2Request = getRequestFactory().createOAuth2Request(client, tokenRequest);
-		return new OAuth2Authentication(storedOAuth2Request, mobileAuthenticationToken);
+		return new OAuth2Authentication(storedOAuth2Request, authenticationToken);
 	}
 }

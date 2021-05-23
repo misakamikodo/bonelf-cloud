@@ -3,6 +3,7 @@ package com.bonelf.user.feign;
 import com.bonelf.frame.cloud.feign.FeignConfig;
 import com.bonelf.frame.core.constant.ServiceNameConstant;
 import com.bonelf.frame.core.domain.Result;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.Role;
 import com.bonelf.user.feign.domain.response.UserResponse;
@@ -34,7 +35,8 @@ public interface UserFeignClient {
      * @return
      */
     @GetMapping(value = "/bonelf/user/v1/getUser")
-    Result<UserResponse> getUserByUniqueId(@RequestParam("uniqueId") String uniqueId);
+    Result<UserResponse> getUserByUniqueId(@RequestParam("uniqueId") String uniqueId,
+                                           @RequestParam(value = "idType", required = false) UniqueIdType[] idType);
 
     /**
      * 用户角色

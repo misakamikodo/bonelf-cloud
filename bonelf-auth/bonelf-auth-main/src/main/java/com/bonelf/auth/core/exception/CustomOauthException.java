@@ -33,7 +33,10 @@ class CustomOauthException extends OAuth2Exception {
 
 	CustomOauthException(OAuth2Exception oAuth2Exception) {
 		super(oAuth2Exception.getSummary(), oAuth2Exception);
-		this.result = Result.error(AuthExceptionEnum.valueOf(oAuth2Exception.getOAuth2ErrorCode().toUpperCase()), oAuth2Exception);
+		this.result = Result.builder()
+				.enums(AuthExceptionEnum.valueOf(oAuth2Exception.getOAuth2ErrorCode().toUpperCase()))
+				.devMsg(oAuth2Exception.getSummary())
+				.build();
 	}
 
 	CustomOauthException(InternalAuthenticationServiceException b) {

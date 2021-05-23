@@ -8,14 +8,18 @@
 
 package com.bonelf.auth.core.oauth2.service;
 
+import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
 import com.bonelf.auth.domain.User;
 import com.bonelf.frame.core.domain.Result;
+import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.support.feign.SupportFeignClient;
 import com.bonelf.support.feign.domain.constant.VerifyCodeTypeEnum;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,6 +32,8 @@ import org.springframework.stereotype.Service;
 public class MobileUserDetailsService extends CustomUserDetailsService {
 	@Autowired
 	protected SupportFeignClient supportFeignClient;
+	@Autowired
+	protected PasswordEncoder passwordEncoder;
 
 	/**
 	 * 调用/auth/token 调用这个方法校验
@@ -37,22 +43,31 @@ public class MobileUserDetailsService extends CustomUserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String uniqueId) {
-		User user = userService.getByUniqueId(uniqueId);
-		if (user == null) {
-			// 验证码正确 但是用户不存在注册
-			user = userService.registerByPhone(uniqueId);
+		User user;
+		try {
+			user = userService.getByUniqueId(uniqueId, UniqueIdType.phone);
+		} catch (BonelfException be) {
+			if ("404".equals(be.getCode())) {
+				throw new UsernameNotFoundException((be.getErrorMessage()), be);
+			} else {
+				throw be;
+			}
 		}
-		Result<String> codeResult = supportFeignClient.getVerify(user.getPhone(), VerifyCodeTypeEnum.LOGIN.getCode());
+		Result<String> codeResult = supportFeignClient.getVerifyPhone(user.getPhone(), VerifyCodeTypeEnum.LOGIN.getCode());
 		if (codeResult.getSuccess()) {
 			user.setVerifyCode(codeResult.getResult());
+		} else {
+			throw BonelfException.builder(codeResult.getMessage()).code(codeResult.getCode()).msg(codeResult.getMessage()).build();
 		}
 		log.debug("load user by mobile:{}", user.toString());
 		// 如果为mobile模式，从短信服务中获取验证码（动态密码） 其实可以去了加密
 		//String credentials = userClient.getSmsCode(uniqueId, "LOGIN");
-		//String credentials = passwordEncoder.encode(user.getVerifyCode());
+		String credentials = passwordEncoder.encode(user.getVerifyCode());
 		//String credentials = user.getVerifyCode();
-		String credentials = new BCryptPasswordEncoder().encode(user.getVerifyCode());
-		return new org.springframework.security.core.userdetails.User(
+		// String credentials = new BCryptPasswordEncoder().encode(user.getVerifyCode());
+		return new AuthUser(
+				user.getUserId(),
+				UniqueIdType.phone,
 				user.getPhone(),
 				credentials,
 				user.getEnabled(),

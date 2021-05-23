@@ -17,6 +17,8 @@ public interface CacheConstant {
 	 */
 	String WEB_SOCKET_SESSION_HASH = BonelfConstant.PROJECT_NAME + ":websocket:session";
 
+	String TOKEN = "bnf:token:";
+
 	/*
 	 * session 有效时间 如果不使用hash表存储session使用
 	 */

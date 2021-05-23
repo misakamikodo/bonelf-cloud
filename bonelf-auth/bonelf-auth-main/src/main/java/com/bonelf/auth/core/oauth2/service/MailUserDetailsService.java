@@ -8,14 +8,18 @@
 
 package com.bonelf.auth.core.oauth2.service;
 
+import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
 import com.bonelf.auth.domain.User;
 import com.bonelf.frame.core.domain.Result;
+import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.support.feign.SupportFeignClient;
 import com.bonelf.support.feign.domain.constant.VerifyCodeTypeEnum;
+import com.bonelf.user.feign.constant.UniqueIdType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,6 +31,8 @@ import org.springframework.stereotype.Service;
 public class MailUserDetailsService extends CustomUserDetailsService {
 	@Autowired
 	protected SupportFeignClient supportFeignClient;
+	@Autowired
+	protected PasswordEncoder passwordEncoder;
 
 	/**
 	 * 调用/auth/token 调用这个方法校验
@@ -36,22 +42,31 @@ public class MailUserDetailsService extends CustomUserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String uniqueId) {
-		User user = userService.getByUniqueId(uniqueId);
-		if (user == null) {
-			// 验证码正确 但是用户不存在注册
-			user = userService.registerByMail(uniqueId);
+		User user;
+		try {
+			user = userService.getByUniqueId(uniqueId, UniqueIdType.mail);
+		} catch (BonelfException be) {
+			if ("404".equals(be.getCode())) {
+				throw new UsernameNotFoundException((be.getErrorMessage()), be);
+			} else {
+				throw be;
+			}
 		}
-		Result<String> codeResult = supportFeignClient.getVerify(user.getPhone(), VerifyCodeTypeEnum.LOGIN.getCode());
+		Result<String> codeResult = supportFeignClient.getVerifyMail(user.getMail(), VerifyCodeTypeEnum.LOGIN.getCode());
 		if (codeResult.getSuccess()) {
 			user.setVerifyCode(codeResult.getResult());
+		} else {
+			throw BonelfException.builder().code(codeResult.getCode()).msg(codeResult.getMessage()).build();
 		}
 		log.debug("load user by mail:{}", user.toString());
 		// 如果为mail模式，从短信服务中获取验证码（动态密码） 其实可以去了加密
 		//String credentials = userClient.getSmsCode(uniqueId, "LOGIN");
-		//String credentials = passwordEncoder.encode(user.getVerifyCode());
+		String credentials = passwordEncoder.encode(user.getVerifyCode());
 		//String credentials = user.getVerifyCode();
-		String credentials = new BCryptPasswordEncoder().encode(user.getVerifyCode());
-		return new org.springframework.security.core.userdetails.User(
+		// String credentials = new BCryptPasswordEncoder().encode(user.getVerifyCode());
+		return  new AuthUser(
+				user.getUserId(),
+				UniqueIdType.mail,
 				user.getMail(),
 				credentials,
 				user.getEnabled(),
