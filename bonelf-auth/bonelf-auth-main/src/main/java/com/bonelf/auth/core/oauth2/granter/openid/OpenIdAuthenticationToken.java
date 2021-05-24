@@ -8,7 +8,7 @@
 
 package com.bonelf.auth.core.oauth2.granter.openid;
 
-import com.bonelf.auth.core.oauth2.granter.base.BaseApiAuthenticationToken;
+import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.Authentication;
@@ -22,7 +22,7 @@ import org.springframework.security.core.Authentication;
 public class OpenIdAuthenticationToken extends BaseApiAuthenticationToken {
     /**
      * 在下面添加自定义内容
-     * @see com.bonelf.auth.core.oauth2.enhancer.CustomTokenEnhancer
+     * @see com.bonelf.auth.core.oauth2.converter.CustomTokenEnhancer
      */
     private String payload = "this is an example payload data";
 

@@ -9,7 +9,7 @@
 package com.bonelf.auth.core.oauth2.granter.mobile;
 
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiAuthenticationProvider;
-import com.bonelf.auth.core.oauth2.granter.base.BaseApiAuthenticationToken;
+import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**

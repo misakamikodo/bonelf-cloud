@@ -1,9 +1,9 @@
 package com.bonelf.user.feign;
 
 import com.bonelf.frame.cloud.feign.FeignConfig;
+import com.bonelf.frame.cloud.security.constant.UniqueIdType;
 import com.bonelf.frame.core.constant.ServiceNameConstant;
 import com.bonelf.frame.core.domain.Result;
-import com.bonelf.user.feign.constant.UniqueIdType;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.Role;
 import com.bonelf.user.feign.domain.response.UserResponse;

@@ -9,7 +9,7 @@ import com.bonelf.auth.web.domain.dto.VerifyCodeLoginDTO;
 import com.bonelf.cicada.util.Md5CryptUtil;
 import com.bonelf.frame.base.property.oauth2.Oauth2Properties;
 import com.bonelf.frame.base.util.JsonUtil;
-import com.bonelf.frame.cloud.constant.AuthFeignConstant;
+import com.bonelf.frame.cloud.security.constant.AuthFeignConstant;
 import com.bonelf.frame.core.constant.AuthConstant;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.web.controller.BaseController;

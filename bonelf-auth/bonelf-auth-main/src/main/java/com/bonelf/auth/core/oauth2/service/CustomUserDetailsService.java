@@ -8,11 +8,11 @@
 
 package com.bonelf.auth.core.oauth2.service;
 
-import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
 import com.bonelf.auth.domain.User;
 import com.bonelf.auth.service.RoleService;
 import com.bonelf.auth.service.UserService;
-import com.bonelf.user.feign.constant.UniqueIdType;
+import com.bonelf.frame.cloud.security.constant.UniqueIdType;
+import com.bonelf.frame.cloud.security.domain.AuthUser;
 import com.bonelf.user.feign.domain.response.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

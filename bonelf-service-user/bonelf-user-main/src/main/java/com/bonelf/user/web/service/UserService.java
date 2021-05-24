@@ -1,7 +1,7 @@
 package com.bonelf.user.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bonelf.user.feign.constant.UniqueIdType;
+import com.bonelf.frame.cloud.security.constant.UniqueIdType;
 import com.bonelf.user.web.domain.dto.AccountLoginDTO;
 import com.bonelf.user.web.domain.dto.WechatLoginDTO;
 import com.bonelf.user.web.domain.entity.User;

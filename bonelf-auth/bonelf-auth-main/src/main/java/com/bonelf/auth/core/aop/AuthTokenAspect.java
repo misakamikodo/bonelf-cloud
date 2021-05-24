@@ -23,6 +23,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * <p>
  * Oauth2.0返回结果封装
@@ -63,7 +65,10 @@ public class AuthTokenAspect {
 					String userId = String.valueOf(body.getAdditionalInformation().get("userId"));
 					log.debug("==即将把下面信息放入redis,用于单客户端登录==\nuserId = {}\ntoken = {}\nexpiresIn = {}",
 							userId, body.getValue(), body.getExpiresIn());
-					redisTemplate.opsForValue().set(CacheConstant.TOKEN + userId, body.getValue(), body.getExpiresIn());
+					redisTemplate.opsForValue().set(CacheConstant.TOKEN + userId,
+							body.getValue(),
+							body.getExpiresIn() + 1,
+							TimeUnit.SECONDS);
 				}
 				response = Result.ok(body);
 			} else {

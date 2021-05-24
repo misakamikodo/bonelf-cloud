@@ -8,8 +8,9 @@
 
 package com.bonelf.auth.core.oauth2.granter.base;
 
-import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
 import com.bonelf.auth.core.oauth2.service.MobileUserDetailsService;
+import com.bonelf.frame.cloud.security.domain.AuthUser;
+import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
 import com.bonelf.frame.core.exception.BonelfException;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;

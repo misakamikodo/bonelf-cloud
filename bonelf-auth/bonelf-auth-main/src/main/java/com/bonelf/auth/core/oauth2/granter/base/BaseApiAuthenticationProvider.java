@@ -8,7 +8,8 @@
 
 package com.bonelf.auth.core.oauth2.granter.base;
 
-import com.bonelf.auth.core.oauth2.granter.domain.AuthUser;
+import com.bonelf.frame.cloud.security.domain.AuthUser;
+import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -36,6 +37,12 @@ public abstract class BaseApiAuthenticationProvider extends DaoAuthenticationPro
 	}
 
 	protected abstract Class<? extends BaseApiAuthenticationToken> authenticationToken();
+
+	// @Override
+	// protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {
+	// 	Authentication result = super.createSuccessAuthentication(principal, authentication, user);
+	// 	return result;
+	// }
 
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {

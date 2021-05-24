@@ -2,12 +2,13 @@ package com.bonelf.auth.config;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import com.bonelf.auth.core.exception.CustomWebResponseExceptionTranslator;
-import com.bonelf.auth.core.oauth2.enhancer.CustomTokenEnhancer;
+import com.bonelf.auth.core.oauth2.converter.CustomTokenEnhancer;
 import com.bonelf.auth.core.oauth2.granter.mail.MailTokenGranter;
 import com.bonelf.auth.core.oauth2.granter.mobile.MobileTokenGranter;
 import com.bonelf.auth.core.oauth2.granter.openid.OpenIdTokenGranter;
 import com.bonelf.auth.service.UserService;
 import com.bonelf.frame.base.property.oauth2.Oauth2JwtProperties;
+import com.bonelf.frame.cloud.security.converter.JwtWithUserInfoAccessTokenConverter;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -186,11 +187,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		//1:
-		//converter.setSigningKey(oauth2JwtProperty.getSigningKey());
-		//出现 Cannot convert access token to JSON （实际上为NPE，verifier为空）考虑设置
-		//converter.setVerifier(new RsaVerifier("---Begin--???---End---"));
-		//2:
+		converter.setAccessTokenConverter(new JwtWithUserInfoAccessTokenConverter());
+		// 1:
+		// converter.setSigningKey(oauth2JwtProperty.getSigningKey());
+		// 出现 Cannot convert access token to JSON （实际上为NPE，verifier为空）考虑设置
+		// converter.setVerifier(new RsaVerifier("---Begin--???---End---"));
+		// 2:
 		if (!StringUtils.hasText(oauth2JwtProperties.getKeystore())) {
 			throw new RuntimeException("keystore is not set");
 		}
@@ -198,6 +200,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				new ClassPathResource(oauth2JwtProperties.getKeystore()), oauth2JwtProperties.getPassword().toCharArray())
 				.getKeyPair(oauth2JwtProperties.getAlias());
 		converter.setKeyPair(keyPair);
+		// 3:
+		// converter.setVerifierKey(jwtVerifierKey);
 		return converter;
 	}
 

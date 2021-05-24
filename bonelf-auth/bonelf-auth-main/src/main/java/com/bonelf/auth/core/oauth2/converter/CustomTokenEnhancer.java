@@ -1,8 +1,8 @@
-package com.bonelf.auth.core.oauth2.enhancer;
+package com.bonelf.auth.core.oauth2.converter;
 
-import com.bonelf.auth.core.oauth2.granter.base.BaseApiAuthenticationToken;
 import com.bonelf.auth.core.oauth2.granter.mobile.MobileAuthenticationToken;
 import com.bonelf.auth.core.oauth2.granter.openid.OpenIdAuthenticationToken;
+import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
 import com.google.common.collect.Maps;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
