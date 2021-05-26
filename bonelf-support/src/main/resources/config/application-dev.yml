@@ -41,5 +41,3 @@ spring:
 bonelf:
   rocketmq:
     enable: false
-  websocket:
-    type: stomp

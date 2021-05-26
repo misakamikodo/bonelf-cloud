@@ -3,6 +3,7 @@ package com.bonelf.auth.config;
 import com.bonelf.auth.core.oauth2.granter.mail.MailAuthenticationProvider;
 import com.bonelf.auth.core.oauth2.granter.mobile.MobileAuthenticationProvider;
 import com.bonelf.auth.core.oauth2.granter.openid.OpenIdAuthenticationProvider;
+import com.bonelf.auth.core.pswencoder.Md5PasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +17,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
@@ -122,24 +122,25 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		// return new BCryptPasswordEncoder();
+		return new Md5PasswordEncoder();
 	}
 
 
 	/**
-	 * 对原始字符不进行加密，比较时都会返回true
+	 * 对原始字符不进行加密
 	 */
 	// @Bean
 	// public PasswordEncoder passwordEncoder() {
 	// 	return new PasswordEncoder() {
 	// 		@Override
-	// 		public String encode(CharSequence charSequence) {
-	// 			return charSequence.toString();
+	// 		public String encode(CharSequence rawPassword) {
+	// 			return rawPassword.toString();
 	// 		}
 	//
 	// 		@Override
-	// 		public boolean matches(CharSequence charSequence, String s) {
-	// 			return true;
+	// 		public boolean matches(CharSequence rawPassword, String encodedPassword) {
+	// 			return Objects.equals(rawPassword.toString(), encodedPassword);
 	// 		}
 	// 	};
 	// }

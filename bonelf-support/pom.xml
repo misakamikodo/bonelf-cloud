@@ -12,11 +12,6 @@
     <artifactId>bonelf-support</artifactId>
 
     <dependencies>
-        <!--FIXME 正式时需要mq放开-->
-        <!--<dependency>-->
-        <!--    <groupId>com.bonelf</groupId>-->
-        <!--    <artifactId>bonelf-support-consumer</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-common-base</artifactId>
