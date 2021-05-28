@@ -22,10 +22,6 @@
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-test-provider-domain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud-web</artifactId>
             <!--FIXME 正式时需要mq注释-->
 <!--            <exclusions>-->

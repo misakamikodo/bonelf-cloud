@@ -22,10 +22,6 @@
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-user-provider-domain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud-web</artifactId>
             <!-- 正式时需要注释mq-->
 <!--            <exclusions>-->

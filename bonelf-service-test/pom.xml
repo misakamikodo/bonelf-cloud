@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-test-feign</module>
         <module>bonelf-test-feign-domain</module>
-        <module>bonelf-test-provider</module>
-        <module>bonelf-test-provider-domain</module>
         <module>bonelf-test-main</module>
     </modules>
 
@@ -40,16 +38,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-test-feign-domain</artifactId>
-                <version>${test.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-test-provider</artifactId>
-                <version>${test.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-test-provider-domain</artifactId>
                 <version>${test.version}</version>
             </dependency>
             <dependency>

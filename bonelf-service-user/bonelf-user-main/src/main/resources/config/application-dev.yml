@@ -28,12 +28,12 @@ spring:
               consumer:
                 # 同步消费消息模式
                 orderly: true
-                tags: SocketTag||DictTag||TestTag # tag 为 tag1/tag2/tag3/tag4
+                tags: SocketTag||DictTag||TestTag||websocket-user # tag 为 tag1/tag2/tag3/tag4
             output:
               producer:
                 group: user
       bindings:
         # consumer
-        input: { destination: BNF_support, group: support, content-type: text/plain, consumer.maxAttempts: 1 }
+        input: { destination: websocketTopic, group: support, content-type: text/plain, consumer.maxAttempts: 1 }
         # provider
         output: { destination: BNF_user, content-type: application/json }

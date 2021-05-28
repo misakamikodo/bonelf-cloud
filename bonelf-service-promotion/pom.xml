@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-promotion-feign</module>
         <module>bonelf-promotion-feign-domain</module>
-        <module>bonelf-promotion-provider</module>
-        <module>bonelf-promotion-provider-domain</module>
         <module>bonelf-promotion-main</module>
     </modules>
 
@@ -40,16 +38,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-promotion-feign-domain</artifactId>
-                <version>${promotion.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-promotion-provider</artifactId>
-                <version>${promotion.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-promotion-provider-domain</artifactId>
                 <version>${promotion.version}</version>
             </dependency>
             <dependency>

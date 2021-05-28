@@ -84,17 +84,7 @@
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-order-provider</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-pay-feign</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-pay-provider</artifactId>
                 <version>${bonelf.version}</version>
             </dependency>
             <dependency>
@@ -104,17 +94,7 @@
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-product-provider</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-promotion-feign</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-promotion-provider</artifactId>
                 <version>${bonelf.version}</version>
             </dependency>
             <dependency>
@@ -124,27 +104,12 @@
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-search-provider</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-system-feign</artifactId>
                 <version>${bonelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-system-provider</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-user-feign</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-user-provider</artifactId>
                 <version>${bonelf.version}</version>
             </dependency>
             <dependency>
@@ -155,11 +120,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-support-feign</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-support-provider</artifactId>
                 <version>${bonelf.version}</version>
             </dependency>
         </dependencies>

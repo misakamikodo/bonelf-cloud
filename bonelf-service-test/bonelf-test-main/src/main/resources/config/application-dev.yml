@@ -36,7 +36,7 @@ spring:
                 enable: false
       bindings:
         input:
-          destination: BNF_support
+          destination: websocketTopic
           content-type: text/plain
           group: ${spring.application.name}
           consumer.maxAttempts: 1

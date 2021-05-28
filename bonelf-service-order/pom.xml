@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-order-feign</module>
         <module>bonelf-order-feign-domain</module>
-        <module>bonelf-order-provider</module>
-        <module>bonelf-order-provider-domain</module>
         <module>bonelf-order-main</module>
     </modules>
 
@@ -40,16 +38,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-order-feign-domain</artifactId>
-                <version>${order.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-order-provider</artifactId>
-                <version>${order.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-order-provider-domain</artifactId>
                 <version>${order.version}</version>
             </dependency>
             <dependency>

@@ -14,7 +14,7 @@ public class ProducerTest {
 		for (int i = 0; i < 2; i++)
 			try {
 				{
-					Message msg = new Message("BNF_support",
+					Message msg = new Message("websocketTopic",
 							"TestTag",
 							"OrderID188",
 							"Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));

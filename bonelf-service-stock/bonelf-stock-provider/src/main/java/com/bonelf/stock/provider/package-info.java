@@ -1,1 +1,0 @@
-package com.bonelf.stock.provider;

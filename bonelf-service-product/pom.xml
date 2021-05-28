@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-product-feign</module>
         <module>bonelf-product-feign-domain</module>
-        <module>bonelf-product-provider</module>
-        <module>bonelf-product-provider-domain</module>
         <module>bonelf-product-main</module>
     </modules>
 
@@ -40,16 +38,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-product-feign-domain</artifactId>
-                <version>${product.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-product-provider</artifactId>
-                <version>${product.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-product-provider-domain</artifactId>
                 <version>${product.version}</version>
             </dependency>
             <dependency>

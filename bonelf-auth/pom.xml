@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-auth-feign</module>
         <module>bonelf-auth-feign-domain</module>
-        <module>bonelf-auth-provider</module>
-        <module>bonelf-auth-provider-domain</module>
         <module>bonelf-auth-main</module>
     </modules>
 
@@ -44,16 +42,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-auth-feign-domain</artifactId>
-                <version>${auth.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-auth-provider</artifactId>
-                <version>${auth.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-auth-provider-domain</artifactId>
                 <version>${auth.version}</version>
             </dependency>
             <dependency>

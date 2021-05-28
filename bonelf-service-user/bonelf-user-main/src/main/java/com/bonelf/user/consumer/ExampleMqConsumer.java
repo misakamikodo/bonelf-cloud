@@ -4,6 +4,8 @@
 
 package com.bonelf.user.consumer;
 
+import com.alibaba.fastjson.JSON;
+import com.bonelf.frame.core.websocket.SocketRespMessage;
 import com.bonelf.user.messaging.ExampleSink;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -14,7 +16,7 @@ import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.stereotype.Component;
 
 /**
- * FIXME mq启用后 打开@StreamListener注释
+ *  mq启用后 打开@StreamListener注释
  */
 @Slf4j
 @Component
@@ -22,7 +24,12 @@ public class ExampleMqConsumer {
 
 	@StreamListener(value = ExampleSink.INPUT, condition = "headers['rocketmq_TAGS']=='TestTag'")
 	public void receiveInput1(@Payload String message) {
-		log.info("Receive input: " + message);
+		log.info("Receive MQ input: \n" + message);
+	}
+
+	@StreamListener(value = ExampleSink.INPUT, condition = "headers['rocketmq_TAGS']=='websocket-user'")
+	public void websocketUserMsg(@Payload SocketRespMessage message) {
+		log.info("Receive MQ input: \n" + JSON.toJSONString(message));
 	}
 
 	/**
@@ -34,7 +41,7 @@ public class ExampleMqConsumer {
 	 */
 	// @StreamListener(value = ExampleSink.INPUT)
 	// public void receiveInput2(@Payload String message, @Headers Map<String, ?> headers) {
-	// 	log.info("Receive input: " + message);
+	// 	log.info("Receive MQ input: \n" + message);
 	// 	log.info("headers: " + JSON.toJSONString(headers));
 	// }
 

@@ -20,10 +20,6 @@
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-demo-feign-domain</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-demo-provider-domain</artifactId>
-        </dependency>
         <!--测试，在公共模块里管理测试Jar是不合适的，因为引入时，指定的scope范围是test,在某一模块，引入依赖包时，并不能成功引入测试依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

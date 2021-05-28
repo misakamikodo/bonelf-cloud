@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-demo-feign</module>
         <module>bonelf-demo-feign-domain</module>
-        <module>bonelf-demo-provider</module>
-        <module>bonelf-demo-provider-domain</module>
         <module>bonelf-demo-main</module>
         <module>bonelf-demo-app</module>
     </modules>
@@ -41,16 +39,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-demo-feign-domain</artifactId>
-                <version>${demo.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-demo-provider</artifactId>
-                <version>${demo.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-demo-provider-domain</artifactId>
                 <version>${demo.version}</version>
             </dependency>
             <dependency>

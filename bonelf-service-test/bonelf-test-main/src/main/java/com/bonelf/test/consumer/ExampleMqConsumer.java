@@ -30,7 +30,7 @@ public class ExampleMqConsumer {
 	 */
 	@StreamListener(value = ExampleSink.INPUT, condition = "headers['rocketmq_TAGS']=='TestTag'")
 	public void receiveInput(String message) {
-		log.info("Receive input: " + message);
+		log.info("Receive MQ input: \n" + message);
 	}
 
 	@StreamListener(value = ExampleSink.INPUT)

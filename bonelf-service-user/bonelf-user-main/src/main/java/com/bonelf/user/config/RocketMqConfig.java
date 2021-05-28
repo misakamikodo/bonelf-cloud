@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * <p>
  * 测试用Bean注入
- * FIXME 正式放开 @EnableBinding({ExampleSink.class})
+ * 正式放开 @EnableBinding({ExampleSink.class})
  * </p>
  * @author bonelf
  * @since 2020/10/5 21:07

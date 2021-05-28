@@ -1,1 +1,0 @@
-package com.bonelf.promotion.provider;

@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-search-feign</module>
         <module>bonelf-search-feign-domain</module>
-        <module>bonelf-search-provider</module>
-        <module>bonelf-search-provider-domain</module>
         <module>bonelf-search-main</module>
     </modules>
 
@@ -40,16 +38,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-search-feign-domain</artifactId>
-                <version>${search.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-search-provider</artifactId>
-                <version>${search.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-search-provider-domain</artifactId>
                 <version>${search.version}</version>
             </dependency>
             <dependency>

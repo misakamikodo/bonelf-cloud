@@ -17,8 +17,6 @@
     <modules>
         <module>bonelf-pay-feign</module>
         <module>bonelf-pay-feign-domain</module>
-        <module>bonelf-pay-provider</module>
-        <module>bonelf-pay-provider-domain</module>
         <module>bonelf-pay-main</module>
     </modules>
 
@@ -41,16 +39,6 @@
             <dependency>
                 <groupId>com.bonelf</groupId>
                 <artifactId>bonelf-pay-feign-domain</artifactId>
-                <version>${pay.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-pay-provider</artifactId>
-                <version>${pay.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-pay-provider-domain</artifactId>
                 <version>${pay.version}</version>
             </dependency>
             <dependency>

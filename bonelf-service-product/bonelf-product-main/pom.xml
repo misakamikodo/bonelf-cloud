@@ -22,26 +22,14 @@
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-product-provider-domain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud-web</artifactId>
-            <!--FIXME 正式时需要mq注释-->
+            <!-- 正式时需要mq注释-->
 <!--            <exclusions>-->
 <!--                <exclusion>-->
 <!--                    <groupId>com.bonelf</groupId>-->
 <!--                    <artifactId>bonelf-frame-mq</artifactId>-->
 <!--                </exclusion>-->
 <!--            </exclusions>-->
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-system-provider</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-product-provider</artifactId>
         </dependency>
     </dependencies>
 

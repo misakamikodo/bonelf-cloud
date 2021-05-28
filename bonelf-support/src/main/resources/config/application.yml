@@ -11,6 +11,7 @@ bonelf:
   # websocket配置
   websocket:
     type: stomp
+    topic-type: mq
     # WebsocketProperties
     # 在不使用Mq、stomp主动获取的情况（见 link? ）下，由support主动将消息通过 feign或者redis发布订阅 发给服务 需要配置cmdMap 来处理指令消息和处理的服务对应关系，各服务需提供接收消息接口（frame-websocket已实现）。
     # 使用 Mq 通过订阅websocketTopic主题下的tag(@StreamListener)来实现主动接收，

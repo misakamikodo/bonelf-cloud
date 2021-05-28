@@ -22,10 +22,6 @@
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-pay-provider-domain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud-web</artifactId>
             <!--FIXME 正式时需要mq注释-->
 <!--            <exclusions>-->
@@ -39,14 +35,6 @@
         <dependency>
             <groupId>cn.springboot</groupId>
             <artifactId>best-pay-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-support-provider</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-product-provider</artifactId>
         </dependency>
     </dependencies>
 

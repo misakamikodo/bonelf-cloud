@@ -35,6 +35,6 @@ spring:
                 group: auth
       bindings:
         # consumer
-        input: { destination: BNF_support, group: support, content-type: text/plain, consumer.maxAttempts: 1 }
+        input: { destination: websocketTopic, group: support, content-type: text/plain, consumer.maxAttempts: 1 }
         # provider
         output: { destination: BNF_auth, content-type: application/json }
