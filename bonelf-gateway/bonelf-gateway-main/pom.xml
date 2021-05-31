@@ -14,29 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-common-base</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.alibaba</groupId>
-                    <artifactId>druid-spring-boot-starter</artifactId>
-                </exclusion>
-                <!-- 不需要security-->
-                <exclusion>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-security</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.security.oauth</groupId>
-                    <artifactId>spring-security-oauth2</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-gateway</artifactId>
             <!-- 正式使用mq 注释排除 bonelf-frame-mq -->
             <!--            <exclusions>-->

@@ -14,8 +14,8 @@ import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.bonelf.auth.constant.GrantTypeEnum;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
-import com.bonelf.auth.domain.User;
-import com.bonelf.auth.service.UserService;
+import com.bonelf.common.base.security.domain.User;
+import com.bonelf.common.base.security.service.AuthUserService;
 import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
@@ -42,7 +42,7 @@ import java.util.Optional;
 @Slf4j
 public class OpenIdTokenGranterWithPhone extends BaseApiTokenGranter {
 	private final WxMaService wxMaService;
-	private final UserService userService;
+	private final AuthUserService userService;
 	protected static final String GRANT_TYPE = GrantTypeEnum.openid.getCode();
 	// private String phone = null;
 	private WxMaUserInfo wxMaUserInfo = null;
@@ -52,7 +52,7 @@ public class OpenIdTokenGranterWithPhone extends BaseApiTokenGranter {
 									   ClientDetailsService clientDetailsService,
 									   OAuth2RequestFactory requestFactory,
 									   WxMaService wxMaService,
-									   UserService userService) {
+									   AuthUserService userService) {
 		super(authenticationManager, tokenServices, clientDetailsService, requestFactory, GRANT_TYPE);
 		this.wxMaService = wxMaService;
 		this.userService = userService;

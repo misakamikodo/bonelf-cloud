@@ -10,8 +10,8 @@ package com.bonelf.auth.core.oauth2.granter.mail;
 
 import com.bonelf.auth.constant.GrantTypeEnum;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
-import com.bonelf.auth.domain.User;
-import com.bonelf.auth.service.UserService;
+import com.bonelf.common.base.security.domain.User;
+import com.bonelf.common.base.security.service.AuthUserService;
 import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
@@ -44,16 +44,16 @@ import java.util.Map;
  * 注册见{@link com.bonelf.auth.core.oauth2.service.MailUserDetailsService}
  */
 public class MailTokenGranter extends BaseApiTokenGranter {
-	private final UserService userService;
+	private final AuthUserService userService;
 
 	protected static final String GRANT_TYPE = GrantTypeEnum.mail.getCode();
 
 
 	public MailTokenGranter(AuthenticationManager authenticationManager,
-							  AuthorizationServerTokenServices tokenServices,
-							  ClientDetailsService clientDetailsService,
-							  OAuth2RequestFactory requestFactory,
-							UserService userService) {
+							AuthorizationServerTokenServices tokenServices,
+							ClientDetailsService clientDetailsService,
+							OAuth2RequestFactory requestFactory,
+							AuthUserService userService) {
 		super(authenticationManager, tokenServices, clientDetailsService, requestFactory, GRANT_TYPE);
 		this.userService = userService;
 	}

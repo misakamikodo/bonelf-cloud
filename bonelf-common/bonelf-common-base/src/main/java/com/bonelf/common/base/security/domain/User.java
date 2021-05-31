@@ -6,14 +6,16 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.bonelf.auth.domain;
+package com.bonelf.common.base.security.domain;
 
 
+import com.bonelf.user.feign.domain.response.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = false )
@@ -71,4 +73,9 @@ public class User implements Serializable {
      * 账户是否没冻结
      */
     private Boolean accountNonLocked;
+
+    /**
+     * 角色
+     */
+    private Set<Role> roles;
 }

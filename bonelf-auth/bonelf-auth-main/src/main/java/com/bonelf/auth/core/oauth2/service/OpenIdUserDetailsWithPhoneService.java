@@ -8,13 +8,17 @@
 
 package com.bonelf.auth.core.oauth2.service;
 
-import com.bonelf.auth.domain.User;
+import cn.hutool.core.collection.CollectionUtil;
+import com.bonelf.common.base.security.domain.User;
 import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.web.security.domain.AuthUser;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.stream.Collectors;
 
 /**
  * 微信登录校验
@@ -55,6 +59,8 @@ public class OpenIdUserDetailsWithPhoneService extends CustomUserDetailsService 
 				user.getAccountNonExpired(),
 				user.getCredentialsNonExpired(),
 				user.getAccountNonLocked(),
-				super.obtainGrantedAuthorities(user));
+				CollectionUtil.isEmpty(user.getRoles()) ?
+						this.obtainGrantedAuthorities(user) :
+						user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toSet()));
 	}
 }

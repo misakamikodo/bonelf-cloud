@@ -1,6 +1,6 @@
 package com.bonelf.auth.web.controller.api;
 
-import com.bonelf.auth.domain.User;
+import com.bonelf.common.base.security.domain.User;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;

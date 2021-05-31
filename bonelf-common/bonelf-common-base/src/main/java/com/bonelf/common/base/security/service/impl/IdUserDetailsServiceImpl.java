@@ -6,61 +6,59 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.bonelf.auth.core.oauth2.service;
+package com.bonelf.common.base.security.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.bonelf.auth.core.oauth2.granter.openid.OpenIdTokenGranter;
 import com.bonelf.common.base.security.domain.User;
+import com.bonelf.common.base.security.service.AuthRoleService;
+import com.bonelf.common.base.security.service.AuthUserService;
 import com.bonelf.frame.core.constant.UniqueIdType;
-import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.web.security.domain.AuthUser;
+import com.bonelf.user.feign.domain.response.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 微信登录校验
+ * <p>
+ * 账号密码登录校验
+ * </p>
  * @author bonelf
+ * @since 2020/11/19 13:10
  */
 @Slf4j
-@Service("openidUserDetailsService")
-public class OpenIdUserDetailsService extends CustomUserDetailsService {
+@Service("idUserDetailsService")
+public class IdUserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	protected AuthUserService userService;
+	@Autowired
+	protected AuthRoleService roleService;
 
 	/**
 	 * 调用/auth/token 调用这个方法校验
-	 * @param uniqueId openId
-	 * @author bonelf
-	 * @date 2020-11-19 11:21
+	 * @param uniqueId account、phone、mail
+	 * @return
+	 * @see BCryptPasswordEncoder 密码加密
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String uniqueId) {
-		User user;
-		try {
-			user = userService.getByUniqueId(uniqueId, UniqueIdType.openId);
-		} catch (BonelfException be) {
-			if ("404".equals(be.getCode())) {
-				throw new UsernameNotFoundException((be.getErrorMessage()), be);
-			} else {
-				throw be;
-			}
-		}
+		User user = userService.getByUniqueId(uniqueId, UniqueIdType.id);
 		// 2020/11/19 错误和NPE处理
-		log.info("load user by openId:{}", user.toString());
-		// 如果为openId模式，从短信服务中获取验证码（动态密码）
+		log.info("load user by id :{}", user.toString());
 		return new AuthUser(
 				user.getUserId(),
-				UniqueIdType.openId,
-				user.getOpenId(),
-				passwordEncoder.encode(OpenIdTokenGranter.PASSWORD),
-				// OpenIdTokenGranter.PASSWORD,
+				UniqueIdType.username,
+				user.getUsername(),
+				// passwordEncoder.encode(user.getPassword()),
+				user.getPassword(),
 				user.getEnabled(),
 				user.getAccountNonExpired(),
 				user.getCredentialsNonExpired(),
@@ -68,5 +66,17 @@ public class OpenIdUserDetailsService extends CustomUserDetailsService {
 				CollectionUtil.isEmpty(user.getRoles()) ?
 						this.obtainGrantedAuthorities(user) :
 						user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toSet()));
+	}
+
+
+	/**
+	 * 获得登录者所有角色的权限集合.
+	 * @param user
+	 * @return
+	 */
+	protected Set<GrantedAuthority> obtainGrantedAuthorities(User user) {
+		Set<Role> roles = roleService.queryUserRolesByUserId(user.getUserId());
+		log.info("=====获取到的用户信息====\nuser:{},roles:{}", user.getUsername(), roles);
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toSet());
 	}
 }

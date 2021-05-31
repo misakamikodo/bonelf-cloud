@@ -8,7 +8,8 @@
 
 package com.bonelf.auth.core.oauth2.service;
 
-import com.bonelf.auth.domain.User;
+import cn.hutool.core.collection.CollectionUtil;
+import com.bonelf.common.base.security.domain.User;
 import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
@@ -17,10 +18,13 @@ import com.bonelf.support.feign.SupportFeignClient;
 import com.bonelf.support.feign.domain.constant.VerifyCodeTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 /**
  * 手机验证码登录校验
@@ -74,6 +78,8 @@ public class MobileUserDetailsService extends CustomUserDetailsService {
 				user.getAccountNonExpired(),
 				user.getCredentialsNonExpired(),
 				user.getAccountNonLocked(),
-				super.obtainGrantedAuthorities(user));
+				CollectionUtil.isEmpty(user.getRoles()) ?
+						this.obtainGrantedAuthorities(user) :
+						user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toSet()));
 	}
 }

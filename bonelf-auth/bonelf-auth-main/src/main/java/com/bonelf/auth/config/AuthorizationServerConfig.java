@@ -6,7 +6,7 @@ import com.bonelf.auth.core.oauth2.converter.CustomTokenEnhancer;
 import com.bonelf.auth.core.oauth2.granter.mail.MailTokenGranter;
 import com.bonelf.auth.core.oauth2.granter.mobile.MobileTokenGranter;
 import com.bonelf.auth.core.oauth2.granter.openid.OpenIdTokenGranter;
-import com.bonelf.auth.service.UserService;
+import com.bonelf.common.base.security.service.AuthUserService;
 import com.bonelf.frame.base.property.oauth2.Oauth2JwtProperties;
 import com.bonelf.frame.web.security.converter.JwtWithUserInfoAccessTokenConverter;
 import com.google.common.collect.Lists;
@@ -70,7 +70,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private WxMaService wxMaService;
 	@Autowired
-	private UserService userService;
+	private AuthUserService userService;
+	@Autowired(required = false)
+	@Qualifier("idUserDetailsService")
+	private UserDetailsService idUserDetailsService;
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
@@ -187,7 +190,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setAccessTokenConverter(new JwtWithUserInfoAccessTokenConverter());
+		converter.setAccessTokenConverter(new JwtWithUserInfoAccessTokenConverter(idUserDetailsService));
 		// 1:
 		// converter.setSigningKey(oauth2JwtProperty.getSigningKey());
 		// 出现 Cannot convert access token to JSON （实际上为NPE，verifier为空）考虑设置

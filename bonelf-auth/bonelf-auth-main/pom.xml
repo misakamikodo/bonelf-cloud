@@ -38,10 +38,6 @@
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
-            <artifactId>bonelf-user-feign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.bonelf</groupId>
             <artifactId>bonelf-support-feign</artifactId>
         </dependency>
         <!-- spring security start-->

@@ -1,8 +1,8 @@
-package com.bonelf.auth.service.impl;
+package com.bonelf.common.base.security.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.bonelf.auth.domain.User;
-import com.bonelf.auth.service.UserService;
+import com.bonelf.common.base.security.domain.User;
+import com.bonelf.common.base.security.service.AuthUserService;
 import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.domain.Result;
@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.common.exceptions.InvalidGrantExcepti
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class AuthUserServiceImpl implements AuthUserService {
 
 	@Autowired
 	private UserFeignClient userFeignClient;

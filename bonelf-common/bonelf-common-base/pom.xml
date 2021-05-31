@@ -16,11 +16,26 @@
     <dependencies>
         <dependency>
             <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-frame-cloud-web</artifactId>
+            <!-- 正式时需要mq注释-->
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>com.bonelf</groupId>-->
+            <!--                    <artifactId>bonelf-frame-mq</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-base</artifactId>
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-user-feign</artifactId>
         </dependency>
     </dependencies>
 

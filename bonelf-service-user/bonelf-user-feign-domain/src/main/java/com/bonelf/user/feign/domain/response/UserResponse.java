@@ -7,6 +7,7 @@ package com.bonelf.user.feign.domain.response;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 public class UserResponse {
@@ -89,4 +90,9 @@ public class UserResponse {
 	 * 语言
 	 */
 	private String verifyCode;
+
+	/**
+	 * 角色
+	 */
+	private Set<Role> roles;
 }

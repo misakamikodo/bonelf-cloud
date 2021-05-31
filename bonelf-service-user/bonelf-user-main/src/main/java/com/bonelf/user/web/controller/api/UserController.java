@@ -10,7 +10,6 @@ import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
 import com.bonelf.frame.web.controller.BaseApiController;
-import com.bonelf.support.feign.SupportFeignClient;
 import com.bonelf.user.constant.enums.UserStatusEnum;
 import com.bonelf.user.constant.exception.UserExceptionEnum;
 import com.bonelf.user.feign.domain.response.UserResponse;
@@ -19,6 +18,7 @@ import com.bonelf.user.web.domain.dto.WechatLoginDTO;
 import com.bonelf.user.web.domain.dto.WechatRegisterUserDTO;
 import com.bonelf.user.web.domain.entity.User;
 import com.bonelf.user.web.domain.vo.LoginVO;
+import com.bonelf.user.web.service.RoleService;
 import com.bonelf.user.web.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +49,7 @@ public class UserController extends BaseApiController<UserService, User> {
 	@Autowired
 	private BonelfProperties bonelfProperties;
 	@Autowired
-	private SupportFeignClient supportFeignClient;
+	private RoleService roleService;
 	@Autowired
 	private RedisUtil redisUtil;
 
@@ -78,6 +78,7 @@ public class UserController extends BaseApiController<UserService, User> {
 			return Result.error(CommonBizExceptionEnum.DB_RESOURCE_NULL, "用户");
 		}
 		UserResponse resp = BeanUtil.copyProperties(user, UserResponse.class);
+		resp.setRoles(roleService.getRoleByUserId(resp.getUserId()));
 		return Result.ok(resp);
 	}
 

@@ -8,9 +8,10 @@
 
 package com.bonelf.auth.core.oauth2.service;
 
-import com.bonelf.auth.domain.User;
-import com.bonelf.auth.service.RoleService;
-import com.bonelf.auth.service.UserService;
+import cn.hutool.core.collection.CollectionUtil;
+import com.bonelf.common.base.security.domain.User;
+import com.bonelf.common.base.security.service.AuthRoleService;
+import com.bonelf.common.base.security.service.AuthUserService;
 import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.web.security.domain.AuthUser;
 import com.bonelf.user.feign.domain.response.Role;
@@ -38,9 +39,9 @@ import java.util.stream.Collectors;
 @Service("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
-	protected UserService userService;
+	protected AuthUserService userService;
 	@Autowired
-	protected RoleService roleService;
+	protected AuthRoleService roleService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -70,7 +71,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 				user.getAccountNonExpired(),
 				user.getCredentialsNonExpired(),
 				user.getAccountNonLocked(),
-				this.obtainGrantedAuthorities(user));
+				CollectionUtil.isEmpty(user.getRoles()) ?
+						this.obtainGrantedAuthorities(user) :
+						user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toSet()));
 	}
 
 	/**

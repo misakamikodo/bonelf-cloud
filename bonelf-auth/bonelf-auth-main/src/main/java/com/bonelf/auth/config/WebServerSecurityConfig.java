@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,6 +31,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 @Slf4j
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * @see com.bonelf.auth.core.oauth2.service.CustomUserDetailsService 账密登录
@@ -76,7 +78,9 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 				.and()
 				.formLogin().loginPage("/login")
-				.successHandler(successHandler).and()
+				.successHandler(successHandler)
+				// .failureHandler(new CustomAuthenticationFailureHandler())
+				.and()
 				.logout().logoutUrl("/logout")
 				.and()
 				.httpBasic().and()

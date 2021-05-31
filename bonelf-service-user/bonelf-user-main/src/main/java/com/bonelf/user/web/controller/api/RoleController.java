@@ -1,16 +1,17 @@
 package com.bonelf.user.web.controller.api;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.bonelf.frame.core.domain.Result;
-import com.bonelf.frame.web.controller.BaseApiController;
+import com.bonelf.user.feign.domain.response.Role;
+import com.bonelf.user.web.service.RoleService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 /**
  * <p>
@@ -24,15 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Api(tags = "角色接口")
 public class RoleController {
+	@Autowired
+	private RoleService roleService;
 
 	@GetMapping(value = "/v1")
-	public Result<JSONArray> getUser(@RequestParam Long userId) {
-		JSONArray json = new JSONArray();
-		JSONObject temp = new JSONObject();
-		temp.put("code", "test:role");
-		temp.put("name", "testRole");
-		temp.put("description", "this is an example role");
-		json.add(temp);
-		return Result.ok(json);
+	public Result<Set<Role>> getUser(@RequestParam Long userId) {
+		return Result.ok(roleService.getRoleByUserId(userId));
 	}
 }
