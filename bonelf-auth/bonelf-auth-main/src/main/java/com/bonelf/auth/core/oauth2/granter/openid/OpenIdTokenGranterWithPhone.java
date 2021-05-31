@@ -16,11 +16,11 @@ import com.bonelf.auth.constant.GrantTypeEnum;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
 import com.bonelf.auth.domain.User;
 import com.bonelf.auth.service.UserService;
-import com.bonelf.frame.cloud.security.constant.UniqueIdType;
-import com.bonelf.frame.cloud.security.domain.AuthUser;
-import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
+import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
+import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
+import com.bonelf.frame.web.security.domain.AuthUser;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -31,6 +31,7 @@ import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * TODO ThreadLocal
@@ -79,14 +80,15 @@ public class OpenIdTokenGranterWithPhone extends BaseApiTokenGranter {
 		}
 		this.wxMaUserInfo = wxUserInfo;
 
-        WxMaPhoneNumberInfo wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(session.getSessionKey(),
-                encryptedData, iv);
-        if (null == wxMaPhoneNumberInfo) {
-            throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "无法找到用户信息");
-        }
-        // 目前该接口针对非个人开发者,且完成了认证的小程序开放(不包合海外主体).,需诨值使用
+		WxMaPhoneNumberInfo wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(session.getSessionKey(),
+				encryptedData, iv);
+		if (null == wxMaPhoneNumberInfo) {
+			throw new BonelfException(CommonBizExceptionEnum.THIRD_FAIL, "无法找到用户信息");
+		}
+		// 目前该接口针对非个人开发者,且完成了认证的小程序开放(不包合海外主体).,需诨值使用
 		AuthUser principal = new AuthUser(
-				wxMaPhoneNumberInfo.getPhoneNumber(),
+				Optional.ofNullable(wxMaPhoneNumberInfo.getPurePhoneNumber())
+						.orElse(wxMaPhoneNumberInfo.getPhoneNumber()),
 				UniqueIdType.openId,
 				wxMaUserInfo.getOpenId());
 		principal.setIdType(UniqueIdType.phone);

@@ -8,8 +8,8 @@
 
 package com.bonelf.auth.core.oauth2.granter.base;
 
-import com.bonelf.frame.cloud.security.domain.AuthUser;
-import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
+import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
+import com.bonelf.frame.web.security.domain.AuthUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;

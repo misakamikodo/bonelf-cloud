@@ -9,7 +9,7 @@
 package com.bonelf.auth.core.oauth2.granter.openid;
 
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiAuthenticationProvider;
-import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
+import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**

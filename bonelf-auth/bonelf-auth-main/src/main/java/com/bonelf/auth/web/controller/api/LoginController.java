@@ -6,11 +6,9 @@ import com.bonelf.auth.constant.ScopeEnum;
 import com.bonelf.auth.web.domain.dto.OpenIdLoginDTO;
 import com.bonelf.auth.web.domain.dto.PswLoginDTO;
 import com.bonelf.auth.web.domain.dto.VerifyCodeLoginDTO;
-import com.bonelf.cicada.util.Md5CryptUtil;
 import com.bonelf.frame.base.property.oauth2.Oauth2Properties;
 import com.bonelf.frame.base.util.JsonUtil;
 import com.bonelf.frame.cloud.security.constant.AuthFeignConstant;
-import com.bonelf.frame.core.constant.AuthConstant;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.web.controller.BaseController;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -111,7 +109,7 @@ public class LoginController extends BaseController {
 	public Result<?> byPsw(@RequestBody @Validated PswLoginDTO dto) {
 		Result<?> result = createOauthLoginReq(paramMap -> {
 			paramMap.add("username", dto.getUsername());
-			paramMap.add("password", Md5CryptUtil.encrypt(dto.getPassword(), AuthConstant.DATABASE_SALT_MD5));
+			paramMap.add("password", dto.getPassword());
 			paramMap.add("grant_type", GrantTypeEnum.password.getCode());
 			paramMap.add("scope", ScopeEnum.app.getCode());
 		});

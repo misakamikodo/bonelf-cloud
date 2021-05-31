@@ -3,7 +3,7 @@ package com.bonelf.auth.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.bonelf.auth.domain.User;
 import com.bonelf.auth.service.UserService;
-import com.bonelf.frame.cloud.security.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;

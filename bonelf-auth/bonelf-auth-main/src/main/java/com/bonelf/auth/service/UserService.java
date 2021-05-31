@@ -1,7 +1,7 @@
 package com.bonelf.auth.service;
 
 import com.bonelf.auth.domain.User;
-import com.bonelf.frame.cloud.security.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import org.springframework.stereotype.Service;
 

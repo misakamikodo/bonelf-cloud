@@ -8,7 +8,7 @@ import com.bonelf.auth.core.oauth2.granter.mobile.MobileTokenGranter;
 import com.bonelf.auth.core.oauth2.granter.openid.OpenIdTokenGranter;
 import com.bonelf.auth.service.UserService;
 import com.bonelf.frame.base.property.oauth2.Oauth2JwtProperties;
-import com.bonelf.frame.cloud.security.converter.JwtWithUserInfoAccessTokenConverter;
+import com.bonelf.frame.web.security.converter.JwtWithUserInfoAccessTokenConverter;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

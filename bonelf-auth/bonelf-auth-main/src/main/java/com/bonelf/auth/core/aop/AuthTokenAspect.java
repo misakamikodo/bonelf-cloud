@@ -62,7 +62,7 @@ public class AuthTokenAspect {
 			if (responseEntity.getStatusCode().is2xxSuccessful()) {
 				// 存储token 做单客户端登录用,如果不需要请删除
 				if (body != null) {
-					String userId = String.valueOf(body.getAdditionalInformation().get("userId"));
+					String userId = String.valueOf(body.getAdditionalInformation().get("user_id"));
 					log.debug("==即将把下面信息放入redis,用于单客户端登录==\nuserId = {}\ntoken = {}\nexpiresIn = {}",
 							userId, body.getValue(), body.getExpiresIn());
 					redisTemplate.opsForValue().set(CacheConstant.TOKEN + userId,

@@ -9,9 +9,9 @@
 package com.bonelf.auth.core.oauth2.granter.base;
 
 import com.bonelf.auth.core.oauth2.service.MobileUserDetailsService;
-import com.bonelf.frame.cloud.security.domain.AuthUser;
-import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
 import com.bonelf.frame.core.exception.BonelfException;
+import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
+import com.bonelf.frame.web.security.domain.AuthUser;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;

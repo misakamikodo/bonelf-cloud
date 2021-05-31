@@ -10,9 +10,9 @@ package com.bonelf.auth.core.oauth2.service;
 
 import com.bonelf.auth.core.oauth2.granter.openid.OpenIdTokenGranter;
 import com.bonelf.auth.domain.User;
-import com.bonelf.frame.cloud.security.constant.UniqueIdType;
-import com.bonelf.frame.cloud.security.domain.AuthUser;
+import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.exception.BonelfException;
+import com.bonelf.frame.web.security.domain.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

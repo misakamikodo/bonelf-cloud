@@ -1,6 +1,6 @@
 package com.bonelf.user.feign.fallback;
 
-import com.bonelf.frame.cloud.security.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UniqueIdType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.user.feign.UserFeignClient;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;

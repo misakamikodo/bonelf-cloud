@@ -8,7 +8,7 @@
 
 package com.bonelf.auth.core.oauth2.granter.mobile;
 
-import com.bonelf.frame.cloud.security.token.BaseApiAuthenticationToken;
+import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.Authentication;
