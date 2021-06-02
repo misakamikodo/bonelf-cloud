@@ -36,11 +36,13 @@ public class SupportApplication {
 		String ip = IpUtil.getWlanV4Ip();
 		String port = env.getProperty("server.port");
 		String path = env.getProperty("server.servlet.context-path");
+		// netty ws://XXXX:8026
+		// norm ws://XXXX:8800
 		log.info("\n----------------------------------------------------------\n\t" +
 				"Application is running! Access URLs:\n\t" +
 				"Local: \t\thttp://127.0.0.1:" + port + path + "\n\t" +
 				"External: \thttp://" + ip + ":" + port + path + "\n\t" +
-				"Websocket: \tws://" + ip + ":" + 8802 + "\n" +
+				"Websocket(stomp): \thttp://" + ip + ":" + port + "/bonelf/wst\n" +
 				"----------------------------------------------------------");
 	}
 }

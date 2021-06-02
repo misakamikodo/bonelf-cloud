@@ -25,11 +25,11 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
 		if (serverHttpRequest instanceof ServletServerHttpRequest) {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest)serverHttpRequest;
 			// 得到token
-			String token = servletRequest.getServletRequest().getHeader(AuthConstant.WEBSOCKET_HEADER);
+			String token = servletRequest.getServletRequest().getHeader(AuthConstant.WEBSOCKET_AUTH_PARAM);
 			if (true) {
 			//if (StringUtils.hasText(token)) {
 				HttpServletResponse httpServletResponse = ((ServletServerHttpResponse)serverHttpResponse).getServletResponse();
-				httpServletResponse.addHeader(AuthConstant.WEBSOCKET_HEADER, token);
+				httpServletResponse.addHeader(AuthConstant.WEBSOCKET_AUTH_PARAM, token);
 				log.info("come in hand Shake ");
 				//Long userId = TokenParseUtil.parseJwt(token);
 				// if(ToolUtil.isNotEmpty(userId)){

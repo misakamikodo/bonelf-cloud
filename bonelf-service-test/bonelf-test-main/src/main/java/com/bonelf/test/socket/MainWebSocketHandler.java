@@ -2,12 +2,12 @@ package com.bonelf.test.socket;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
+import com.bonelf.frame.base.util.redis.RedisUtil;
+import com.bonelf.frame.core.constant.AuthConstant;
 import com.bonelf.frame.core.websocket.SocketMessage;
 import com.bonelf.frame.core.websocket.SocketRespMessage;
 import com.bonelf.frame.core.websocket.constant.MessageSendCmdEnum;
 import com.bonelf.frame.core.websocket.constant.OnlineStatusEnum;
-import com.bonelf.frame.base.util.redis.RedisUtil;
-import com.bonelf.frame.core.constant.AuthConstant;
 import com.bonelf.test.constant.CacheConstant;
 import com.bonelf.test.constant.MessageRecvCmdEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +52,7 @@ public class MainWebSocketHandler implements WebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
 		log.info("建立连接");
-		List<String> token = session.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_HEADER);
+		List<String> token = session.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_AUTH_PARAM);
 		log.debug("header:" + JSON.toJSONString(token));
 		// FIXME: 2020/10/14 测试用户编号
 		String userId = "1";
@@ -92,7 +92,7 @@ public class MainWebSocketHandler implements WebSocketHandler {
 	 */
 	@Override
 	public void handleMessage(WebSocketSession webSocketSession, @NonNull WebSocketMessage<?> webSocketMessage) {
-		List<String> token = webSocketSession.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_HEADER);
+		List<String> token = webSocketSession.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_AUTH_PARAM);
 		log.debug("header:" + JSON.toJSONString(token));
 		// FIXME: 2020/10/15
 		String userId = "1";
@@ -158,7 +158,7 @@ public class MainWebSocketHandler implements WebSocketHandler {
 	 */
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable throwable) throws Exception {
-		List<String> token = session.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_HEADER);
+		List<String> token = session.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_AUTH_PARAM);
 		log.debug("header:" + JSON.toJSONString(token));
 		// FIXME: 2020/10/14 测试用户编号
 		String userId = "1";
@@ -180,7 +180,7 @@ public class MainWebSocketHandler implements WebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		//String userId = session.getUri().toString().split("userId=")[1];
-		List<String> token = session.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_HEADER);
+		List<String> token = session.getHandshakeHeaders().get(AuthConstant.WEBSOCKET_AUTH_PARAM);
 		log.debug("header:" + JSON.toJSONString(token));
 		// FIXME: 2020/10/14 测试用户编号
 		String userId = "1";

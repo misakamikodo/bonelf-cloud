@@ -13,6 +13,7 @@ public enum GrantTypeEnum {
 	mail("mail"),
 	openid("openid"),
 	password("password"),
+	refreshToken("refresh_token"),
 	;
 
 	private String code;

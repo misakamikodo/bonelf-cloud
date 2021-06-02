@@ -1,9 +1,9 @@
 package com.bonelf.user.web.controller.api;
 
-import com.bonelf.frame.web.controller.BaseController;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
+import com.bonelf.frame.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;

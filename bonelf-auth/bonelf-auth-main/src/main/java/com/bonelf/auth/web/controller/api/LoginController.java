@@ -5,6 +5,7 @@ import com.bonelf.auth.constant.GrantTypeEnum;
 import com.bonelf.auth.constant.ScopeEnum;
 import com.bonelf.auth.web.domain.dto.OpenIdLoginDTO;
 import com.bonelf.auth.web.domain.dto.PswLoginDTO;
+import com.bonelf.auth.web.domain.dto.RefreshTokenDTO;
 import com.bonelf.auth.web.domain.dto.VerifyCodeLoginDTO;
 import com.bonelf.frame.base.property.oauth2.Oauth2Properties;
 import com.bonelf.frame.base.util.JsonUtil;
@@ -111,6 +112,17 @@ public class LoginController extends BaseController {
 			paramMap.add("username", dto.getUsername());
 			paramMap.add("password", dto.getPassword());
 			paramMap.add("grant_type", GrantTypeEnum.password.getCode());
+			paramMap.add("scope", ScopeEnum.app.getCode());
+		});
+		return result;
+	}
+
+	@ApiOperation(value = "刷新Token")
+	@PostMapping("/refreshToken")
+	public Result<?> refreshToken(@RequestBody @Validated RefreshTokenDTO dto) {
+		Result<?> result = createOauthLoginReq(paramMap -> {
+			paramMap.add("refresh_token", dto.getRefreshToken());
+			paramMap.add("grant_type", GrantTypeEnum.refreshToken.getCode());
 			paramMap.add("scope", ScopeEnum.app.getCode());
 		});
 		return result;
