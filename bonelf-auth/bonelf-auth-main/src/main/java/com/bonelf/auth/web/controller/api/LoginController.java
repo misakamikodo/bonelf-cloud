@@ -22,7 +22,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
@@ -46,9 +45,9 @@ import java.util.function.Consumer;
 
 /**
  * 登录接口重定向
- * @see org.springframework.security.oauth2.provider.endpoint.TokenEndpoint oauth原生
  * @author ccy
  * @date 2021/4/29 16:37
+ * @see org.springframework.security.oauth2.provider.endpoint.TokenEndpoint oauth原生
  */
 @Slf4j
 @Api(tags = {"登录接口"})
@@ -57,8 +56,10 @@ import java.util.function.Consumer;
 public class LoginController extends BaseController {
 	@Autowired
 	private Oauth2Properties oauth2Properties;
-	// @Autowired
-	// private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
+	@Value("${server.servlet.context-path:}")
+	private String ctxPath;
 
 	@ApiOperation(value = "手机验证码登录")
 	@PostMapping("/byPhoneCode")
@@ -78,7 +79,7 @@ public class LoginController extends BaseController {
 	@ApiOperation(value = "邮箱验证码登录")
 	@PostMapping("/byMailCode")
 	public Result<?> byMailCode(@RequestBody @Validated VerifyCodeLoginDTO dto) {
-		Result<?> result =  createOauthLoginReq(paramMap -> {
+		Result<?> result = createOauthLoginReq(paramMap -> {
 			for (Field field : VerifyCodeLoginDTO.class.getDeclaredFields()) {
 				JsonProperty jsonProperty = field.getAnnotation(JsonProperty.class);
 				paramMap.add(jsonProperty == null ? field.getName() : field.getAnnotation(JsonProperty.class).value(),
@@ -93,7 +94,7 @@ public class LoginController extends BaseController {
 	@ApiOperation(value = "微信登录")
 	@PostMapping("/byVx")
 	public Result<?> byVx(@RequestBody @Validated OpenIdLoginDTO dto) {
-		Result<?> result =  createOauthLoginReq(paramMap -> {
+		Result<?> result = createOauthLoginReq(paramMap -> {
 			for (Field field : OpenIdLoginDTO.class.getDeclaredFields()) {
 				JsonProperty jsonProperty = field.getAnnotation(JsonProperty.class);
 				paramMap.add(jsonProperty == null ? field.getName() : field.getAnnotation(JsonProperty.class).value(),
@@ -135,14 +136,15 @@ public class LoginController extends BaseController {
 	 * 创建oauth登录
 	 * @param paramMap
 	 * @return
+	 * @see org.springframework.security.oauth2.provider.endpoint.TokenEndpoint
 	 */
 	private Result<?> createOauthLoginReq(Consumer<MultiValueMap<String, Object>> paramMap) {
-		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-		requestFactory.setOutputStreaming(false);
-		RestTemplate restTemplate = new RestTemplate(requestFactory);
-		String url = "http://localhost:" + port + "/bonelf/oauth/token";
+		// SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+		// requestFactory.setOutputStreaming(false);
+		// RestTemplate restTemplate = new RestTemplate(requestFactory);
+		String url = "http://auth/" + ctxPath + "/oauth/token";
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(AuthFeignConstant.AUTH_HEADER, "-");
+		headers.set(AuthFeignConstant.AUTH_HEADER, AuthFeignConstant.FEIGN_REQ_FLAG_PREFIX + " -");
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
 		paramMap.accept(params);

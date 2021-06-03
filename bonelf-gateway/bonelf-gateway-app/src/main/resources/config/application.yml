@@ -5,7 +5,7 @@ server:
 
 bonelf:
   no-auth-path:
-    - /oauth/token,/open,/v2/api-docs
+    - /oauth/token,/login/byPsw,/open,/v2/api-docs
     - /user/loginByAccount
     - /test/testConverter
 

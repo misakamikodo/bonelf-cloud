@@ -75,6 +75,8 @@ public class WebServerSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/assets/**").permitAll()
 				.antMatchers("/actuator/**").permitAll()
 				.antMatchers("/login").permitAll()
+				// 测试全部放权用
+				.requestMatchers(request -> true).permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin().loginPage("/login")
