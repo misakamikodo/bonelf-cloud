@@ -1,9 +1,7 @@
 package com.bonelf.user.web.controller.api;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.bonelf.frame.base.util.redis.RedisUtil;
 import com.bonelf.frame.core.domain.Result;
-import com.bonelf.frame.web.controller.BaseApiController;
 import com.bonelf.user.constant.CacheConstant;
 import com.bonelf.user.web.domain.dto.ShopDTO;
 import io.swagger.annotations.Api;
@@ -28,7 +26,7 @@ public class ShopController {
 	@Autowired
 	private RedisUtil redisUtil;
 
-	@PostMapping("")
+	@PostMapping("/add")
 	@ApiOperation("添加")
 	public Result<?> add(@RequestBody ShopDTO shopDto) {
 		// FIXME: 2020/12/1 ShopId
@@ -36,7 +34,7 @@ public class ShopController {
 		return Result.ok();
 	}
 
-	@GetMapping("")
+	@RequestMapping(value = "/page", method = {RequestMethod.POST, RequestMethod.GET})
 	@ApiOperation("分页查询")
 	public Result<?> list(@RequestParam Double lat, @RequestParam Double lng) {
 		// FIXME: 2020/12/1 ShopId

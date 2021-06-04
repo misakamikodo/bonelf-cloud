@@ -8,6 +8,12 @@ spring:
       - common
 
 bonelf:
+  qrcode:
+    ticket-uri:
+      temp: N/A
+    limit-ticket-uri:
+      9b8c1028acf: user:shop/page?lat=30.00&lng=120.001
+    permit-urls: user:shop/page
   # websocket配置
   websocket:
     type: stomp
