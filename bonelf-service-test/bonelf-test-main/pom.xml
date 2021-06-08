@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud-web</artifactId>
-            <!--FIXME 正式时需要mq注释-->
+            <!--正式时需要mq注释-->
 <!--            <exclusions>-->
 <!--                <exclusion>-->
 <!--                    <groupId>com.bonelf</groupId>-->
@@ -41,11 +41,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-        </dependency>
-        <!--测试使用springboot自带的websocket-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
     </dependencies>
 

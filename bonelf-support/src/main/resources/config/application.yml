@@ -7,10 +7,21 @@ spring:
     include:
       - common
 
+  http:
+    encoding:
+      # 解决静态文本文件编码错误
+      force: true
+
 bonelf:
+  upload:
+    type: ftp
+  oauth2:
+    # new AntPathRequestMatcher(pattern, method)
+    permit-path: /vCode/**,/resource/**,/image/**
   qrcode:
     ticket-uri:
       temp: N/A
+    # 有效期限制的url
     limit-ticket-uri:
       9b8c1028acf: user:shop/page?lat=30.00&lng=120.001
     permit-urls: user:shop/page

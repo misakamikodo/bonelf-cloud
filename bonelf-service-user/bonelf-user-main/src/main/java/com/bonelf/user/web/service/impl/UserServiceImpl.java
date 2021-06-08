@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bonelf.cicada.util.CipherCryptUtil;
 import com.bonelf.cicada.util.Md5CryptUtil;
+import com.bonelf.frame.base.property.BonelfProperties;
 import com.bonelf.frame.base.util.redis.RedisUtil;
 import com.bonelf.frame.core.constant.AuthConstant;
 import com.bonelf.frame.core.constant.BonelfConstant;
@@ -27,7 +28,6 @@ import com.bonelf.user.web.mapper.UserMapper;
 import com.bonelf.user.web.service.UserService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -44,8 +44,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	@Autowired
 	private WxMaService wxMaService;
 
-	@Value("${bonelf.base-url:http://127.0.0.1}")
-	private String baseUrl;
+	@Autowired
+	private BonelfProperties bonelfProperties;
 
 	@Override
 	public Map<String, Set<String>> getApiUserRolesAndPermission(Long userId) {
@@ -92,7 +92,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 				//}
 				user.setPassword(Md5CryptUtil.encrypt(user.getPhone().substring(user.getPhone().length() - 6), AuthConstant.DATABASE_SALT_MD5));
 				user.setLastLoginTime(LocalDateTime.now());
-				user.setAvatar(baseUrl + BonelfConstant.DEFAULT_AVATAR_PATH);
+				user.setAvatar(bonelfProperties.getBaseUrl() + BonelfConstant.DEFAULT_AVATAR_PATH);
 				this.baseMapper.insert(user);
 				user.setNickname("用户" + HexUtil.toHex(user.getUserId()));
 				this.baseMapper.updateById(user);

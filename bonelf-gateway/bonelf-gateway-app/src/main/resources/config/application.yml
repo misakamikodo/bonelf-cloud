@@ -4,7 +4,7 @@ server:
     context-path: /bonelf
 
 bonelf:
-  no-auth-path:
+  permit-path:
     - /oauth/token,/login/byPsw,/open,/v2/api-docs
     - /user/loginByAccount
     - /test/testConverter

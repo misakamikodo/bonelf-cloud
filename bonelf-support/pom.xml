@@ -11,6 +11,11 @@
 
     <artifactId>bonelf-support</artifactId>
 
+    <properties>
+        <minio.version>8.0.3</minio.version>
+        <ftp.version>3.6</ftp.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.bonelf</groupId>
@@ -19,6 +24,16 @@
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-support-main</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>${ftp.version}</version>
         </dependency>
     </dependencies>
 
