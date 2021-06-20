@@ -111,7 +111,7 @@ minio 对象存储
 
 maven一键部署、使用docker部署（depoly） 
 
-jenkins 部署 nexus、springcloud
+jenkins 部署 nexus、springcloud（DockerFile/docker-compose.yml-docker方式）
 
 zipkin 监控 压力测试
 
