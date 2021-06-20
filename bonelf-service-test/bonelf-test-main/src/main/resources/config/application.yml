@@ -6,3 +6,7 @@ spring:
     active: dev
     include:
       - common
+
+bonelf:
+  oauth2:
+    permit-path: /test/**,/noAuth/**

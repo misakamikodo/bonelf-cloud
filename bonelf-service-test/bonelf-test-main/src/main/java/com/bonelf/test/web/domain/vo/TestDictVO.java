@@ -4,6 +4,8 @@ import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.dict.DbDict;
 import com.bonelf.frame.core.dict.DictField;
 import com.bonelf.frame.core.dict.EnumDict;
+import com.bonelf.frame.web.aop.annotation.TableDict;
+import com.bonelf.test.web.domain.entity.Test;
 import lombok.Data;
 
 import java.util.List;
@@ -14,10 +16,15 @@ import java.util.List;
  */
 @Data
 public class TestDictVO {
-	@DbDict(value = "test", cached = true)
+	@DbDict(value = "test", cached = false)
 	private String hello = "123";
 
 	private String helloName;
+
+	@DbDict(value = "test", cached = true)
+	private String helloCached = "123";
+
+	private String helloCachedName;
 
 	@EnumDict(YesOrNotEnum.class)
 	private Integer world = 1;
@@ -27,6 +34,11 @@ public class TestDictVO {
 	private String nihao = null;
 
 	private List<?> shijie = null;
+
+	@TableDict(Test.class)
+	private Integer table = 1;
+
+	private String tableName;
 
 	@DictField
 	private TestDictPropertyVO test = new TestDictPropertyVO();

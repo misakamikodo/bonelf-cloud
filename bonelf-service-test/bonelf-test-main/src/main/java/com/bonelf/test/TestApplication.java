@@ -9,9 +9,6 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-
-import java.net.UnknownHostException;
 
 /**
  * <p>
@@ -22,7 +19,6 @@ import java.net.UnknownHostException;
  * @since 2020/10/6 18:58
  */
 @Slf4j
-@EnableWebSocket
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = {
