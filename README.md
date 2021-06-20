@@ -78,43 +78,40 @@ Windows启动：切换到/bin目录 -> .\startup.cmd -m standalone
 Jeecg-boot、ruoyi-cloud、Guns、litemall、best-pay
 
 ## 开发计划
-项目重构
-
-更换为标准的Aibaba架构，备份后改用Dubbo、sentinel、streamer
-
-sentinel 流量控制
 
 seata 分布式事务中间件
 
-接口耗时aop
+搜索服务elasticsearch
+
+filterRules field、operate、value 三个属性的list 来形成查询条件 Map<Key,(operate、value)>
 
 数据库异常封装，controller封装
 
-优化字典，使用JsonNode自动添加字段不用自己定义
-
-类似字典aop方式，支持查询实体名称字段并填充
-
 处理文件上传aop or 拦截器，处理后返回url填充入对应表单字段中，这样controller只需要处理保存链接地址即可
 
-按照配置决定字典实现方式
+RocketMQ（应用订单服务通知商品修改销售数目、定时器发送消息，其他服务处理）
 
-完善开发到一半的功能
+点击量排序问题（需rocketmq）
 
-Feign、consumer、producer、具体业务 四个拆分？
+销售量排序问题（需rocketmq）
 
-继承Webserver是否可以替换springboot的web服务？
+微信支付宝 支付、退款
+
+库存问题
+
+规格问题（下单）
+
+经纬度排序问题
 
 三方登录
 
 二维码登录
 
-OAuth自动刷新token
-
-支付对账、分账
-
 minio 对象存储
 
-maven一键部署、使用docker部署（depoly）
+maven一键部署、使用docker部署（depoly） 
+
+jenkins 部署 nexus、springcloud
 
 zipkin 监控 压力测试
 
@@ -125,6 +122,10 @@ kibana 日志分析的 Web 接口
 Kafka 分布式日志(类似MQ)(新建项目)
 
 activiti 工作流
+
+## 不完善
+
+接口耗时aop （只能适用标准的请求-Controller结尾的，例如Oauth等不符合定义的没等统一配置）
 
 ## 已完成
 nacos基本微服务框架功能配置（swagger、多数据源、druid、{}、feign、redis、mybatisplus、消息转化器、异常处理advice、spring cache使用redis实现等）
@@ -163,31 +164,18 @@ string 替换文本注解
 
 二维码
 
-RocketMQ（应用订单服务通知商品修改销售数目、定时器发送消息，其他服务处理）
-
 RocketMQ 实现 redis websocket发布订阅
 
-点击量排序问题（需rocketmq）
+更换为标准的Aibaba架构，备份后改用Dubbo、sentinel、streamer
 
-销售量排序问题（需rocketmq）
+sentinel 流量控制
 
-## 开发到一半（点到为止）
-微信支付宝 支付、退款
+## 参考中
 
-库存问题
+继承Webserver是否可以替换springboot的web服务？
 
-规格问题（下单）
-
-经纬度排序问题
-
-搜索服务elasticsearch
 
 ## 放弃
-CAS单点登录（使用OAuth2.0解决）
+CAS单点登录（使用OAuth2.0解决、SpringSecurity也有支持CAS）
 
 shiro （不支持分布式，替换成OAuth2)
-
-Temp
-frame可借鉴：crud基类，JsonNode注入新属性，树节点attribute如何实现同级，数据库异常封装，controller封装，filterRules，Adapter，
-
-springwebsocket(WebSocketMessageBrokerConfigurer)
