@@ -83,6 +83,8 @@ seata 分布式事务中间件
 
 搜索服务elasticsearch
 
+单点项目版本（分离auth服务 类似support）
+
 filterRules field、operate、value 三个属性的list 来形成查询条件 Map<Key,(operate、value)>
 
 数据库异常封装，controller封装
