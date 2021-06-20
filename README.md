@@ -123,13 +123,14 @@ kibana 日志分析的 Web 接口
 
 Kafka 分布式日志(类似MQ)(新建项目)
 
-activiti 工作流
+activiti/flowable 工作流
 
 ## 不完善
 
 接口耗时aop （只能适用标准的请求-Controller结尾的，例如Oauth等不符合定义的没等统一配置）
 
 ## 已完成
+
 nacos基本微服务框架功能配置（swagger、多数据源、druid、{}、feign、redis、mybatisplus、消息转化器、异常处理advice、spring cache使用redis实现等）
 
 SpringBoot、Netty、redis发布订阅三者的websocket
@@ -178,6 +179,7 @@ sentinel 流量控制
 
 
 ## 放弃
+
 CAS单点登录（使用OAuth2.0解决、SpringSecurity也有支持CAS）
 
 shiro （不支持分布式，替换成OAuth2)
