@@ -79,17 +79,21 @@ Jeecg-boot、ruoyi-cloud、Guns、litemall、best-pay
 
 ## 开发计划
 
-seata 分布式事务中间件
-
 搜索服务elasticsearch
 
 单点项目版本（分离auth服务 类似support）
 
+maven一键部署、使用docker部署（depoly）
+
+jenkins 部署 nexus、springcloud（DockerFile/docker-compose.yml-docker方式）
+
 filterRules field、operate、value 三个属性的list 来形成查询条件 Map<Key,(operate、value)>
+
+mybatis-plus 分页可能与seata不兼容；令使用adapter适应分页参数，增加 start、end 的传参方式 而不是 page size
 
 数据库异常封装，controller封装
 
-处理文件上传aop or 拦截器，处理后返回url填充入对应表单字段中，这样controller只需要处理保存链接地址即可
+处理文件上传 aop or 拦截器，处理后返回url填充入对应表单字段中，这样controller只需要处理保存链接地址即可
 
 RocketMQ（应用订单服务通知商品修改销售数目、定时器发送消息，其他服务处理）
 
@@ -109,11 +113,7 @@ RocketMQ（应用订单服务通知商品修改销售数目、定时器发送消
 
 二维码登录
 
-minio 对象存储
-
-maven一键部署、使用docker部署（depoly） 
-
-jenkins 部署 nexus、springcloud（DockerFile/docker-compose.yml-docker方式）
+liquibase 数据库版本更新
 
 zipkin 监控 压力测试
 
@@ -125,17 +125,13 @@ Kafka 分布式日志(类似MQ)(新建项目熟悉)
 
 activiti/flowable 工作流
 
-liquibase 数据库版本更新
-
 ## 不完善
 
 接口耗时aop （只能适用标准的请求-Controller结尾的，例如Oauth等不符合定义的没等统一配置）
 
 ## 已完成
 
-nacos基本微服务框架功能配置（swagger、多数据源、druid、{}、feign、redis、mybatisplus、消息转化器、异常处理advice、spring cache使用redis实现等）
-
-SpringBoot、Netty、redis发布订阅三者的websocket
+基本微服务框架功能配置（swagger、多数据源、druid、nacos、feign、redis、mybatisplus、消息转化器、异常处理advice、spring cache使用redis实现等）
 
 quartz数据库定时器
 
@@ -171,14 +167,19 @@ string 替换文本注解
 
 RocketMQ 实现 redis websocket发布订阅
 
+Websocket:stomp netty origin
+
 更换为标准的Aibaba架构，备份后改用Dubbo、sentinel、streamer
 
 sentinel 流量控制
 
+minio 对象存储
+
+seata 分布式事务中间件
+
 ## 参考中
 
 继承Webserver是否可以替换springboot的web服务？
-
 
 ## 放弃
 
