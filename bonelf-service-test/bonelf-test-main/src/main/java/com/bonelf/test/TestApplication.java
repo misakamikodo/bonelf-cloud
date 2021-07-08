@@ -3,6 +3,7 @@ package com.bonelf.test;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.bonelf.cicada.util.IpUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -26,6 +27,10 @@ import org.springframework.core.env.Environment;
 },
 		exclude = {DruidDataSourceAutoConfigure.class})
 public class TestApplication {
+	@Value("${bonelf.mode}")
+	private String test;
+	@Value("${mybatis-plus.config-location}")
+	private String te;
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext application;

@@ -18,6 +18,7 @@ spring:
     nacos:
       discovery:
         server-addr: nacos.bonelf.com:80
+        group: DEFAULT_GROUP
     stream:
       rocketmq:
         binder:
@@ -37,3 +38,34 @@ spring:
 #        input: { destination: websocketTopic, group: support, content-type: text/plain, consumer.maxAttempts: 1 }
         # provider
         output: { destination: websocketTopic, content-type: application/json }
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default
+  # 服务注册到 nacos
+  registry:
+    type: nacos
+    nacos:
+      # 想配置group和application但是包里没读取？
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      namespace: ""
+      group: DEFAULT_GROUP
+      username: "nacos"
+      password: "nacos"
+      cluster: default
+  config:
+    type: nacos
+    nacos:
+      serverAddr: ${spring.cloud.nacos.discovery.server-addr}
+      namespace: ""
+      username: "nacos"
+      password: "nacos"
+      group: SEATA_GROUP

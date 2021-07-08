@@ -7,6 +7,7 @@ import com.bonelf.frame.web.controller.BaseController;
 import com.bonelf.test.web.domain.dto.TestConverterDTO;
 import com.bonelf.test.web.domain.vo.TestConverterVO;
 import com.bonelf.test.web.domain.vo.TestDictVO;
+import com.bonelf.test.web.service.TestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,8 @@ import org.springframework.web.client.RestTemplate;
 public class NoAuthTestController extends BaseController {
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private TestService testService;
 
 	// @ApiOperation(value = "testLogin")
 	// @GetMapping("/testLogin")
@@ -42,6 +45,11 @@ public class NoAuthTestController extends BaseController {
 	public Result<TestConverterDTO> testConverterPost(@Validated @RequestBody TestConverterDTO testConverterDto) {
 		log.debug("\n" + JSON.toJSONString(testConverterDto, SerializerFeature.PrettyFormat));
 		return Result.ok(testConverterDto);
+	}
+
+	@PostMapping("/testSeata")
+	public Result<Object> testSeata() {
+		return Result.ok(testService.testSeata());
 	}
 
 	/**

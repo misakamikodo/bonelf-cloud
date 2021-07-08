@@ -121,9 +121,11 @@ grafana 度量分析和可视化工具
 
 kibana 日志分析的 Web 接口
 
-Kafka 分布式日志(类似MQ)(新建项目)
+Kafka 分布式日志(类似MQ)(新建项目熟悉)
 
 activiti/flowable 工作流
+
+liquibase 数据库版本更新
 
 ## 不完善
 
