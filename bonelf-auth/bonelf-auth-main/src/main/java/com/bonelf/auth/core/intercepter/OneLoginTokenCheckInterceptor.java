@@ -1,9 +1,9 @@
 package com.bonelf.auth.core.intercepter;
 
 import com.bonelf.auth.constant.CacheConstant;
-import com.bonelf.auth.core.exception.AuthExceptionEnum;
 import com.bonelf.frame.core.constant.AuthConstant;
 import com.bonelf.frame.core.exception.BonelfException;
+import com.bonelf.frame.core.exception.enums.AuthExceptionEnum;
 import com.bonelf.frame.web.security.domain.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

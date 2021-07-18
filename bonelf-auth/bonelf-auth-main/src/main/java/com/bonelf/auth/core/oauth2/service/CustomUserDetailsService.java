@@ -12,7 +12,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.bonelf.common.base.security.domain.User;
 import com.bonelf.common.base.security.service.AuthRoleService;
 import com.bonelf.common.base.security.service.AuthUserService;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.web.security.domain.AuthUser;
 import com.bonelf.user.feign.domain.response.Role;
 import lombok.extern.slf4j.Slf4j;
@@ -57,13 +57,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String uniqueId) {
-		User user = userService.getByUniqueId(uniqueId, new UniqueIdType[]{UniqueIdType.username,
-				UniqueIdType.phone, UniqueIdType.mail});
+		User user = userService.getByUniqueId(uniqueId, new UsernameType[]{UsernameType.username,
+				UsernameType.phone, UsernameType.mail});
 		// 2020/11/19 错误和NPE处理
 		log.info("load user by username :{}", user.toString());
 		return new AuthUser(
 				user.getUserId(),
-				UniqueIdType.username,
+				UsernameType.username,
 				user.getUsername(),
 				// passwordEncoder.encode(user.getPassword()),
 				user.getPassword(),

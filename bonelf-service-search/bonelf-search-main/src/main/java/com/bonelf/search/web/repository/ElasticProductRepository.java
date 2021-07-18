@@ -4,7 +4,7 @@
 
 package com.bonelf.search.web.repository;
 
-import com.bonelf.search.web.domain.entity.ProductSearch;
+import com.bonelf.search.web.domain.entity.BonelfSpu;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.data.util.Streamable;
@@ -16,25 +16,25 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 @Repository
-public interface ElasticProductRepository extends ElasticsearchRepository<ProductSearch, Long> {
+public interface ElasticProductRepository extends ElasticsearchRepository<BonelfSpu, Long> {
 	/**
 	 * 流方式查询
 	 * @param spuType
 	 * @return
 	 */
-	Streamable<ProductSearch> findByKeywords(Short spuType);
+	Streamable<BonelfSpu> findByKeywords(Short spuType);
 
-	List<ProductSearch> findBySpuType(Short spuType);
+	List<BonelfSpu> findBySpuType(Short spuType);
 
 	//删除
 	Long deleteBySpuCode(String spuCode);
 
 	//异步查询
 	@Async
-	Future<ProductSearch> findOneBySpuCode(String spuCode);
+	Future<BonelfSpu> findOneBySpuCode(String spuCode);
 
 	@Async
-	ListenableFuture<ProductSearch> findOneBySpuType(Short spuType);
+	ListenableFuture<BonelfSpu> findOneBySpuType(Short spuType);
 
 	/**
 	 * match查询并设置operator
@@ -43,6 +43,6 @@ public interface ElasticProductRepository extends ElasticsearchRepository<Produc
 	 * @return
 	 */
 	@Query("{\"match\": {\"title\":{ \"query\": \"?0\",\"operator\":\"?1\"}}}")
-	ProductSearch findByQueryExp(String title, String operator);
+	BonelfSpu findByQueryExp(String title, String operator);
 
 }

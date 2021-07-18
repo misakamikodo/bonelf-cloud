@@ -12,7 +12,7 @@ import com.bonelf.auth.constant.GrantTypeEnum;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
 import com.bonelf.common.base.security.domain.User;
 import com.bonelf.common.base.security.service.AuthUserService;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
 import com.bonelf.frame.web.security.domain.AuthUser;
@@ -60,7 +60,7 @@ public class MailTokenGranter extends BaseApiTokenGranter {
 
 	@Override
 	protected AuthUser getAuthUserFromParam(Map<String, String> parameters) {
-		AuthUser principal = new AuthUser(parameters.get("username"), UniqueIdType.mail, parameters.get("verify_code"));
+		AuthUser principal = new AuthUser(parameters.get("username"), UsernameType.mail, parameters.get("verify_code"));
 		return principal;
 	}
 

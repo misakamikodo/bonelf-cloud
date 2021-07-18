@@ -11,6 +11,7 @@ package com.bonelf.auth.core.exception;
 import com.bonelf.frame.core.constant.BizConstants;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
+import com.bonelf.frame.core.exception.enums.AuthExceptionEnum;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -5,18 +5,19 @@
 package com.bonelf.search.web.service.impl;
 
 import com.bonelf.search.web.domain.dto.ProductSearchDTO;
-import com.bonelf.search.web.domain.entity.ProductSearch;
+import com.bonelf.search.web.domain.entity.BonelfSpu;
 import com.bonelf.search.web.domain.vo.ProductSearchVO;
 import com.bonelf.search.web.repository.ElasticProductRepository;
 import com.bonelf.search.web.service.ProductSearchService;
-import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
@@ -24,6 +25,12 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
+/**
+ * {@link org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate}
+ * @author bonelf
+ */
 @Service
 public class ProductSearchServiceImpl implements ProductSearchService {
 	@Autowired
@@ -38,13 +45,18 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 	 */
 	@Override
 	public Page<ProductSearchVO> searchProduct(ProductSearchDTO productSearchDto) {
-		NativeSearchQuery searchQuery = getSearchQuery(1, 10);
-		Page<ProductSearch> searchResult1 = elasticProductRepository.search(searchQuery);
-		//其中IndexCoordinates为封装索引库名称的不可变值对象, 用IndexCoordinates.of("索引库名")来构造该对象
-		// SearchHits<ProductSearch> searchResult2 = elasticsearchRestTemplate.search(searchQuery, ProductSearch.class);
-		//searchResult2.getTotalHits();
-		//searchResult2.getSearchHits();
-		return null;
+		NativeSearchQuery searchQuery = getSearchQuery(0, 10);
+		Page<BonelfSpu> searchResult = elasticProductRepository.search(searchQuery);
+		// 其中IndexCoordinates为封装索引库名称的不可变值对象, 用IndexCoordinates.of("索引库名")来构造该对象
+		Page<ProductSearchVO> result = new PageImpl<>(
+				searchResult.getContent().stream().map(item -> {
+					ProductSearchVO vo = new ProductSearchVO();
+					BeanUtils.copyProperties(item, vo);
+					return vo;
+				}).collect(Collectors.toList()),
+				searchResult.getPageable(), searchResult.getTotalElements()
+		);
+		return result;
 	}
 
 	/**
@@ -54,7 +66,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 	 * - 模糊查询
 	 * - 排序查询
 	 * - 设置分页参数
-	 * @param page 当前页码
+	 * @param page  当前页码
 	 * @param limit 每页大小
 	 * @return
 	 */
@@ -73,16 +85,16 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 		 match
 		 模糊匹配 与like 等价。
 		 */
-		//TODO 字段精确匹配
-		if ("platFrom" != null) {
-			builder.must(QueryBuilders.termQuery("platFrom", "platFrom"));
-		}
-		//TODO 设置多字段组合模糊搜索
-		if (StringUtils.isNotBlank("searchContent")) {
-			builder.must(QueryBuilders.multiMatchQuery("searchContent", "username", "operation", "exceptionDetail"));
-		}
+		// TODO 字段精确匹配
+		// if ("platFrom" != null) {
+		// 	builder.must(QueryBuilders.termQuery("platFrom", "platFrom"));
+		// }
+		// TODO 设置多字段组合模糊搜索
+		// if (StringUtils.isNotBlank("searchContent")) {
+		// 	builder.must(QueryBuilders.multiMatchQuery("searchContent", "username", "operation", "exceptionDetail"));
+		// }
 		//设置排序
-		FieldSortBuilder sort = SortBuilders.fieldSort("id").order(SortOrder.DESC);
+		FieldSortBuilder sort = SortBuilders.fieldSort("spu_id").order(SortOrder.DESC);
 		//设置分页
 		Pageable pageable = PageRequest.of(page, limit);
 

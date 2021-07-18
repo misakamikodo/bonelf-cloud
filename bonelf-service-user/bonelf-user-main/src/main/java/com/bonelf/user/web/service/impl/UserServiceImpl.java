@@ -16,7 +16,7 @@ import com.bonelf.frame.base.util.redis.RedisUtil;
 import com.bonelf.frame.core.constant.AuthConstant;
 import com.bonelf.frame.core.constant.BonelfConstant;
 import com.bonelf.frame.core.constant.CommonCacheConstant;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
 import com.bonelf.user.constant.CacheConstant;
@@ -121,7 +121,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 	 * @return
 	 */
 	@Override
-	public User getUserByType(String uniqueId, UniqueIdType[] idTypes) {
+	public User getUserByType(String uniqueId, UsernameType[] idTypes) {
 		if(idTypes == null || idTypes.length == 0){
 			return this.getOne(Wrappers.<User>lambdaQuery()
 					.eq(User::getUserId, uniqueId).or()
@@ -133,7 +133,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 			LambdaQueryWrapper<User> lqw = Wrappers.<User>lambdaQuery()
 					.orderByDesc(User::getUpdateTime).last("limit 1");
 			for (int i = 0; i < idTypes.length - 1; i++) {
-				UniqueIdType idType = idTypes[i];
+				UsernameType idType = idTypes[i];
 				switch (idType){
 					case id:
 						lqw = lqw.eq(User::getUserId, uniqueId).or();

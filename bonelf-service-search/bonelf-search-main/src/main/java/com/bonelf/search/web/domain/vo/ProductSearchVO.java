@@ -8,4 +8,8 @@ import lombok.Data;
 
 @Data
 public class ProductSearchVO {
+	private Long spuId;
+	private String title;
+	private String keywords;
+	private Double originPrice;
 }

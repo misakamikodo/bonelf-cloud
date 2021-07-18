@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api("产品搜索")
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/noAuth/product")
 public class ProductSearchController {
 	@Autowired
 	private ProductSearchService productSearchService;
 
 	@ApiParam("搜索")
 	@RequestMapping("/search")
-	public Result<ProductSearchVO> search(ProductSearchDTO productSearchDto) {
+	public Result<Page<ProductSearchVO>> search(ProductSearchDTO productSearchDto) {
 		Page<ProductSearchVO> productSearchVoPage = productSearchService.searchProduct(productSearchDto);
-		return Result.ok();
+		return Result.ok(productSearchVoPage);
 	}
 
 

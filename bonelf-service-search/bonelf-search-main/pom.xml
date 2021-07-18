@@ -15,6 +15,22 @@
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-common-base</artifactId>
+            <exclusions>
+                <!--mybatis-plus-->
+                <!--<exclusion>-->
+                <!--    <groupId>com.baomidou</groupId>-->
+                <!--    <artifactId>mybatis-plus-boot-starter</artifactId>-->
+                <!--</exclusion>-->
+                <!-- 分布式事务 seata -->
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-spring-boot-starter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.alibaba.cloud</groupId>
+                    <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>

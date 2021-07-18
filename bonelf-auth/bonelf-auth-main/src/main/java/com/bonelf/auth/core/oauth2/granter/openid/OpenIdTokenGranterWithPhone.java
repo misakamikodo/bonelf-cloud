@@ -16,7 +16,7 @@ import com.bonelf.auth.constant.GrantTypeEnum;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
 import com.bonelf.common.base.security.domain.User;
 import com.bonelf.common.base.security.service.AuthUserService;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
 import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
@@ -89,9 +89,9 @@ public class OpenIdTokenGranterWithPhone extends BaseApiTokenGranter {
 		AuthUser principal = new AuthUser(
 				Optional.ofNullable(wxMaPhoneNumberInfo.getPurePhoneNumber())
 						.orElse(wxMaPhoneNumberInfo.getPhoneNumber()),
-				UniqueIdType.openId,
+				UsernameType.openId,
 				wxMaUserInfo.getOpenId());
-		principal.setIdType(UniqueIdType.phone);
+		principal.setUsernameType(UsernameType.phone);
 		return principal;
 	}
 

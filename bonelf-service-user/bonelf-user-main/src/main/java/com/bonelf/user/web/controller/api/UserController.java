@@ -4,9 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.bonelf.frame.base.property.BonelfProperties;
 import com.bonelf.frame.base.util.redis.RedisUtil;
-import com.bonelf.frame.cloud.aop.annotation.MustFeignRequest;
 import com.bonelf.frame.core.constant.BonelfConstant;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
 import com.bonelf.frame.web.controller.BaseApiController;
@@ -72,7 +71,7 @@ public class UserController extends BaseApiController<UserService, User> {
 
 	@GetMapping(value = "/v1/getUser")
 	public Result<UserResponse> getUser(@RequestParam("uniqueId") String uniqueId,
-										@RequestParam(value = "idType", required = false) UniqueIdType[] idType) {
+										@RequestParam(value = "idType", required = false) UsernameType[] idType) {
 		User user = userService.getUserByType(uniqueId, idType);
 		if (user == null) {
 			return Result.error(CommonBizExceptionEnum.DB_RESOURCE_NULL, "用户");
@@ -82,7 +81,6 @@ public class UserController extends BaseApiController<UserService, User> {
 		return Result.ok(resp);
 	}
 
-	@MustFeignRequest
 	@PostMapping(value = "/v1/registerByPhone")
 	public Result<User> registerByPhone(@RequestParam("phone") String phone) {
 		User past = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getPhone, phone));
@@ -99,7 +97,6 @@ public class UserController extends BaseApiController<UserService, User> {
 		return Result.ok(user);
 	}
 
-	@MustFeignRequest
 	@PostMapping(value = "/v1/registerByMail")
 	public Result<User> registerByMail(@RequestParam("mail") String mail) {
 		User past = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getMail, mail));
@@ -131,7 +128,6 @@ public class UserController extends BaseApiController<UserService, User> {
 		return null;
 	}
 
-	@MustFeignRequest
 	@PostMapping(value = "/v1/registerByOpenId")
 	public Result<User> registerByOpenId(@RequestBody WechatRegisterUserDTO wechatRegisterUserDto) {
 		User past = userService.getOne(Wrappers.<User>lambdaQuery()

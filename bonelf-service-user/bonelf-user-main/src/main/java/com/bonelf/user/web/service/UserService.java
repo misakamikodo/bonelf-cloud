@@ -1,7 +1,7 @@
 package com.bonelf.user.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.user.web.domain.dto.AccountLoginDTO;
 import com.bonelf.user.web.domain.dto.WechatLoginDTO;
 import com.bonelf.user.web.domain.entity.User;
@@ -37,5 +37,5 @@ public interface UserService extends IService<User> {
 	 * @param idTypes
 	 * @return
 	 */
-	User getUserByType(String uniqueId, UniqueIdType[] idTypes);
+	User getUserByType(String uniqueId, UsernameType[] idTypes);
 }

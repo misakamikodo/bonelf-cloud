@@ -3,7 +3,7 @@ package com.bonelf.common.base.security.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.bonelf.common.base.security.domain.User;
 import com.bonelf.common.base.security.service.AuthUserService;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
@@ -29,8 +29,8 @@ public class AuthUserServiceImpl implements AuthUserService {
 	 */
 	@Override
 	//@Cacheable(value = "#id", condition = "#result.getSuccess()")
-	public User getByUniqueId(String uniqueId, UniqueIdType idType) {
-		return getByUniqueId(uniqueId, new UniqueIdType[]{idType});
+	public User getByUniqueId(String uniqueId, UsernameType idType) {
+		return getByUniqueId(uniqueId, new UsernameType[]{idType});
 	}
 
 	/**
@@ -41,12 +41,12 @@ public class AuthUserServiceImpl implements AuthUserService {
 	 * @return
 	 */
 	@Override
-	public User getByUniqueIdOrElseRegister(String uniqueId, UniqueIdType idType, RegisterUserRequest userMsg) {
-		return getByUniqueId(uniqueId, new UniqueIdType[]{idType});
+	public User getByUniqueIdOrElseRegister(String uniqueId, UsernameType idType, RegisterUserRequest userMsg) {
+		return getByUniqueId(uniqueId, new UsernameType[]{idType});
 	}
 
 	@Override
-	public User getByUniqueId(String uniqueId, UniqueIdType[] idTypes) {
+	public User getByUniqueId(String uniqueId, UsernameType[] idTypes) {
 		Result<UserResponse> user = userFeignClient.getUserByUniqueId(uniqueId, idTypes);
 		if (!user.getSuccess()) {
 			throw BonelfException.builder(user.getMessage()).code(user.getCode()).msg(user.getMessage()).build();

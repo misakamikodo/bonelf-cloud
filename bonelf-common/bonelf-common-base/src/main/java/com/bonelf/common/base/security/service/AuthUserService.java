@@ -1,7 +1,7 @@
 package com.bonelf.common.base.security.service;
 
 import com.bonelf.common.base.security.domain.User;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +20,9 @@ public interface AuthUserService {
      * @param uniqueId
      * @return
      */
-	User getByUniqueId(String uniqueId, UniqueIdType idType);
+	User getByUniqueId(String uniqueId, UsernameType idType);
 
-	User getByUniqueId(String uniqueId, UniqueIdType[] idType);
+	User getByUniqueId(String uniqueId, UsernameType[] idType);
 
 	/**
 	 * 注册
@@ -51,5 +51,5 @@ public interface AuthUserService {
 	 * @return
 	 */
 	@Deprecated
-	User getByUniqueIdOrElseRegister(String uniqueId, UniqueIdType idType, RegisterUserRequest userMsg);
+	User getByUniqueIdOrElseRegister(String uniqueId, UsernameType idType, RegisterUserRequest userMsg);
 }

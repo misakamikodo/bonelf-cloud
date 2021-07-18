@@ -14,7 +14,7 @@ import com.bonelf.auth.constant.GrantTypeEnum;
 import com.bonelf.auth.core.oauth2.granter.base.BaseApiTokenGranter;
 import com.bonelf.common.base.security.domain.User;
 import com.bonelf.common.base.security.service.AuthUserService;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.web.security.BaseApiAuthenticationToken;
 import com.bonelf.frame.web.security.domain.AuthUser;
@@ -79,10 +79,10 @@ public class OpenIdTokenGranter extends BaseApiTokenGranter {
 		AuthUser principal = new AuthUser(
 				// wxUserInfo.getOpenId(),
 				"oSxri4irwmzqj4VnxfwOtiMjZxaw",
-				UniqueIdType.openId,
+				UsernameType.openId,
 				PASSWORD);
 		// principal.setUsername(wxUserInfo.getOpenId());
-		principal.setIdType(UniqueIdType.openId);
+		principal.setUsernameType(UsernameType.openId);
 		return principal;
 	}
 

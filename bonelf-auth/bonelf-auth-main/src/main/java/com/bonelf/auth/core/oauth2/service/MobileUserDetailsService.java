@@ -10,7 +10,7 @@ package com.bonelf.auth.core.oauth2.service;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.bonelf.common.base.security.domain.User;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.web.security.domain.AuthUser;
@@ -49,7 +49,7 @@ public class MobileUserDetailsService extends CustomUserDetailsService {
 	public UserDetails loadUserByUsername(String uniqueId) {
 		User user;
 		try {
-			user = userService.getByUniqueId(uniqueId, UniqueIdType.phone);
+			user = userService.getByUniqueId(uniqueId, UsernameType.phone);
 		} catch (BonelfException be) {
 			if ("404".equals(be.getCode())) {
 				throw new UsernameNotFoundException((be.getErrorMessage()), be);
@@ -71,7 +71,7 @@ public class MobileUserDetailsService extends CustomUserDetailsService {
 		// String credentials = new BCryptPasswordEncoder().encode(user.getVerifyCode());
 		return new AuthUser(
 				user.getUserId(),
-				UniqueIdType.phone,
+				UsernameType.phone,
 				user.getPhone(),
 				credentials,
 				user.getEnabled(),

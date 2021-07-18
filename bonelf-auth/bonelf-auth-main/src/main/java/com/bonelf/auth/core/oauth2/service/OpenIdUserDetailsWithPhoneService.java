@@ -10,7 +10,7 @@ package com.bonelf.auth.core.oauth2.service;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.bonelf.common.base.security.domain.User;
-import com.bonelf.frame.core.constant.UniqueIdType;
+import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.exception.BonelfException;
 import com.bonelf.frame.web.security.domain.AuthUser;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,7 @@ public class OpenIdUserDetailsWithPhoneService extends CustomUserDetailsService 
 		// 这里还是phone openId作为密码
 		User user;
 		try {
-			user = userService.getByUniqueId(uniqueId, UniqueIdType.phone);
+			user = userService.getByUniqueId(uniqueId, UsernameType.phone);
 		} catch (BonelfException be) {
 			if ("404".equals(be.getCode())) {
 				throw new UsernameNotFoundException(be.getErrorMessage());
@@ -52,7 +52,7 @@ public class OpenIdUserDetailsWithPhoneService extends CustomUserDetailsService 
 		// 如果为openId模式，从短信服务中获取验证码（动态密码）
 		return new AuthUser(
 				user.getUserId(),
-				UniqueIdType.phone,
+				UsernameType.phone,
 				user.getPhone(),
 				user.getOpenId(),
 				user.getEnabled(),
