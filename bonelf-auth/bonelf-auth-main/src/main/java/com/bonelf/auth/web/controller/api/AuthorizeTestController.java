@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * auth权限测试
- * @author ccy
+ * @author bonelf
  * @date 2021/5/29 15:07
  */
 @Slf4j

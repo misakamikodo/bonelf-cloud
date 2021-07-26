@@ -1,9 +1,9 @@
 package com.bonelf.test.web.domain.vo;
 
 import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
-import com.bonelf.frame.core.dict.DbDict;
-import com.bonelf.frame.core.dict.DictField;
-import com.bonelf.frame.core.dict.EnumDict;
+import com.bonelf.frame.core.dict.enums.DbDict;
+import com.bonelf.frame.core.dict.enums.DictField;
+import com.bonelf.frame.core.dict.enums.EnumDict;
 import com.bonelf.frame.web.aop.annotation.TableDict;
 import com.bonelf.test.web.domain.entity.Test;
 import lombok.Data;

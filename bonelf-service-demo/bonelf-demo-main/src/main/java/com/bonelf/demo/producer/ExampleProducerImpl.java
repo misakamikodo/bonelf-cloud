@@ -7,7 +7,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 
 /**
  * ------
- * @author ccy
+ * @author bonelf
  * @date 2021/5/28 16:48
  */
 public class ExampleProducerImpl {

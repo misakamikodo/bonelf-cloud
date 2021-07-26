@@ -17,6 +17,23 @@
     </properties>
 
     <dependencies>
+        <!-- cloud -->
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-frame-cloud-web</artifactId>
+            <!-- 正式时需要注释mq-->
+            <!--<exclusions>-->
+            <!--    <exclusion>-->
+            <!--        <groupId>com.bonelf</groupId>-->
+            <!--        <artifactId>bonelf-frame-mq</artifactId>-->
+            <!--    </exclusion>-->
+            <!--</exclusions>-->
+        </dependency>
+        <!-- single-point -->
+        <!--<dependency>-->
+        <!--    <groupId>com.bonelf</groupId>-->
+        <!--    <artifactId>bonelf-frame-web</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-common-base</artifactId>

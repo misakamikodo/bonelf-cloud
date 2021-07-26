@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  * 异常处理(示例)
- * @author ccy
+ * @author bonelf
  * @date 2021/5/31 14:47
  */
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {

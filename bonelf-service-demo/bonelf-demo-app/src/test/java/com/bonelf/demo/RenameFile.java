@@ -1,14 +1,13 @@
 package com.bonelf.demo;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 /**
  * TODO Edit file description there
- * @author ccy
+ * @author bonelf
  * @date 2021-1-21 15:12
  */
 public class RenameFile {

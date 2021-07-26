@@ -45,7 +45,7 @@ import java.util.function.Consumer;
 
 /**
  * 登录接口重定向
- * @author ccy
+ * @author bonelf
  * @date 2021/4/29 16:37
  * @see org.springframework.security.oauth2.provider.endpoint.TokenEndpoint oauth原生
  */

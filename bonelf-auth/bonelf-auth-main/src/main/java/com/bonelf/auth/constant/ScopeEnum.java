@@ -2,7 +2,7 @@ package com.bonelf.auth.constant;
 
 /**
  * oauth2 scope
- * @author ccy
+ * @author bonelf
  * @date 2021/5/6 9:18
  */
 public enum ScopeEnum {

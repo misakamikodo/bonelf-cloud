@@ -11,7 +11,7 @@ import java.util.Objects;
  * MD5加密
  * {@link org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder}
  *
- * @author ccy
+ * @author bonelf
  * @date 2021/5/26 16:20
  */
 public class Md5PasswordEncoder implements PasswordEncoder {

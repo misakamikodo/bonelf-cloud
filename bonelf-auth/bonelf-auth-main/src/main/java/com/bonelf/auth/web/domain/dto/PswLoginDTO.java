@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * oauth2获取token传参
- * @author ccy
+ * @author bonelf
  * @date 2021/4/29 16:45
  */
 @Data

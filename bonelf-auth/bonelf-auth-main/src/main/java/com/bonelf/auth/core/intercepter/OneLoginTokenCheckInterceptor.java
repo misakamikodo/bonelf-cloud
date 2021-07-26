@@ -20,7 +20,7 @@ import java.util.Objects;
  * 限制只有一个客户端允许登录
  * 若其他设备登录，此客户端token失效
  * {@link org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter decode 参数获取}
- * @author ccy
+ * @author bonelf
  * @date 2021/5/20 17:51
  * @see com.bonelf.auth.core.aop.AuthTokenAspect
  */

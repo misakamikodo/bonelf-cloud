@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * 权限
  * {@link org.springframework.security.access.prepost.PreAuthorize 实现注解}
- * @author ccy
+ * @author bonelf
  * @date 2021/5/31 14:54
  */
 @Slf4j

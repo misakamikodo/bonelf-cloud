@@ -2,7 +2,6 @@ package com.bonelf.search;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.bonelf.cicada.util.IpUtil;
-import com.bonelf.frame.cloud.config.SeataAutoConfig;
 import com.bonelf.frame.web.config.MybatisPlusConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +29,6 @@ import java.net.UnknownHostException;
 },
 		exclude = {
 				DruidDataSourceAutoConfigure.class,
-				SeataAutoConfig.class,
 				MybatisPlusConfig.class,
 		})
 public class SearchApplication {
