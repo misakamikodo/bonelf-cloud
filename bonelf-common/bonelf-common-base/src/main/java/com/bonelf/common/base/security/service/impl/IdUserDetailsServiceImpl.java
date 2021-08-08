@@ -9,7 +9,7 @@
 package com.bonelf.common.base.security.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.bonelf.frame.cloud.service.IdUserDetailsService;
+import com.bonelf.frame.base.service.IdUserDetailsService;
 import com.bonelf.frame.core.auth.domain.Role;
 import com.bonelf.frame.core.auth.domain.User;
 import com.bonelf.frame.core.auth.service.AuthRoleService;
