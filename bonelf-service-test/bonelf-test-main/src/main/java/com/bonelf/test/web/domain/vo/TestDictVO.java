@@ -4,7 +4,7 @@ import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.dict.enums.DbDict;
 import com.bonelf.frame.core.dict.enums.DictField;
 import com.bonelf.frame.core.dict.enums.EnumDict;
-import com.bonelf.frame.web.aop.annotation.TableDict;
+import com.bonelf.frame.core.dict.enums.TableDict;
 import com.bonelf.test.web.domain.entity.Test;
 import lombok.Data;
 
