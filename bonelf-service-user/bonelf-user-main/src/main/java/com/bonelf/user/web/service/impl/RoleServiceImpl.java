@@ -1,7 +1,7 @@
 package com.bonelf.user.web.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.bonelf.user.feign.domain.response.Role;
+import com.bonelf.user.feign.domain.response.RoleResponse;
 import com.bonelf.user.web.service.RoleService;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +15,15 @@ import java.util.Set;
 @Service
 public class RoleServiceImpl implements RoleService {
 	@Override
-	public Set<Role> getRoleByUserId(Long userId) {
-		Role exampleRole = new Role();
-		exampleRole.setCode("test:authority");
-		exampleRole.setName("testAuthority");
-		exampleRole.setDescription("this is an example authority");
-		Role exampleRole2 = new Role();
-		exampleRole2.setCode("ROLE_role");
-		exampleRole2.setName("testRole");
-		exampleRole2.setDescription("this is an example role");
-		return CollectionUtil.newHashSet(exampleRole, exampleRole2);
+	public Set<RoleResponse> getRoleByUserId(Long userId) {
+		RoleResponse exampleRoleResponse = new RoleResponse();
+		exampleRoleResponse.setCode("test:authority");
+		exampleRoleResponse.setName("testAuthority");
+		exampleRoleResponse.setDescription("this is an example authority");
+		RoleResponse exampleRoleResponse2 = new RoleResponse();
+		exampleRoleResponse2.setCode("ROLE_role");
+		exampleRoleResponse2.setName("testRole");
+		exampleRoleResponse2.setDescription("this is an example role");
+		return CollectionUtil.newHashSet(exampleRoleResponse, exampleRoleResponse2);
 	}
 }

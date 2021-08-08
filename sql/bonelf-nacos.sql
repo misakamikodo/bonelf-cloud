@@ -173,19 +173,19 @@ CREATE TABLE `permissions`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for roles
+-- Table structure for roleResponses
 -- ----------------------------
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE `roles`  (
+DROP TABLE IF EXISTS `roleResponses`;
+CREATE TABLE `roleResponses`  (
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   UNIQUE INDEX `idx_user_role`(`username`, `role`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of roles
+-- Records of roleResponses
 -- ----------------------------
-INSERT INTO `roles` VALUES ('nacos', 'ROLE_ADMIN');
+INSERT INTO `roleResponses` VALUES ('nacos', 'ROLE_ADMIN');
 
 -- ----------------------------
 -- Table structure for tenant_capacity

@@ -9,18 +9,19 @@
 package com.bonelf.common.base.security.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.bonelf.common.base.security.domain.User;
-import com.bonelf.common.base.security.service.AuthRoleService;
-import com.bonelf.common.base.security.service.AuthUserService;
+import com.bonelf.frame.cloud.service.IdUserDetailsService;
+import com.bonelf.frame.core.auth.domain.Role;
+import com.bonelf.frame.core.auth.domain.User;
+import com.bonelf.frame.core.auth.service.AuthRoleService;
+import com.bonelf.frame.core.auth.service.AuthUserService;
 import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.web.security.domain.AuthUser;
-import com.bonelf.user.feign.domain.response.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +35,10 @@ import java.util.stream.Collectors;
  * @author bonelf
  * @since 2020/11/19 13:10
  */
+@Primary
 @Slf4j
 @Service("idUserDetailsService")
-public class IdUserDetailsServiceImpl implements UserDetailsService {
+public class IdUserDetailsServiceImpl implements IdUserDetailsService {
 	@Autowired
 	protected AuthUserService userService;
 	@Autowired
@@ -75,8 +77,8 @@ public class IdUserDetailsServiceImpl implements UserDetailsService {
 	 * @return
 	 */
 	protected Set<GrantedAuthority> obtainGrantedAuthorities(User user) {
-		Set<Role> roles = roleService.queryUserRolesByUserId(user.getUserId());
-		log.info("=====获取到的用户信息====\nuser:{},roles:{}", user.getUsername(), roles);
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toSet());
+		Set<Role> roleResponses = roleService.queryUserRolesByUserId(user.getUserId());
+		log.info("=====获取到的用户信息====\nuser:{},roles:{}", user.getUsername(), roleResponses);
+		return roleResponses.stream().map(role -> new SimpleGrantedAuthority(role.getCode())).collect(Collectors.toSet());
 	}
 }

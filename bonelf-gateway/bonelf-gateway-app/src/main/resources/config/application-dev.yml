@@ -2,23 +2,23 @@ spring:
   cloud:
     nacos:
       discovery:
-        # server-addr: api.bonelf.com:8848
+        # server-addr: api2.bonelf.com:8848
         server-addr: nacos.bonelf.com:80
     stream:
       rocketmq:
         binder:
-          name-server: api.bonelf.com:9876
+          name-server: api2.bonelf.com:9876
 #  datasource:
 #    dynamic:
 #      primary: master
 #      datasource:
 #        master:
-#          url: jdbc:mysql://api.bonelf.com:3306/bonelf-gateway?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+#          url: jdbc:mysql://api2.bonelf.com:3306/bonelf-gateway?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
 #          username: bonelf
 #          password: 567215
 #          driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     database: 0
-    host: api.bonelf.com
+    host: api2.bonelf.com
     port: 6379
     password: '567215'

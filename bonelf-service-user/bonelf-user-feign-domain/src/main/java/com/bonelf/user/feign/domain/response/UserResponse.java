@@ -94,5 +94,5 @@ public class UserResponse {
 	/**
 	 * 角色
 	 */
-	private Set<Role> roles;
+	private Set<RoleResponse> roles;
 }

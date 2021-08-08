@@ -1,8 +1,10 @@
 package com.bonelf.common.base.security.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.bonelf.common.base.security.domain.User;
-import com.bonelf.common.base.security.service.AuthUserService;
+import com.bonelf.frame.core.auth.domain.RegisterUserAO;
+import com.bonelf.frame.core.auth.domain.Role;
+import com.bonelf.frame.core.auth.domain.User;
+import com.bonelf.frame.core.auth.service.AuthUserService;
 import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
 import com.bonelf.frame.core.domain.Result;
@@ -11,11 +13,15 @@ import com.bonelf.user.feign.UserFeignClient;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
 import com.bonelf.user.feign.domain.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.stream.Collectors;
+
+@Primary
+@Service("defaultAuthUserService")
 public class AuthUserServiceImpl implements AuthUserService {
 
 	@Autowired
@@ -41,7 +47,7 @@ public class AuthUserServiceImpl implements AuthUserService {
 	 * @return
 	 */
 	@Override
-	public User getByUniqueIdOrElseRegister(String uniqueId, UsernameType idType, RegisterUserRequest userMsg) {
+	public User getByUniqueIdOrElseRegister(String uniqueId, UsernameType idType, RegisterUserAO userMsg) {
 		return getByUniqueId(uniqueId, new UsernameType[]{idType});
 	}
 
@@ -77,6 +83,9 @@ public class AuthUserServiceImpl implements AuthUserService {
 		userResult.setAccountNonExpired(true);
 		userResult.setCredentialsNonExpired(true);
 		userResult.setAccountNonLocked(YesOrNotEnum.N.getCode().equals(userResp.getResult().getStatus()));
+		userResult.setRoles(userResp.getResult().getRoles().stream()
+				.map(item -> BeanUtil.copyProperties(item, Role.class))
+				.collect(Collectors.toSet()));
 		return userResult;
 	}
 
@@ -91,8 +100,8 @@ public class AuthUserServiceImpl implements AuthUserService {
 	}
 
 	@Override
-	public User registerByOpenId(RegisterUserRequest registerUser) {
-		Result<UserResponse> userResp = userFeignClient.registerByOpenId(registerUser);
+	public User registerByOpenId(RegisterUserAO registerUser) {
+		Result<UserResponse> userResp = userFeignClient.registerByOpenId(BeanUtil.copyProperties(registerUser, RegisterUserRequest.class));
 		if (userResp.getSuccess()) {
 			User userResult = getUserFromUserResp(userResp);
 			return userResult;

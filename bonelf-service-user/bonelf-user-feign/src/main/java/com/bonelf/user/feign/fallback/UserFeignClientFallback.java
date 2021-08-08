@@ -4,7 +4,7 @@ import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.user.feign.UserFeignClient;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
-import com.bonelf.user.feign.domain.response.Role;
+import com.bonelf.user.feign.domain.response.RoleResponse;
 import com.bonelf.user.feign.domain.response.UserResponse;
 import lombok.Setter;
 
@@ -47,9 +47,9 @@ public class UserFeignClientFallback implements UserFeignClient {
 	}
 
 	@Override
-	public Result<Set<Role>> queryRolesByUserId(Long userId) {
+	public Result<Set<RoleResponse>> queryRolesByUserId(Long userId) {
 		// FIXME: 2020/11/19 超时报错返回error
-		return Result.ok(new HashSet<Role>());
+		return Result.ok(new HashSet<RoleResponse>());
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import com.bonelf.frame.core.constant.ServiceNameConstant;
 import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.user.feign.domain.request.RegisterUserRequest;
-import com.bonelf.user.feign.domain.response.Role;
+import com.bonelf.user.feign.domain.response.RoleResponse;
 import com.bonelf.user.feign.domain.response.UserResponse;
 import com.bonelf.user.feign.factory.UserFeignFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -44,7 +44,7 @@ public interface UserFeignClient {
      * @return
      */
     @GetMapping(value = "/bonelf/role/v1")
-    Result<Set<Role>> queryRolesByUserId(@RequestParam("userId") Long userId);
+    Result<Set<RoleResponse>> queryRolesByUserId(@RequestParam("userId") Long userId);
 
     /**
      * 注册

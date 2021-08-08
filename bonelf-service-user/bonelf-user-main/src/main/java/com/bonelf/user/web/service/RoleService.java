@@ -1,6 +1,6 @@
 package com.bonelf.user.web.service;
 
-import com.bonelf.user.feign.domain.response.Role;
+import com.bonelf.user.feign.domain.response.RoleResponse;
 
 import java.util.Set;
 
@@ -10,5 +10,5 @@ import java.util.Set;
  * @date 2021/5/31 16:36
  */
 public interface RoleService {
-	Set<Role> getRoleByUserId(Long userId);
+	Set<RoleResponse> getRoleByUserId(Long userId);
 }

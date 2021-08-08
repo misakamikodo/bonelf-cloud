@@ -12,6 +12,10 @@
     <artifactId>bonelf-auth-main</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.bonelf</groupId>
+            <artifactId>bonelf-frame-auth</artifactId>
+        </dependency>
         <!-- spring security start-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -33,13 +37,6 @@
         <dependency>
             <groupId>com.bonelf</groupId>
             <artifactId>bonelf-frame-cloud-web</artifactId>
-            <!--FIXME 正式时需要mq注释-->
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <groupId>com.bonelf</groupId>-->
-            <!--                    <artifactId>bonelf-frame-mq</artifactId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>com.bonelf</groupId>

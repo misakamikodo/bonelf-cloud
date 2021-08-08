@@ -1,7 +1,7 @@
 package com.bonelf.user.web.controller.api;
 
 import com.bonelf.frame.core.domain.Result;
-import com.bonelf.user.feign.domain.response.Role;
+import com.bonelf.user.feign.domain.response.RoleResponse;
 import com.bonelf.user.web.service.RoleService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class RoleController {
 	private RoleService roleService;
 
 	@GetMapping(value = "/v1")
-	public Result<Set<Role>> getUser(@RequestParam Long userId) {
+	public Result<Set<RoleResponse>> getUser(@RequestParam Long userId) {
 		return Result.ok(roleService.getRoleByUserId(userId));
 	}
 }

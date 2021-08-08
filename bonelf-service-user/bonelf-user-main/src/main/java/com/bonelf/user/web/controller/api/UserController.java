@@ -67,7 +67,7 @@ public class UserController extends BaseApiController<UserService, User> {
 		return Result.ok(user);
 	}
 
-	/*===========================Feign FIXME 为Feign新建模块 ===========================*/
+	/*===========================Feign ===========================*/
 
 	@GetMapping(value = "/v1/getUser")
 	public Result<UserResponse> getUser(@RequestParam("uniqueId") String uniqueId,
@@ -93,7 +93,7 @@ public class UserController extends BaseApiController<UserService, User> {
 		user.setPhone(phone);
 		user.setLastLoginTime(LocalDateTime.now());
 		userService.save(user);
-		userService.update(Wrappers.<User>lambdaUpdate().set(User::getNickname, "手机用户").eq(User::getUserId, user.getUserId()).last("limit 1"));
+		userService.update(Wrappers.<User>lambdaUpdate().set(User::getNickname, "手机用户").eq(User::getUserId, user.getUserId()));
 		return Result.ok(user);
 	}
 
@@ -109,7 +109,7 @@ public class UserController extends BaseApiController<UserService, User> {
 		user.setMail(mail);
 		user.setLastLoginTime(LocalDateTime.now());
 		userService.save(user);
-		userService.update(Wrappers.<User>lambdaUpdate().set(User::getNickname, "邮箱用户").eq(User::getUserId, user.getUserId()).last("limit 1"));
+		userService.update(Wrappers.<User>lambdaUpdate().set(User::getNickname, "邮箱用户").eq(User::getUserId, user.getUserId()));
 		return Result.ok(user);
 	}
 
