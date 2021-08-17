@@ -2,6 +2,9 @@ package com.bonelf.test.web.controller.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.bonelf.frame.core.dict.annotation.DictWrapper;
+import com.bonelf.frame.core.dict.annotation.DictWrappers;
+import com.bonelf.frame.core.dict.enums.DictType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.web.controller.BaseController;
 import com.bonelf.test.web.domain.dto.TestConverterDTO;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
 
 @Slf4j
 @Api(tags = {"测试接口"})
@@ -52,6 +57,13 @@ public class NoAuthTestController extends BaseController {
 		return Result.ok(testService.testSeata());
 	}
 
+	@GetMapping("/remoteDict")
+	public Result<Object> remoteDict() {
+		return Result.ok(new HashMap<String, Object>() {{
+			put("test", "TestOK");
+		}});
+	}
+
 	/**
 	 * <p>
 	 * restTemplate 方法调用服务测试
@@ -85,7 +97,11 @@ public class NoAuthTestController extends BaseController {
 	// public Result<?> userFeign() {
 	// 	return userFeignClient.getUserByUniqueId("1328231759195709441");
 	// }
-
+	@DictWrappers(
+			@DictWrapper(type = DictType.enums,
+					payload = "value=com.bonelf.frame.core.constant.enums.YesOrNotEnum",
+					fieldSeq = "aopDict")
+	)
 	@ApiOperation(value = "testDict")
 	@GetMapping("/testDict")
 	public Result<TestDictVO> testDict() {

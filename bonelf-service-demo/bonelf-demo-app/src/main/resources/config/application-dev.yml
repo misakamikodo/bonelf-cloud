@@ -5,5 +5,5 @@ spring:
 #    password: ??
   redis:
     database: 0
-    host: api2.bonelf.com
+    host: 192.168.31.60
     port: 6379

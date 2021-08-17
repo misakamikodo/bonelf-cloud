@@ -4,7 +4,7 @@ spring:
       primary: master
       datasource:
         master:
-          url: jdbc:mysql://api2.bonelf.com:3306/bonelf-auth?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://192.168.31.60:3306/bonelf-auth?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
           username: bonelf
           password: 567215
           driver-class-name: com.mysql.cj.jdbc.Driver

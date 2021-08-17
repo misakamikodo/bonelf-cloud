@@ -4,25 +4,26 @@ spring:
       primary: master
       datasource:
         master:
-          url: jdbc:mysql://api2.bonelf.com:3306/bonelf-support?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://192.168.31.60:3306/bonelf-support?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
           username: bonelf
           password: 567215
           driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     database: 0
-    host: api2.bonelf.com
+    host: 192.168.31.60
     port: 6379
     password: 567215
 
   cloud:
     nacos:
       discovery:
-        server-addr: nacos.bonelf.com:80
+        server-addr: 192.168.31.60:8848
+#        server-addr: 192.168.31.60:8848
         group: DEFAULT_GROUP
     stream:
       rocketmq:
         binder:
-          name-server: api2.bonelf.com:9876
+          name-server: 192.168.31.60:9876
           # RocketMQ 自定义 Binding 配置项，对应 RocketMQBindingProperties Map
           bindings:
 #            input:

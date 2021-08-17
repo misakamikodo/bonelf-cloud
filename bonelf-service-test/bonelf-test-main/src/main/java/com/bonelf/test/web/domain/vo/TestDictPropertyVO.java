@@ -1,8 +1,8 @@
 package com.bonelf.test.web.domain.vo;
 
 import com.bonelf.frame.core.constant.enums.YesOrNotEnum;
-import com.bonelf.frame.core.dict.enums.DbDict;
-import com.bonelf.frame.core.dict.enums.EnumDict;
+import com.bonelf.frame.core.dict.annotation.DbDict;
+import com.bonelf.frame.core.dict.annotation.EnumDict;
 import lombok.Data;
 
 import java.util.List;
