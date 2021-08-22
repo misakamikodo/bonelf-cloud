@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 80023
  Source Host           : api.bonelf.com:3306
- Source Schema         : bonelf-gateway
+ Source Schema         : bonelf-order
 
  Target Server Type    : MySQL
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 23/08/2021 00:29:55
+ Date: 23/08/2021 00:30:45
 */
 
 SET NAMES utf8mb4;
@@ -31,5 +31,9 @@ CREATE TABLE `undo_log`  (
   `log_modified` datetime(6) NOT NULL COMMENT 'modify datetime',
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'AT transaction mode undo table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of undo_log
+-- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
