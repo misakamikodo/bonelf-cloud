@@ -11,7 +11,7 @@ bonelf:
 
 spring:
   profiles:
-    active: dev
+    active: test
   cloud:
     gateway:
       discovery:

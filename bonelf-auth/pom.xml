@@ -28,9 +28,6 @@
         <oauth.version>2.3.6.RELEASE</oauth.version>
     </properties>
 
-    <dependencies>
-    </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <dependency>

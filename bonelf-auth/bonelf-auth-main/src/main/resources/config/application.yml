@@ -2,7 +2,7 @@ server:
   port: 8809
 spring:
   profiles:
-    active: dev
+    active: test
     include:
       - common
 

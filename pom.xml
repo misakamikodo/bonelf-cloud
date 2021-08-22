@@ -121,6 +121,50 @@
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <!--镜像名称 bonelf/bonelf-gateway-app-->
+                        <imageName>bonelf/${project.artifactId}</imageName>
+                        <!--标签版本-->
+                        <imageTags>
+                            <imageTag>latest</imageTag>
+                        </imageTags>
+                        <!--基础镜像，相当于Dockerfile里的from-->
+                        <baseImage>java</baseImage>
+                        <!--标签版本-->
+                        <maintainer>bonelf me@bonelf.com</maintainer>
+                        <!--入口点，project.build.finalName就是project标签下的build标签下的filename标签内容，test-docker-demo-->
+                        <!--相当于启动容器后，会自动执行java -jar/bonelf-gateway-app.jar-->
+                        <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                        <!--docker地址-->
+                        <dockerHost>http://192.168.31.60:2375</dockerHost>
+
+                        <!-- 这里是复制 jar 包到 docker 容器指定目录配置 -->
+                        <resources>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <!--复制的根目录，target-->
+                                <directory>${project.build.directory}</directory>
+                                <!--把哪个文件上传到docker，相当于Dockerfile里的add test-docker-demo.jar /-->
+                                <include>${project.build.finalName}.jar</include>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <executable>true</executable>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <!--指定JDK编译版本 -->
             <plugin>
@@ -155,8 +199,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <!--<pluginManagement>-->
-        <!--</pluginManagement>-->
     </build>
 
     <repositories>

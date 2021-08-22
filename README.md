@@ -79,10 +79,6 @@ Jeecg-boot、ruoyi-cloud、Guns、litemall、best-pay
 
 ## 开发计划
 
-单点项目版本（分离auth服务 类似support）
-
-maven一键部署、使用docker部署（depoly）
-
 jenkins 部署 nexus、springcloud（DockerFile/docker-compose.yml-docker方式）
 
 filterRules field、operate、value 三个属性的list 来形成查询条件 Map<Key,(operate、value)>
@@ -117,7 +113,7 @@ zipkin 监控 压力测试
 
 grafana 度量分析和可视化工具
 
-Kafka 分布式日志(类似MQ)(新建项目熟悉)
+Kafka 分布式日志(MQ)(新建项目熟悉)
 
 activiti/flowable 工作流
 
@@ -174,6 +170,10 @@ minio 对象存储
 seata 分布式事务中间件
 
 elasticsearch 搜索服务 （elk）
+
+单点项目版本（分离auth服务 类似support）
+
+maven一键部署、使用docker部署（depoly）
 
 ## 参考中
 
