@@ -1,0 +1,67 @@
+spring:
+  datasource:
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          url: jdbc:mysql://172.17.0.1:3306/bonelf-user?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          username: bonelf
+          password: 567215
+          driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    database: 0
+    host: 172.17.0.1
+    port: 6379
+    password: 567215
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.17.0.1:8848
+    stream:
+      rocketmq:
+        binder:
+          name-server: 172.17.0.1:9876
+          # RocketMQ 自定义 Binding 配置项，对应 RocketMQBindingProperties Map
+          bindings:
+            input:
+              consumer:
+                # 同步消费消息模式
+                orderly: true
+                tags: SocketTag||DictTag||TestTag||websocket-user # tag 为 tag1/tag2/tag3/tag4
+            output:
+              producer:
+                group: user
+      bindings:
+        # consumer
+        input: { destination: websocketTopic, group: support, content-type: text/plain, consumer.maxAttempts: 1 }
+        # provider
+        output: { destination: BNF_user, content-type: application/json }
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default
+  # 服务注册到 nacos
+  registry:
+    type: nacos
+    nacos:
+      # 想配置group和application但是包里没读取？
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      namespace: ""
+      group: DEFAULT_GROUP
+      username: "nacos"
+      password: "nacos"
+      cluster: default
+  config:
+    type: nacos
+    nacos:
+      serverAddr: ${spring.cloud.nacos.discovery.server-addr}
+      namespace: ""
+      username: "nacos"
+      password: "nacos"
+      group: SEATA_GROUP
