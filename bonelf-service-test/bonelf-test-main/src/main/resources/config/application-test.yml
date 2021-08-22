@@ -12,11 +12,17 @@ spring:
     database: 0
     host: 192.168.31.60
     port: 6379
+    password: 567215
 
   cloud:
+    nacos:
+      discovery:
+        ip: 192.168.31.60
+        server-addr: ${spring.cloud.nacos.discovery.ip}:8848
     stream:
       rocketmq:
         binder:
+          # RocketMQ Namesrv 地址
           name-server: 192.168.31.60:9876
           bindings:
             input:
@@ -38,5 +44,30 @@ spring:
           destination: BNF_${spring.application.name}
           content-type: application/json
 
-rocketmq:
-  enable: false
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  service:
+    vgroup-mapping:
+      my_test_tx_group: default
+  # 服务注册到 nacos
+  registry:
+    type: nacos
+    nacos:
+      # 想配置group和application但是包里没读取？
+      server-addr: ${spring.cloud.nacos.discovery.server-addr}
+      namespace: ""
+      group: DEFAULT_GROUP
+      username: "nacos"
+      password: "nacos"
+      cluster: default
+  config:
+    type: nacos
+    nacos:
+      serverAddr: ${spring.cloud.nacos.discovery.server-addr}
+      namespace: ""
+      username: "nacos"
+      password: "nacos"
+      group: SEATA_GROUP

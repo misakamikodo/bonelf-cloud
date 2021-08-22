@@ -18,7 +18,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.17.0.1:8848
+        ip: 192.168.31.60
+        server-addr: ${spring.cloud.nacos.discovery.ip}:8848
     stream:
       rocketmq:
         binder:

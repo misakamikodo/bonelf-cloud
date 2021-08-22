@@ -18,6 +18,8 @@
         <module>bonelf-auth-feign</module>
         <module>bonelf-auth-feign-domain</module>
         <module>bonelf-auth-main</module>
+        <!--单个打包时加上，对root则不需要-->
+        <!--<module>../bonelf-common</module>-->
     </modules>
 
     <properties>
