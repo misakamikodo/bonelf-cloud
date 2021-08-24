@@ -9,6 +9,7 @@ import com.bonelf.frame.core.constant.UsernameType;
 import com.bonelf.frame.core.domain.Result;
 import com.bonelf.frame.core.exception.enums.CommonBizExceptionEnum;
 import com.bonelf.frame.web.controller.BaseApiController;
+import com.bonelf.frame.web.util.ContextUtil;
 import com.bonelf.user.constant.enums.UserStatusEnum;
 import com.bonelf.user.constant.exception.UserExceptionEnum;
 import com.bonelf.user.feign.domain.response.UserResponse;
@@ -17,6 +18,7 @@ import com.bonelf.user.web.domain.dto.WechatLoginDTO;
 import com.bonelf.user.web.domain.dto.WechatRegisterUserDTO;
 import com.bonelf.user.web.domain.entity.User;
 import com.bonelf.user.web.domain.vo.LoginVO;
+import com.bonelf.user.web.domain.vo.UserInfoVO;
 import com.bonelf.user.web.service.RoleService;
 import com.bonelf.user.web.service.UserService;
 import io.swagger.annotations.Api;
@@ -51,6 +53,8 @@ public class UserController extends BaseApiController<UserService, User> {
 	private RoleService roleService;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	private ContextUtil contextUtil;
 
 	@Deprecated
 	@ApiOperation("账号密码登录")
@@ -153,5 +157,11 @@ public class UserController extends BaseApiController<UserService, User> {
 	@PostMapping(value = "/v1/getPermission")
 	public Result<Map<String, Set<String>>> getPermission(@RequestParam Long userId) {
 		return Result.ok(userService.getApiUserRolesAndPermission(userId));
+	}
+
+	@GetMapping("/v1/info")
+	public Result<UserInfoVO> info() {
+		log.debug("userId:{}", contextUtil.getUserId());
+		return Result.ok(new UserInfoVO());
 	}
 }
