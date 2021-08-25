@@ -16,23 +16,17 @@ Bonelf
 ├    ├    ├── bonelf-support-fegin -- 
 ├    ├    ├── bonelf-support-fegin-domain -- 
 ├    ├    ├── bonelf-support-provider -- 
-├    ├    ├── bonelf-support-provider-domain -- 
-├    ├    ├── bonelf-support-consumer -- 
-├    ├    ├── bonelf-support-web -- 
-├    ├    ├── bonelf-support-base -- 
+├    ├    ├── bonelf-support-main -- 
 ├── bonelf-gateway -- 网关
 ├    ├── bonelf-gateway-main -- 网关逻辑
 ├    ├── bonelf-gateway-app -- 启动模块
 ├── bonelf-support-app -- 工具服务启动模块
 ├── bonelf-auth -- 授权服务提供
+├── bonelf-service-user -- 用户模块
 ├── bonelf-service-demo -- demo服务
-├    ├── bonelf-demo-base -- 配置
-├    ├── bonelf-demo-provider -- 提供MQ消息发送方法 （可选） 
-├    ├── bonelf-demo-provider-domain -- provider 参数
 ├    ├── bonelf-demo-feign -- 提供feign发送方法 （可选） 
 ├    ├── bonelf-demo-feign-domain -- feign 参数
-├    ├── bonelf-demo-consumer -- MQ消息处理（可选）（处理定时器消息）（entity、consumer domain、service）
-├    ├── bonelf-demo-web -- 服务
+├    ├── bonelf-demo-main -- 服务
 └──  └── bonelf-demo-app -- 启动模块 （web）
 ```
 ## 项目结构
