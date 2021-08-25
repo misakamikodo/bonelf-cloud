@@ -175,6 +175,8 @@ elasticsearch 搜索服务 （elk）
 
 maven一键部署、使用docker部署（depoly）
 
+断点续传、秒传
+
 ## 参考中
 
 继承Webserver是否可以替换springboot的web服务？
