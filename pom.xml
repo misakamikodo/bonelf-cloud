@@ -107,16 +107,6 @@
                 <artifactId>bonelf-user-feign</artifactId>
                 <version>${bonelf.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-support-main</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.bonelf</groupId>
-                <artifactId>bonelf-support-feign</artifactId>
-                <version>${bonelf.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

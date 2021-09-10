@@ -27,6 +27,11 @@ public class AuthUserServiceImpl implements AuthUserService {
 	@Autowired
 	private UserFeignClient userFeignClient;
 
+	@Override
+	public User getById(String userId) {
+		return getByUniqueId(userId, UsernameType.id);
+	}
+
 	/**
 	 * 根据用户唯一标识获取用户信息
 	 * FIXME 此处添加缓存

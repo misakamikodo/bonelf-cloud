@@ -26,7 +26,7 @@ import java.net.UnknownHostException;
 @SpringBootApplication(scanBasePackages = {
 		"com.bonelf.support"
 },
-		exclude = {DruidDataSourceAutoConfigure.class})
+		exclude = {DruidDataSourceAutoConfigure.class}) // , FlowableAutoConfig.class
 public class SupportApplication {
 
 	public static void main(String[] args) throws UnknownHostException {

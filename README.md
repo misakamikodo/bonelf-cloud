@@ -109,8 +109,6 @@ grafana 度量分析和可视化工具
 
 Kafka 分布式日志(MQ)(新建项目熟悉)
 
-activiti/flowable 工作流
-
 ## 不完善
 
 接口耗时aop （只能适用标准的请求-Controller结尾的，例如Oauth等不符合定义的没等统一配置）
@@ -170,6 +168,8 @@ elasticsearch 搜索服务 （elk）
 maven一键部署、使用docker部署（depoly）
 
 断点续传、秒传
+
+flowable 工作流（简单封装）
 
 ## 参考中
 
