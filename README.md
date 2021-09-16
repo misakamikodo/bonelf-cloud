@@ -75,8 +75,6 @@ Jeecg-boot、ruoyi-cloud、Guns、litemall、best-pay
 
 jenkins 部署 nexus、springcloud（DockerFile/docker-compose.yml-docker方式）
 
-filterRules field、operate、value 三个属性的list 来形成查询条件 Map<Key,(operate、value)>
-
 mybatis-plus 分页可能与seata不兼容；令使用adapter适应分页参数，增加 start、end 的传参方式 而不是 page size
 
 数据库异常封装，controller封装
@@ -170,6 +168,8 @@ maven一键部署、使用docker部署（depoly）
 断点续传、秒传
 
 flowable 工作流（简单封装）
+
+查询条件装配、分页参数适配
 
 ## 参考中
 
