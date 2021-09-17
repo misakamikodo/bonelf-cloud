@@ -39,10 +39,15 @@
             <artifactId>bonelf-support-provider-domain</artifactId>
         </dependency>
         <!--mybatis-plus-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>com.baomidou</groupId>-->
+        <!--    <artifactId>mybatis-plus-boot-starter</artifactId>-->
+        <!--</dependency>-->
+        <!--liquibase-->
+        <!--<dependency>-->
+        <!--    <groupId>org.liquibase</groupId>-->
+        <!--    <artifactId>liquibase-core</artifactId>-->
+        <!--</dependency>-->
         <!-- 分布式事务 seata -->
         <dependency>
             <groupId>io.seata</groupId>

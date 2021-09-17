@@ -99,8 +99,6 @@ RocketMQ（应用订单服务通知商品修改销售数目、定时器发送消
 
 二维码登录
 
-liquibase 数据库版本更新
-
 zipkin 监控 压力测试
 
 grafana 度量分析和可视化工具
@@ -170,6 +168,8 @@ maven一键部署、使用docker部署（depoly）
 flowable 工作流（简单封装）
 
 查询条件装配、分页参数适配
+
+liquibase 数据库表版本更新
 
 ## 参考中
 

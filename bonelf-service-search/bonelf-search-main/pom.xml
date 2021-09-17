@@ -21,6 +21,10 @@
                 <!--    <groupId>com.baomidou</groupId>-->
                 <!--    <artifactId>mybatis-plus-boot-starter</artifactId>-->
                 <!--</exclusion>-->
+                <!--<exclusion>-->
+                <!--    <groupId>org.liquibase</groupId>-->
+                <!--    <artifactId>liquibase-core</artifactId>-->
+                <!--</exclusion>-->
                 <!-- 分布式事务 seata -->
                 <exclusion>
                     <groupId>io.seata</groupId>
