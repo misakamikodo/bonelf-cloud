@@ -73,9 +73,9 @@ Jeecg-boot、ruoyi-cloud、Guns、litemall、best-pay
 
 ## 开发计划
 
-jenkins 部署 nexus、springcloud（DockerFile/docker-compose.yml-docker方式）
+jenkins 部署 springcloud（DockerFile/docker-compose.yml-docker方式）
 
-mybatis-plus 分页可能与seata不兼容；令使用adapter适应分页参数，增加 start、end 的传参方式 而不是 page size
+mybatis-plus 分页可能与seata不兼容；增加 start、end 的传参方式
 
 数据库异常封装，controller封装
 
